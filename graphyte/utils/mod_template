@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="UTF-8">
+      <meta name="description" content="%webTitle%">
+      <meta name="created by" content="Cisco <{graphyte}>">
+      <meta name="author" content="Jorge Somavilla">
+      <style>
+    * { margin:0;padding:0; }
+    body { background:#FFFFFF; }
+
+    /*Prevent scrollbar from repositioning web page*/
+    html {
+      overflow-y: scroll;
+    }
+
+    #title{
+      font-family: "Verdana", Geneva, sans-serif;
+      font-size:15pt;
+      width: auto;
+      color: grey;
+      float: left;
+      padding: 3px 0px 0px 10px;
+    }
+
+    .wrap{
+      width: 100%;
+      height: auto;
+      clear: both;
+      display: block;
+      overflow: visible;
+      position: relative;
+      z-index:5;
+    }
+
+    .floatleft{
+      float:left;
+      width: 49%;
+      height: auto;
+      margin-left: 1%;
+      margin-top: 50px;
+    }
+
+    .floatright{
+      float:right;
+      max-height: 90vh;
+      overflow: auto;
+      white-space: pre-wrap;
+      width: 49%;
+      margin-right: 1%;
+      margin-top: 50px;
+      background-color: rgba(255, 255, 255, 0.7);
+      box-shadow: 0 7px 20px rgba(0,0,0,.3);
+      height: auto;
+    }
+
+    #svgDiv{
+      margin: 0px 10px 0px 10px;
+      z-index:6;
+    }
+
+    #texttitle {
+      font-family: "Verdana", Geneva, sans-serif;
+      font-size:11pt;
+      color: grey;
+      font-weight: bold;
+      margin: 0% 2% 0% 0%;
+      width: 95%;
+      text-align:left;
+    }
+
+    .txtedit {
+      font-family: "Verdana", Geneva, sans-serif;
+      font-size:8pt;
+      color: #636698;
+      font-weight: bold;
+      margin: 0% 0% 0% 1%;
+    }
+
+    .txtedit:hover {
+      text-decoration: underline;
+      cursor:pointer;
+    }
+
+    #text {
+      font-family: "Courier New", Courier, monospace;
+      font-size:9pt;
+      margin: 1% 5% 1% 5%;
+      width: 95%;
+      text-align:left;
+    }
+
+    #editbottom {
+      text-align:left;
+      margin: 0% 5% 0% 5%;
+    }
+
+    a {
+      font-family: "Courier New", Courier, monospace;
+      font-size:9pt;
+      color: grey;
+      text-decoration: none;
+    }
+
+    a:hover {
+      font-family: "Courier New", Courier, monospace;
+      font-size:9pt;
+      color: grey;
+      text-decoration: underline;
+    }
+
+    table {
+      border-collapse: collapse;
+      border-style: hidden;
+      margin: 0% 2% 0% 0%;
+    }
+
+    table, th, td {
+      border: 1px solid lightgrey;
+      padding: 5px;
+      /*text-align: left;*/
+    }
+
+    .ed {
+      border-collapse: collapse;
+      border-style: hidden;
+      padding: 5px;
+      text-align: left;
+    }
+
+    .edr {
+      border-collapse: collapse;
+      border-style: hidden;
+      padding: 5px;
+      text-align: right;
+    }
+
+    #editbutton {
+      -moz-box-shadow:inset 0px 1px 0px 0px #54a3f7;
+      -webkit-box-shadow:inset 0px 1px 0px 0px #54a3f7;
+      box-shadow:inset 0px 1px 0px 0px #54a3f7;
+       background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #007dc1), color-stop(1, #0061a7));
+      background:-moz-linear-gradient(top, #007dc1 5%, #0061a7 100%);
+      background:-webkit-linear-gradient(top, #007dc1 5%, #0061a7 100%);
+      background:-o-linear-gradient(top, #007dc1 5%, #0061a7 100%);
+      background:-ms-linear-gradient(top, #007dc1 5%, #0061a7 100%);
+      background:linear-gradient(to bottom, #007dc1 5%, #0061a7 100%);
+      filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#007dc1', endColorstr='#0061a7',GradientType=0);
+      background-color:#007dc1;
+      -moz-border-radius:3px;
+      -webkit-border-radius:3px;
+      border-radius:3px;
+      border:1px solid #124d77;
+      display:inline-block;
+      cursor:pointer;
+      color:#ffffff;
+      font-family:Arial;
+      font-size:15px;
+      padding:6px 24px;
+      text-decoration:none;
+      text-shadow:0px 1px 0px #154682;
+    }
+
+    #editbutton:hover {
+      background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #0061a7), color-stop(1, #007dc1));
+      background:-moz-linear-gradient(top, #0061a7 5%, #007dc1 100%);
+      background:-webkit-linear-gradient(top, #0061a7 5%, #007dc1 100%);
+      background:-o-linear-gradient(top, #0061a7 5%, #007dc1 100%);
+      background:-ms-linear-gradient(top, #0061a7 5%, #007dc1 100%);
+      background:linear-gradient(to bottom, #0061a7 5%, #007dc1 100%);
+      filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#0061a7', endColorstr='#007dc1',GradientType=0);
+      background-color:#0061a7;
+    }
+
+    #editbutton:active {
+      position:relative;
+      top:1px;
+    }
+
+    #savebutton {
+        -moz-box-shadow:inset 0px 1px 0px 0px #a4e271;
+        -webkit-box-shadow:inset 0px 1px 0px 0px #a4e271;
+        box-shadow:inset 0px 1px 0px 0px #a4e271;
+        background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #89c403), color-stop(1, #77a809));
+        background:-moz-linear-gradient(top, #89c403 5%, #77a809 100%);
+        background:-webkit-linear-gradient(top, #89c403 5%, #77a809 100%);
+        background:-o-linear-gradient(top, #89c403 5%, #77a809 100%);
+        background:-ms-linear-gradient(top, #89c403 5%, #77a809 100%);
+        background:linear-gradient(to bottom, #89c403 5%, #77a809 100%);
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#89c403', endColorstr='#77a809',GradientType=0);
+        background-color:#89c403;
+        -moz-border-radius:3px;
+        -webkit-border-radius:3px;
+        border-radius:3px;
+        border:1px solid #74b807;
+        display:inline-block;
+        cursor:pointer;
+        color:#ffffff;
+        font-family:Arial;
+        font-size:15px;
+        padding:6px 24px;
+        text-decoration:none;
+        text-shadow:0px 1px 0px #528009;
+    }
+    #savebutton:hover {
+        background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #77a809), color-stop(1, #89c403));
+        background:-moz-linear-gradient(top, #77a809 5%, #89c403 100%);
+        background:-webkit-linear-gradient(top, #77a809 5%, #89c403 100%);
+        background:-o-linear-gradient(top, #77a809 5%, #89c403 100%);
+        background:-ms-linear-gradient(top, #77a809 5%, #89c403 100%);
+        background:linear-gradient(to bottom, #77a809 5%, #89c403 100%);
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#77a809', endColorstr='#89c403',GradientType=0);
+        background-color:#77a809;
+    }
+    #savebutton:active {
+        position:relative;
+        top:1px;
+    }
+
+    #cancelbutton {
+    	-moz-box-shadow:inset 0px 1px 0px 0px #cf866c;
+    	-webkit-box-shadow:inset 0px 1px 0px 0px #cf866c;
+    	box-shadow:inset 0px 1px 0px 0px #cf866c;
+    	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #d0451b), color-stop(1, #bc3315));
+    	background:-moz-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+    	background:-webkit-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+    	background:-o-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+    	background:-ms-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+    	background:linear-gradient(to bottom, #d0451b 5%, #bc3315 100%);
+    	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d0451b', endColorstr='#bc3315',GradientType=0);
+    	background-color:#d0451b;
+    	-moz-border-radius:3px;
+    	-webkit-border-radius:3px;
+    	border-radius:3px;
+    	border:1px solid #942911;
+    	display:inline-block;
+    	cursor:pointer;
+    	color:#ffffff;
+    	font-family:Arial;
+    	font-size:15px;
+    	padding:6px 24px;
+    	text-decoration:none;
+    	text-shadow:0px 1px 0px #854629;
+    }
+
+    #cancelbutton:hover {
+    	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #bc3315), color-stop(1, #d0451b));
+    	background:-moz-linear-gradient(top, #bc3315 5%, #d0451b 100%);
+    	background:-webkit-linear-gradient(top, #bc3315 5%, #d0451b 100%);
+    	background:-o-linear-gradient(top, #bc3315 5%, #d0451b 100%);
+    	background:-ms-linear-gradient(top, #bc3315 5%, #d0451b 100%);
+    	background:linear-gradient(to bottom, #bc3315 5%, #d0451b 100%);
+    	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#bc3315', endColorstr='#d0451b',GradientType=0);
+    	background-color:#bc3315;
+    }
+
+    #cancelbutton:active {
+    	position:relative;
+    	top:1px;
+    }
+
+    #top ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      background-color: transparent;
+      position: fixed;
+      width: 100%;
+      z-index:15;
+    }
+
+    #top ul li {
+      float: left;
+    }
+
+    #top ul li a {
+      display: block;
+      text-align: left;
+      text-decoration: none;
+    }
+
+    #nav {
+      float:right;
+      padding: 0px 0px 0px 0px;
+    }
+
+    #nav a {
+      font-family: "Courier New", Courier, monospace;
+      font-size:9pt;
+      color: grey;
+      display:block;
+      padding:10px 10px;
+      position:relative;
+    }
+
+    #nav ul {
+      padding:0;
+      margin:0;
+      list-style:none;
+      display:none;
+      background-color: #ffffff;
+      min-width: %menuwidth%px;
+      box-shadow: 0 7px 20px rgba(0,0,0,.3);
+      margin: 0px 10px 0px 0px;
+      left: auto;
+      right: 0;
+    }
+
+    #nav ul li {
+      display:block;
+      position:relative;
+      border:none;
+      float:none;
+      margin:0;
+      padding: 0px 10px 0px 0px;
+    }
+
+    #nav a:hover {
+      text-decoration: none;
+      color: black;
+    }
+
+    #nav:hover ul {
+      display:block;
+      position:absolute;
+      z-index: 10;
+      background:#fff;
+      width:150px;
+      border:0;
+    }
+
+    #nav ul li:hover {
+      border:none;
+      background:#f1f1f1;
+    }
+
+    #nav:hover a{
+      color:black;
+    }
+
+    #nav ul li:hover a {
+      text-decoration: underline;
+    }
+
+    #nav ul li a {
+      color: black;
+      padding:10px;
+    }
+
+    #nav:last-child ul {
+      right: 0;
+      background:white;
+    }
+    #zoom,#zoomOut,#zoomIn,#params,#zoomid{
+      padding-top:10px;
+      font-family: "Courier New", Courier, monospace;
+      font-size:9pt;
+      color: grey;
+      /*no text highlighting*/
+      -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Chrome/Safari/Opera */
+         -khtml-user-select: none; /* Konqueror */
+           -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+                user-select: none; /* Non-prefixed version */
+    }
+
+    #zoomIn, #params{
+      padding-right: 15px
+    }
+
+    #zoomIn:hover, #zoomOut:hover, #params:hover{
+      color:black;
+      cursor:pointer;
+    }
+      </style>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+      <!-- Use the code below for full offline functionality (you will need to download the jquery.min.js file first :) ) -->
+      <!-- script src="jquery/jquery.min.js"></script>-->
+      <script>
+        $(window).load(function(){
+
+          var element = $('.floatright'),
+              originalY = element.offset().top;
+          // Space between element and top of screen (when scrolling)
+          var topMargin = 40;
+          element.css('position', 'relative');
+
+          var lastevent = null;
+          var mapsvgdoc = null;
+          var svgURL = "";
+
+          var latestclicked = "";
+          var latestedited = "";
+
+          htmlElement = document.getElementsByTagName('html')[0];
+          htmlElement.addEventListener("mousedown", htmlElmMouseDown, false);
+
+        function htmlElmMouseDown(evt){
+          if ($(evt.target).closest('#svg').length) {svgElmMouseDown(evt);}
+          else if ($(evt.target).closest('#editbutton').length) {texteditorElmMouseDown(evt);}
+          else if ($(evt.target).closest('#cancelbutton').length) {processClick(latestedited,false);}
+          else if ($(evt.target).closest('#savebutton').length) {saveTextAsFile(evt);}
+          else if ($(evt.target).closest('.floatright').length) {/*do nothing*/}
+          else if ($(evt.target).closest('#zoomOut').length) {zoomOutElmMouseDown(evt);}
+          else if ($(evt.target).closest('#zoomIn').length) {zoomInElmMouseDown(evt);}
+          else if ($(evt.target).closest('#params').length) {paramsElmMouseDown(evt);}
+          else {
+            cleardisplay("3");
+          }
+        }
+
+        function saveTextAsFile(){
+          var textToSave = document.getElementById("inputTextToSave").value;
+          textToSave = textToSave.replace(/([^\r])\n/g, "$1\r\n");
+          var textToSaveAsBlob = new Blob([textToSave], {type:"text/plain"});
+          var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
+          var fileNameToSaveAs = latestedited;
+
+          var ie = navigator.userAgent.match(/MSIE\s([\d.]+)/),
+                ie11 = navigator.userAgent.match(/Trident\/7.0/) && navigator.userAgent.match(/rv:11/),
+                ieEDGE = navigator.userAgent.match(/Edge/g),
+                ieVer=(ie ? ie[1] : (ie11 ? 11 : (ieEDGE ? 12 : -1)));
+          if (ieVer>-1) { // No blobs on IE ver<10
+            window.navigator.msSaveBlob(textToSaveAsBlob, fileNameToSaveAs);
+          } else {
+            var downloadLink = document.createElement("a");
+            downloadLink.download = fileNameToSaveAs;
+            downloadLink.innerHTML = "Download File";
+            downloadLink.href = textToSaveAsURL;
+            downloadLink.onclick = destroyClickedElement;
+            downloadLink.style.display = "none";
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+          }
+        }
+
+        function texteditorElmMouseDown(evt){
+          cleardisplay("1");
+          editbuttonDIV = document.getElementById('editbottom');
+          editbuttonDIV.innerHTML = "";
+          textDiv = document.getElementById('text');
+          textDiv.innerHTML = "<table class=\"ed\"><td class=\"ed\" colspan=\"3\"><textarea id=\"inputTextToSave\" cols=\"80\" rows=\"25\" style=\"width: 82vh; height: 75vh\"></textarea></td></tr><tr class=\"edr\"><td class=\"edr\"><button id=\"savebutton\">Save</button>&nbsp<button id=\"cancelbutton\">Cancel</button></td></tr></table>";
+          loadFileAsText();
+        }
+
+        function loadFileAsText(){
+          data = eval(latestclicked).join("\n");
+          var re = /^(.*)$/m;
+          var fname_retr = re.exec(data)[0];
+          latestedited = fname_retr;
+          data = data.replace(/^.*\n/g,"");
+          document.getElementById("inputTextToSave").value = data;
+        }
+
+        function destroyClickedElement(event){
+          document.body.removeChild(event.target);
+        }
+
+        function zoomInElmMouseDown(){
+          modifyZoom(30);
+        }
+        function zoomOutElmMouseDown(){
+          modifyZoom(-30);
+        }
+        function cleardisplay(level){
+          //level 1,2,3
+          textDiv = document.getElementById('text');
+          textDiv.innerHTML = "";
+          //level 2,3
+          if (level != "1"){
+            texttitleDiv = document.getElementById('texttitle');
+            texttitleDiv.innerHTML = "";
+          }
+          //level 3
+          if (level == "3"){
+            var y = document.getElementsByClassName('floatright');
+            var aNode = y[0];
+            aNode.style.backgroundColor = "transparent";
+            aNode.style.boxShadow = "none";
+            aNode.style.height = "0px";
+          }
+        }
+
+        function modifyZoom(zoom){
+          svgWidth = document.getElementById("svg").getAttribute("width");
+          svgWidth = svgWidth.replace("%", "");
+          newWidth = parseInt(svgWidth) + zoom;
+          if (newWidth > 0 && newWidth < 400) {
+            document.getElementById("svg").setAttribute("width",newWidth + "%");
+          }
+        }
+
+        function processClick(filename,ctrlKey) {
+          var y = document.getElementsByClassName('floatright');
+          var aNode = y[0];
+          aNode.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
+          aNode.style.boxShadow = "0 7px 20px rgba(0,0,0,.3)";
+          aNode.style.height = "auto";
+
+          var map = {
+            '&': '&amp;',
+            '<{': '<b><span style=background-color:LightSkyBlue>&lt;{',
+            '}>': '}&gt;</span></b>',
+            '<(': '<b><span style=background-color:greenyellow>&lt;(',
+            ')>': ')&gt;</span></b>',
+            '<[': '<b><span style=background-color:gold>&lt;[',
+            ']>': ']&gt;</span></b>',
+            '<': '<b><span style=background-color:yellow>&lt;',
+            '>': '&gt;</span></b>',
+            '"': '&quot;',
+            "'": '&#039;',
+            ",": '</td><td style="padding:0 3px 0 3px;">',
+            "\n": '</td></tr><tr align="left" width="auto"><td>'
+          };
+          var map2 = {
+            '&': '&amp;',
+            '<': '</b></span><span style=color:#555555>&lt;',
+            '>': '&gt;</span><span style=color:Black><b>',
+            '{': '<b><span style=background-color:yellow;color:Black>{',
+            '}': '}</span></b>',
+            '"': '&quot;',
+            "'": '&#039;',
+          };
+          /*if (ctrlKey){
+            //var url = filesDir.concat(filename);
+            //window.open(url);
+          }else{*/
+            cleardisplay("1");
+            texttitleDiv = document.getElementById('texttitle');
+            texttitleDiv.innerHTML = String(filename) + ":";
+            editbuttonDIV = document.getElementById('editbottom');
+            editbuttonDIV.innerHTML = "<tr class=\"ed\"><td class=\"ed\"><button id=\"editbutton\">Edit</button></td></tr>";
+            // get the filename extension
+            var re = /(?:\.([^.]+))?$/;
+            var ext = re.exec(filename)[1];
+            filename_var = "v_" + filename.replace(/\s|\.|-|\(|\)|\+/g, '_');
+            latestclicked = filename_var;
+            if (ext == "htm" || ext == "html"){
+              jQuery("#text").load(filesDir + filename);
+            }else if (ext == "csv"){
+              data = eval(filename_var).join("\n");
+              var re = /^(.*)$/m;
+              var fname_retr = re.exec(data)[0];
+              data = data.replace(/^.*\n/g,"");
+              data = data.replace(/(&)|(<\{)|(\}>)|(<\()|(\)>)|(<\[(?!\*>)|\]>)|(<)(?!\*>)|(>)|(")|(')|(,)|(\n)/g, function(m) { return map[m]; });
+              textDiv.innerHTML = "<table><tr align=\"left\" width=\"auto\"><td>" + data + "</table>";
+            }else if (ext == "xml"){
+             data = eval(filename_var).join("\n");
+             textDiv = document.getElementById('text');
+             var re = /^(.*)$/m;
+             var fname_retr = re.exec(data)[0];
+             data = data.replace(/^.*\n/g,"");
+             data = data.replace(/(&)|(<)|(>)|({)|(})|(")|(')/g, function(n) { return map2[n]; });
+             data = data.replace(/([^\r])\n/g, "$1<br>");
+             textDiv.innerHTML = data;
+            }else{
+              data = eval(filename_var).join("\n");
+              var re = /^(.*)$/m;
+              var fname_retr = re.exec(data)[0];
+              data = data.replace(/^.*\n/g,"");
+              var lines = data.split('\n');
+              dataout = ""
+              for(var i = 0;i < lines.length;i++){
+                lines[i] = lines[i].replace(/"/g, "&quot;"); // replace " by entity
+                lines[i] = lines[i].replace(/'/g, "&#039;"); // replace ' by entity
+                lines[i] = lines[i].replace(/&lt;/g, "/&lt;"); // protect &lt; string
+                lines[i] = lines[i].replace(/&gt;/g, "/&gt;"); // protect &gt; string
+                lines[i] = lines[i].replace(/</g, "-&lt;"); // identify < string
+                lines[i] = lines[i].replace(/>/g, "-&gt;"); // identify > string
+                lines[i] = lines[i].replace(/\-&lt;([$,a-z,A-Z,0-9,\-,_]+)\-&gt;/g, "<b><span style=background-color:yellow>&lt;$1&gt;</span></b>"); // param <type1>
+                lines[i] = lines[i].replace(/\-&lt;{([$,a-z,A-Z,0-9,\-,_]+)}\-&gt;/g, "<b><span style=background-color:LightSkyBlue>&lt;{$1}&gt;</span></b>"); // param <{type2}>
+                lines[i] = lines[i].replace(/\-&lt;\(([$,a-z,A-Z,0-9,\-,_]+)\)\-&gt;/g, "<b><span style=background-color:greenyellow>&lt;($1)&gt;</span></b>"); // param <(type3)>
+                lines[i] = lines[i].replace(/\-&lt;\[([$,a-z,A-Z,0-9,\-,_]+)\]\-&gt;/g, "<b><span style=background-color:gold>&lt;[$1]&gt;</span></b>"); // param <[type4]>
+                lines[i] = lines[i].replace(/\/&lt;/g, "&amp;lt;"); // restore &lt; string
+                lines[i] = lines[i].replace(/\/&gt;/g, "&amp;gt;");  // restore &gt; string
+                lines[i] = lines[i].replace(/\-&lt;/g, "&lt;"); // replace < by entity
+                lines[i] = lines[i].replace(/\-&gt;/g, "&gt;"); // replace > by entity
+                dataout  = dataout + lines[i] + "\n";
+
+              }
+              dataout = dataout.replace(/([^\r])\n/g, "$1<br>");
+              textDiv.innerHTML = dataout;
+          }
+        }
+
+        function paramsElmMouseDown(evt){
+          cleardisplay("1");
+          processClick("%params_csv%",evt.ctrlKey);
+        }
+
+        function scrollTextDiv(){
+          var scrollTop = $(window).scrollTop();
+          element.stop(false, false).animate({
+            top: scrollTop < originalY
+              ? 0
+              : scrollTop - originalY + topMargin
+          }, 300);
+        }
+
+        function svgElmMouseDown(evt) {
+          cleardisplay("3");
+          if(!lastevent)
+            lastevent = evt;
+
+          dx = Math.abs(lastevent.clientX-evt.clientX);
+          dy = Math.abs(lastevent.clientY-evt.clientY);
+
+          lastevent = evt;
+          var elm = evt.target;
+          var classattr = null;
+          var idattr = null;
+
+          while(elm && !classattr) {
+            if(elm.nodeType == Node.ELEMENT_NODE && elm.hasAttribute("class") && elm.hasAttribute("id")){
+              classattr = elm.getAttribute("class");
+            }
+            if (classattr){
+              idattr = elm.getAttribute("id");
+            }
+              elm = elm.parentNode;
+          }
+
+          var found = false;
+          if(classattr) {
+            if (classattr == "wrapper"){
+               processClick(idattr,evt.ctrlKey);
+            }
+          }
+          scrollTextDiv();
+        }
+
+        function svgElmMouseUp(evt) {
+          dx = Math.abs(lastevent.clientX-evt.clientX);
+          dy = Math.abs(lastevent.clientY-evt.clientY);
+          lastevent = evt;
+        }
+
+        function svgElmHovered(evt) {}
+
+    });
+
+      </script>
+    </head>
+    <body>
+      <div id="top">
+        <ul>
+          <li id="title">%webTitle%</li>
+          <li id="nav" style="float:right">
+            <a href="#">&#x25BC All Modules</a>
+            <ul>
+              %menu%
+            </ul>
+          </li>
+          <li id="params" style="float:right">Module Parameters %alert%</li>
+          <li id="zoomid" style="float:right"><span id="zoomOut">[-]</span><span id="zoom">Zoom</span><span id="zoomIn">[+]</span></li>
+        </ul>
+      </div>
+      <div class="wrap">
+        <div class="floatleft">
+          <div id="svgDiv">
+            %svg%
+          </div>
+        </div>
+        <div class="floatright">
+          <span id="texttitle">Welcome!</span>
+          <div id="text">Use controls <b>[-]</b> and <b>[+]</b> to adjust the diagram size.<br>Use <b>Module Parameters</b> to display a list of module attributes, if any.<br>Use the dropdown <b>All Modules</b> to navigate between modules.%viewer_init_content%</div><div id="editbottom"></div>
+        </div>
+      </div>
+      <script>
+      %templates%
+      %xls%
+      </script>
+    </body>
+    </html>
