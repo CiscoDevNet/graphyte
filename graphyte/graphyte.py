@@ -45,6 +45,7 @@ __author__ = "Jorge Somavilla"
 start_time = datetime.datetime.now()
 
 
+
 def make_zip(src_dir, dst_dir, id):
     """Compress model files into a ZIP file.
 
@@ -77,7 +78,7 @@ def main(args):
     ############################################
     # Argument Parser                          #
     ############################################
-    usage = "graphyte.py -d|--dir input_files_directory"
+    usage = "\nusage: graphyte.py -d|--dir input_files_directory"
 
     class MyParser(argparse.ArgumentParser):
         """Argument Parser class handles inputs.
@@ -93,6 +94,7 @@ def main(args):
             :param message: Error message
             :return: None
             """
+            logger = logging.getLogger('graphyte')
             logger.error('error: %s\n' % message)
             sys.stderr.write('error: %s\n' % message)
             print (usage)
@@ -111,7 +113,7 @@ def main(args):
     else:
         basedir = args.dir.strip()
         if not os.path.exists(basedir):
-            parser.error("Couldn't find directory \"basedir\".")
+            parser.error("Couldn't find directory: " + basedir)
 
     identifier = ""
     if args.id:
