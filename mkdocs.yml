@@ -1,0 +1,5 @@
+site_name: Graphyte Webdoc Automation
+nav:
+    - Home: index.md
+    - Templates: templates.md
+theme: readthedocs
