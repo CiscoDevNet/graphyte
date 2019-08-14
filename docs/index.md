@@ -1,10 +1,6 @@
-# Graphyte Documentation
+# Introduction
 
-Graphyte is a general-purpose webdoc automation engine that supports the full project lifecycle (requirement capture, revision, design, development, Q&A, documentation).
-
-## Introduction
-
-Graphyte helps automate the creation of interactive, portable web documents that massively reduce the size and complexity of traditional documentation.
+Graphyte is a general-purpose webdoc automation engine that supports the full project lifecycle (requirement capture, revision, design, development, Q&A, documentation). It helps automate the creation of interactive, portable web documents that massively reduce the size and complexity of traditional documentation.
 
 Features:
 
