@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Diagrams - Graphyte Webdoc Automation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Diagrams";
+    var mkdocs_page_input_path = "diagrams.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Graphyte Webdoc Automation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../templates/">Templates</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Diagrams</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#diagrams">Diagrams</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#modules-and-diagram-files">Modules and diagram files</a></li>
+        
+            <li><a class="toctree-l3" href="#linking-input-diagrams-and-templates">Linking input diagrams and templates</a></li>
+        
+            <li><a class="toctree-l3" href="#supported-link-types">Supported Link Types</a></li>
+        
+            <li><a class="toctree-l3" href="#svg-diagrams">SVG Diagrams</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../variables.md">Variable List</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../configfile.md">Configuration File</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Graphyte Webdoc Automation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Diagrams</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="diagrams">Diagrams</h1>
+<p>Graphyte supports two types of input diagrams:</p>
+<ul>
+<li><strong>SVG</strong>: Scalable Vector Graphics files (with extension <strong>.svg</strong>).</li>
+<li><strong>UML</strong>: Unified Modeling Language UML files (with extension <strong>.uml</strong>)</li>
+</ul>
+<p>Both types of diagram specifications are text-based and require a rendering engine to create the resulting graphics. Below you can see a couple of examples of the source text file and the rendered version for both types of diagrams:</p>
+<p><img alt="xml.jpg" src="../img/xml.jpg" /></p>
+<p><img alt="uml.jpg" src="../img/uml.jpg" /></p>
+<h2 id="modules-and-diagram-files">Modules and diagram files</h2>
+<p>We saw earlier that a graphyte model is formed by several modules. The modules present in a model have a 1 to 1 correspondence with the diagrams provided as input, i.e. for each input diagram (file with extension <strong>.svg</strong> or <strong>.uml</strong>), graphyte will create one dedicated module in the model.</p>
+<p>In order to name each module, graphyte will use the corresponding input diagrams filename. It will strip the extension and use the remaining part as name for the module.</p>
+<p>For example, for a diagram filename "Architecture Components.svg", the resulting module will be named "Architecture Components".</p>
+<h2 id="linking-input-diagrams-and-templates">Linking input diagrams and templates</h2>
+<p>If everything goes as planned, graphyte will produce a series of web documents embedding both diagrams and templates. When the user selects active shapes of the diagram, the corresponding templates will be triggered and loaded into the viewer.</p>
+<p>For this to be possible, there must be some association linking a particular element in a diagram to one of the multiple input templates. Graphyte uses the <strong>Hyperlink</strong> field on diagram shapes to establish that association between shape and template. The user is required to add a hyperlink to each shape with the name of the target template to be loaded on a mouse-click event.</p>
+<h2 id="supported-link-types">Supported Link Types</h2>
+<p>Graphyte supports 3 types of links in diagrams:</p>
+<ul>
+<li>Links to templates</li>
+</ul>
+<p>Used to show the contents of a template in the viewer when clicking on a particular shape. In order to achieve this, in your diagram, add a link to the shape. Add the name of the template in the href field (the path is not required). No additional tags are required.</p>
+<pre><code>E.g.: href="my_template.txt"
+</code></pre>
+<ul>
+<li>Links to other modules in the model</li>
+</ul>
+<p>This allows the user to, by clicking on a shape in one module, load another one of the modules in the same model. In order to define this type of link, we must use the tag "mod:".</p>
+<pre><code>E.g.: Consider the following graphyte model called "Project ACME", which has 3 diagrams, that will generate 3 modules.
+
+Model = "Project ACME"
+
+Module 1 = foo.svg
+
+Module 2 = bar.svg
+
+Module 3 = baz.uml
+</code></pre>
+<p>In order to go from Module 1 to Module 2, the user could rely on the embedded navigation menu that graphyte adds to the model. But it is also possible to add a link to a shape in foo.svg, that will take the user directly to Module 2. In order to achieve this, the model owner can add a link to a shape in foo.svg with the content:</p>
+<pre><code>href="mod:bar.svg"
+</code></pre>
+<p>(It is also possible to leave the extension out, as in <strong>href="mod:bar"</strong>).</p>
+<p>The same applies for uml diagrams. However there is one thing the model owner needs to take care of. Plantuml syntax for hyperlinks does not allow spaces, while graphyte does allow spaces in diagram filenames. So in graphyte we could have a diagram file called "foo bar.uml". In order to link to that module from a plantuml diagram, model owner must remember to replace spaces (" ") by their percent encoding ("%20") sign: "foo%20bar.uml". This is not required for SVG diagrams.</p>
+<ul>
+<li>Links to any external URL</li>
+</ul>
+<p>In order for graphyte not to interpret href field contents, the model owner must add it as a literal hyperlink with the tag "lit:".</p>
+<p>This will be useful to link to URLs that graphyte should not process further.</p>
+<pre><code>E.g.: href="lit:https://www.cisco.com/"
+</code></pre>
+<p>When clicking on the shape it will load the URL <a href="https://www.cisco.com">https://www.cisco.com</a> in the browser.</p>
+<h2 id="svg-diagrams">SVG Diagrams</h2>
+<p>SVG files are text-based specifications of two-dimensional graphics, written following an XML-based structure. Rendering of most SVG graphics is supported by the majority of mainstream modern browsers (<strong>W3C</strong>). Other advanced features present in complex SVG elements, like for example "foreign-object" elements are not supported in the HTML5 <svg> element. Test HTML support for your diagrams passing them to the graphyte tool.</p>
+<p>The creation of SVG graphics is usually achieved by using a graphic editor. One can simply draw lines and shapes and once ready export the work to an SVG file. We will explain how to do this using several editors widely known and used:</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Microsoft_Visio">Visio</a>, a widely used software from Microsoft.</li>
+<li><a href="https://www.draw.io/">Draw.io</a>, an online flowchart editor.</li>
+<li><a href="https://inkscape.org/">Inkscape</a>, a free vector graphics editor.</li>
+</ul>
+<p>In these sections we will first create a simple shape, then add the link for a hypothetical template file, and lastly export to SVG format, compatible with graphyte. Creating a model will come down to repeat the procedure for each shape/template of each diagram.</p>
+<h3 id="creating-svg-diagrams-with-microsoft-visio">Creating SVG diagrams with Microsoft Visio</h3>
+<p>This might be the most familiar solution in many cases, since it comes with simple to use stencil collections for any kind of diagram, which can also be extended downloading new stencils from online sources.</p>
+<p>Open Visio and draw any shape or stencil you want. For example in the top Ribbon - Tools select the rectangle and draw a rectangle in your canvas.</p>
+<p>Right-click on your shape and select "Hyperlink...".</p>
+<p><img alt="visio_1.png" src="../img/visio_1.png" /></p>
+<p>Edit the field "Address:" and add the name of the TXT, CSV or XML template you would like to link to this shape. <strong>Only the filename</strong> is required, no need for the full path to the template. When done click OK.</p>
+<p><img alt="visio_2.png" src="../img/visio_2.png" /></p>
+<p>Repeat the steps above until your diagram is ready.</p>
+<p>(see also: <a href="#Supported-Link-Types">Supported Link Types</a> section)</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../templates/" class="btn btn-neutral" title="Templates"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../templates/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>

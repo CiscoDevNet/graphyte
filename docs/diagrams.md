@@ -40,7 +40,7 @@ Used to show the contents of a template in the viewer when clicking on a particu
 
 This allows the user to, by clicking on a shape in one module, load another one of the modules in the same model. In order to define this type of link, we must use the tag "mod:".
 
-    E.g.: Consider the following graphyte model called "Project ACME", which has 3 diagrams, that will generate 3 modules.
+E.g.: Consider the following graphyte model called "Project ACME", which has 3 diagrams, that will generate 3 modules:
 
     Model = "Project ACME"
 
@@ -99,4 +99,111 @@ Edit the field "Address:" and add the name of the TXT, CSV or XML template you w
 Repeat the steps above until your diagram is ready.
 
 (see also: [Supported Link Types](#Supported-Link-Types) section)
+
+In order to export the diagram to SVG from Visio click on **File -> Export -> Change File Type-> SVG** and choose the name of your SVG file. This will become the name of the module, and that the file must keep its **.svg** extension.
+
+> **Important**: Filenames must be **unique** per model. Graphyte will crawl through all the input files looking for every linked filename until it finds the first match.
+
+### Creating SVG diagrams with Draw.io
+
+Draw.io is a great online graph editor from JGraph Ltd. It has an intuitive and rich interface to create all kinds of diagrams and flow charts.
+
+Visit [Draw.io](www.draw.io) and select "Create New Diagram" from the splash screen. If you had previously created a draw.io diagram and exported it to a file, you can select "Open Existing Diagram" and upload it again for edition:
+
+![drawio_splash.png](img/drawio_splash.png)
+
+Draw.io has a bunch of chart types to choose from. Start with the "Basic" chart.
+
+![drawio_new.png](img/drawio_new.png)
+
+Drag and drop the shapes on the left panel into the canvas. You can move the shapes and change their size and proportions.
+
+![drawio.png](img/drawio.png)
+
+Select a shape and use the tools on the right panel to change styles, arrangement and text.
+
+![drawio_shape.png](img/drawio_shape.png)
+
+In order to add the link to the template, right click on a shape and select "Edit Link...".
+
+![drawio_link1.png](img/drawio_link1.png)
+
+Add the name of the TXT, CSV or XML template you would like to link to this shape. **Only the name**, no need for the full path to the template. When done click on "Apply".
+
+![drawio_link2.png](img/drawio_link2.png)
+
+(see also: [Supported Link Types](#Supported-Link-Types) section)
+
+At any point in time you can rename your diagram, in order to do so click on File -> Rename and edit the filename. Leave the .xml extension, for now.
+
+![drawio_rename.png](img/drawio_rename.png)
+
+Once your diagram is ready you need to export it to SVG. In order to do so click on File -> Export -> SVG.
+
+![drawio_export.png](img/drawio_export.png)
+
+Click on "Export."
+
+![drawio_export2.png](img/drawio_export2.png)
+
+And then "Download" to get the SVG file into your local filesystem.
+
+![drawio_export3.png](img/drawio_export3.png)
+
+### Creating SVG diagrams with Inkscape
+
+Perhaps a bit more complex to learn than Visio, but quite powerful, fully equiped with vector graphic manipulation tools.
+
+Select a shape from the bar on the left, for example the rectangle, and draw a shape. Right click on the shape and select "Create link"
+
+![inkscape1.png](img/inkscape1.png)
+
+A file attributes box will pop up on the right side. In the field "Href" write the name of the TXT, CSV or XML template file you want to link. Remember to write only the name of the template, no need for the full path.
+
+![inkscape2.png](img/inkscape2.png)
+
+> **Important**: Filenames must be **unique** per model. Graphyte will crawl through all the input files looking for every linked filename until it finds the first match.
+
+In order to add another shape just repeat the steps again. You can add hyperlinks to virtually any element you add to the Inkscape canvas, the options are endless.
+
+When your diagram is ready, click on **Archive -> Save as** and choose the name of your SVG file. Remember that this will later become the name of the module, and that the file must keep its **.svg** extension.
+
+![inkscape3.png](img/inkscape3.png)
+
+(see also: [Supported Link Types](#Supported-Link-Types) section)
+
+
+## UML Diagrams
+
+Graphyte achieves support for UML specification files through integration with the great [PlantUML tool](http://plantuml.com/). PlantUML is widely used in IT for a variety of applications, from creating live diagrams while extracting requirements from a customer, to creating specifications for a design, representations of software components or creating charts of any kind.
+
+At the time of this writing, the following UML diagrams are supported by PlantUML:
+
+- [Sequence diagram(http://plantuml.com/sequence-diagram)
+- [Usecase diagram](http://plantuml.com/use-case-diagram)
+- [Class diagram](http://plantuml.com/class-diagram)
+- [Activity diagram](http://plantuml.com/activity-diagram-beta)
+- [Component diagram](http://plantuml.com/component-diagram)
+- [State diagram](http://plantuml.com/state-diagram)
+- [Object diagram](http://plantuml.com/object-diagram)
+- [Deployment diagram](http://plantuml.com/deployment-diagram)
+- [Timing diagram](http://plantuml.com/timing-diagram)
+
+On each of the links above, the PlantUML folks guide you through the creation of each type of diagram. It´s worth taking a look at the possibilities.
+
+Once you have your first UML specification ready, you can test it online on [PlantUML Web Server](http://www.plantuml.com/plantuml). Or, if you prefer, [download PlantUML](http://plantuml.com/download) and work offline.
+
+### Creating UML diagrams for Graphyte
+
+Use the plain text editor of your choice to create the UML file with your diagram's specification, following the guides on [PlantUML website](http://plantuml.com/).
+
+In order to link an element of your diagram to a specific input template, follow the format described in [Using Hyperlinks with PlantUML](http://plantuml.com/link). 
+
+In the following example, graphyte will load the user created template **request.txt** in the viewer area when clicking on the "Request" text, and will load the template **response.txt** when it detects a click on the "Response" text in the diagram.
+
+![uml_diagram.jpg](img/uml_diagram.jpg)
+
+(see also: [Supported Link Types](#Supported-Link-Types) section)
+
+Choose the name of your UML file carefully. Remember that this will later become the name of the module, and that the file must keep its .uml extension.
 

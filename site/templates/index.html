@@ -58,10 +58,41 @@
     <a class="current" href="./">Templates</a>
     <ul class="subnav">
             
-    <li class="toctree-l2"><a href="#graphyte">Graphyte</a></li>
+    <li class="toctree-l2"><a href="#templates">Templates</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#txt-templates">TXT Templates</a></li>
+        
+            <li><a class="toctree-l3" href="#variables-in-txt-templates">Variables in TXT Templates</a></li>
+        
+            <li><a class="toctree-l3" href="#csv-templates">CSV Templates</a></li>
+        
+            <li><a class="toctree-l3" href="#variables-in-csv-templates">Variables in CSV Templates</a></li>
+        
+            <li><a class="toctree-l3" href="#xml-templates">XML Templates</a></li>
+        
+            <li><a class="toctree-l3" href="#variables-in-xml-templates">Variables in XML Templates</a></li>
+        
+        </ul>
     
 
     </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../diagrams/">Diagrams</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../variables.md">Variable List</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../configfile.md">Configuration File</a>
 	    </li>
           
         </ul>
@@ -96,13 +127,51 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="graphyte">Graphyte</h1>
+                <h1 id="templates">Templates</h1>
+<p>Let´s take a closer look at how the different types of input templates look like.</p>
+<h2 id="txt-templates">TXT Templates</h2>
+<p>Any plain text content to be displayed in the viewer can be added as a file with <strong>.txt</strong> extension.</p>
+<p>TXT templates may use variables if desired. When displayed in the viewer (after the user clicks on the associated diagram section) the variables are highlighted for readability.</p>
+<h2 id="variables-in-txt-templates">Variables in TXT Templates</h2>
+<p>Graphyte supports variable markup syntax based on text bracketing, that allows it to recognize up to 4 different types of variables in the plain text files, process and validate them, and color highlight them in the viewer in real time.</p>
+<p>The following variable syntax markers are available for <strong>.txt</strong> files:</p>
+<ul>
+<li><strong>Type 1</strong> variables: <strong><variable_name></strong></li>
+<li><strong>Type 2</strong> variables: <strong>&lt;{variable_name}&gt;</strong></li>
+<li><strong>Type 3</strong> variables: <strong>&lt;(variable_name)&gt;</strong></li>
+<li><strong>Type 4</strong> variables: <strong>&lt;[variable_name]&gt;</strong></li>
+</ul>
+<p>It is up to the graphyte user to decide the specific role that each of the variable types above will play in the model. Some models will require several categories for different types of variables, others might only require a single type, and some models might not even require parametrized templates at all. There is full flexibility on this regard.</p>
+<p>When the template is loaded in the viewer, the variables are rendered for better readability. Different markers are highlighted in different colors.</p>
+<p>Say, for instance, the user would like to add to the model a template for the configuration of a sub-interface, leaving some of the configuration data as input variables. The user will mark those variables picking one of the available markers in a way that makes sense for his model. For example '<strong>&lt; &gt;</strong>' (<strong>Type 1</strong>) for input variables, and '<strong>&lt;[ ]&gt;</strong>' (<strong>Type 4</strong>) for variables that need to be looked up on some database. Graphyte will spot and process those variables and the viewer will highlight them according to their markup.</p>
+<p><img alt="template_txt.jpg" src="../img/template_txt.jpg" /></p>
+<p>Parameter names must follow some rules:</p>
+<ul>
+<li>May not contain spaces or newlines.</li>
+<li>May only contain markup characters in external marker '&lt; &gt; { } ( ) [ ]'. (E.g.: <na{m}e> is not a valid variable name, while &lt;{name}&gt; is).</li>
+<li>The standard recommendation is to use <strong>letters [a-zA-Z]</strong>, <strong>numbers [0-9]</strong> and <strong>underscores '_'</strong>.</li>
+</ul>
+<h2 id="csv-templates">CSV Templates</h2>
+<p>Comma Separated Values (<strong>.csv</strong>) files are used to represent tables.</p>
+<p>CSV files can be created on any plain text editor. New rows are depicted by the newline or carriage return character, and cells within a row are separated by the character '<strong>,</strong>'. The filename must have the extension .csv for graphyte to recognize it as a CSV input file, and represent it as a table when loaded in the viewer.</p>
+<h2 id="variables-in-csv-templates">Variables in CSV Templates</h2>
+<p>The same considerations as for variables in TXT files apply for CSV files. Syntax will be highlighted and the same kind of parameter processing will be performed.</p>
+<p><img alt="template_csv.jpg" src="../img/template_csv.jpg" /></p>
+<p>In this example, the user has included two types of parameters, marked with '<strong>&lt; &gt;</strong>' (<strong>Type 1</strong>) and '<strong>&lt;{ }&gt;</strong>' (<strong>Type 2</strong>). Perhaps the model owner has defined that type 1 parameters (yellow) will mean "input parameters" in his model, and type 2 parameters (blue) are those that can be calculated based on others (derived) and therefore are not needed as inputs.</p>
+<h2 id="xml-templates">XML Templates</h2>
+<p>XML template files are passed to graphyte as input files with the extension <strong>.xml</strong>. When displayed in the viewer, graphyte performs a basic highlighting differentiating the text that is part of the XML markup (inside '&lt; &gt;' tags) and the text that is part of the XML data content, also known as "character data".</p>
+<h2 id="variables-in-xml-templates">Variables in XML Templates</h2>
+<p>The syntax used to specify parameters on XML files differs from the one used for TXT or CSV on the fact that it uses a simple brace bracketing '<strong>{ }</strong>' markup. Parameters on XML files are not validated and are highlighted in yellow as follows.</p>
+<p><img alt="template_xml.jpg" src="../img/template_xml.jpg" /></p>
+<p>In the example some of the character data fields include parameters that are highlighted in the viewer, while others have fixed values. A character data field may have fixed parts and parameters at the same time.</p>
               
             </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../diagrams/" class="btn btn-neutral float-right" title="Diagrams">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -133,6 +202,8 @@
       
         <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
       
+      
+        <span style="margin-left: 15px"><a href="../diagrams/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
