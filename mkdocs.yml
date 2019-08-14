@@ -3,6 +3,6 @@ nav:
     - Home: index.md
     - Templates: templates.md
     - Diagrams: diagrams.md
-    - Variable: variables.md
-    - Configuration: configfile.md
+    - Variable List: variables.md
+    - Configuration File: configfile.md
 theme: readthedocs

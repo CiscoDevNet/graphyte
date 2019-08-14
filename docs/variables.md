@@ -1,4 +1,4 @@
-# Diagrams
+# Variable List
 
 As seen in previous sections, parameters in TXT and CSV input templates are marked with '**< >**' (type 1), '**<{ }>**' (type 2), '**<( )>**' (type 3) and '**<[ ]>**' (type 4).
 
