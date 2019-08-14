@@ -2,4 +2,7 @@ site_name: Graphyte Webdoc Automation
 nav:
     - Home: index.md
     - Templates: templates.md
+    - Diagrams: diagrams.md
+    - Variable List: variables.md
+    - Configuration File: configfile.md
 theme: readthedocs
