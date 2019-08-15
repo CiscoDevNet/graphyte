@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Creating SVG diagrams with Inkscape - Graphyte Webdoc Automation</title>
+  <title>Graphyte Output Files - Graphyte Webdoc Automation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Creating SVG diagrams with Inkscape";
-    var mkdocs_page_input_path = "diagrams_inkscape.md";
+    var mkdocs_page_name = "Graphyte Output Files";
+    var mkdocs_page_input_path = "output_files.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -78,15 +78,9 @@
     <a class="" href="../diagrams_drawio/">Creating SVG diagrams with Draw.io</a>
 	    </li>
           
-            <li class="toctree-l1 current">
+            <li class="toctree-l1">
 		
-    <a class="current" href="./">Creating SVG diagrams with Inkscape</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l2"><a href="#creating-svg-diagrams-with-inkscape">Creating SVG diagrams with Inkscape</a></li>
-    
-
-    </ul>
+    <a class="" href="../diagrams_inkscape/">Creating SVG diagrams with Inkscape</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -109,9 +103,23 @@
     <a class="" href="../configfile/">Graphyte Configuration File</a>
 	    </li>
           
-            <li class="toctree-l1">
+            <li class="toctree-l1 current">
 		
-    <a class="" href="../output_files/">Graphyte Output Files</a>
+    <a class="current" href="./">Graphyte Output Files</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#output-files">Output Files</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#html-modules">HTML Modules</a></li>
+        
+            <li><a class="toctree-l3" href="#log-file">Log file</a></li>
+        
+        </ul>
+    
+
+    </ul>
 	    </li>
           
         </ul>
@@ -136,7 +144,7 @@
     
       
     
-    <li>Creating SVG diagrams with Inkscape</li>
+    <li>Graphyte Output Files</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -146,19 +154,20 @@
           <div role="main">
             <div class="section">
               
-                <h3 id="creating-svg-diagrams-with-inkscape">Creating SVG diagrams with Inkscape</h3>
-<p>Perhaps a bit more complex to learn than Visio, but quite powerful, fully equiped with vector graphic manipulation tools.</p>
-<p>Select a shape from the bar on the left, for example the rectangle, and draw a shape. Right click on the shape and select "Create link"</p>
-<p><img alt="inkscape1.png" src="../img/inkscape1.png" /></p>
-<p>A file attributes box will pop up on the right side. In the field "Href" write the name of the TXT, CSV or XML template file you want to link. Remember to write only the name of the template, no need for the full path.</p>
-<p><img alt="inkscape2.png" src="../img/inkscape2.png" /></p>
-<blockquote>
-<p><strong>Important</strong>: Filenames must be <strong>unique</strong> per model. Graphyte will crawl through all the input files looking for every linked filename until it finds the first match.</p>
-</blockquote>
-<p>In order to add another shape just repeat the steps again. You can add hyperlinks to virtually any element you add to the Inkscape canvas, the options are endless.</p>
-<p>When your diagram is ready, click on <strong>Archive -&gt; Save as</strong> and choose the name of your SVG file. Remember that this will later become the name of the module, and that the file must keep its <strong>.svg</strong> extension.</p>
-<p><img alt="inkscape3.png" src="../img/inkscape3.png" /></p>
-<p>(see also: <a href="#Supported-Link-Types">Supported Link Types</a> section)</p>
+                <h2 id="output-files">Output Files</h2>
+<p>As a result of running graphyte successfully, graphyte will generate one <strong>.html module</strong> for each diagram input file, as well as the <strong>graphyte.log</strong> file containing execution information.</p>
+<p>The output files will be placed in a <strong>/www</strong> folder below the directory passed with -d option.</p>
+<h3 id="html-modules">HTML Modules</h3>
+<p>Graphyte will generate an HTML file for each of the modules that form the model. Apart from the diagram and the viewer area, the following fields are found:</p>
+<ul>
+<li><strong>Title</strong>: Formed by the name and version of the model (specified in graphyte.conf file), and the module name (extracted from the diagram file).</li>
+<li><strong>Zoom tool</strong>: Allows zooming the diagram in and out for better visualization.</li>
+<li><strong>Module Parameters</strong>: if the parameter analysis was performed as part of graphyte's execution, the results will show up here.</li>
+<li><strong>Navigation menu</strong>, displaying all the available modules (HTML pages) and providing a way to jump from one to the other from within the browser. Navigation links are relative, so the HTML files must be in the same folder for them to work.</li>
+<li><strong>Text editor</strong>: Templates can be edited from within the viewer using the integrated editor. After making the changes on the plain text document, the reviewer can download the modified file to his system. The template embedded in the current model will not be updated, the model is frozen on a fixed version. In order to incorporate the revised template, a new model version will need to be generated.</li>
+</ul>
+<h3 id="log-file">Log file</h3>
+<p>The log file contains execution details useful for information and troubleshooting.</p>
               
             </div>
           </div>
@@ -166,10 +175,8 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../diagrams_uml/" class="btn btn-neutral float-right" title="Creating UML diagrams for Graphyte">Next <span class="icon icon-circle-arrow-right"></span></a>
       
-      
-        <a href="../diagrams_drawio/" class="btn btn-neutral" title="Creating SVG diagrams with Draw.io"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../configfile/" class="btn btn-neutral" title="Graphyte Configuration File"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -195,10 +202,8 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../diagrams_drawio/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../configfile/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
-      
-        <span style="margin-left: 15px"><a href="../diagrams_uml/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
