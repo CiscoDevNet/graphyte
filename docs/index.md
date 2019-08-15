@@ -83,6 +83,33 @@ Within the diagram, the model designer will **link** shapes or elements to targe
 
 The [Diagrams section](diagrams.md) provides more details on how to create graphyte-ready diagrams using several widely available tools.
 
+---...
+
+Graphyte supports two types of input diagrams:
+
+- **SVG**: Scalable Vector Graphics files (with extension **.svg**).
+- **UML**: Unified Modeling Language UML files (with extension **.uml**)
+
+Both types of diagram specifications are text-based and require a rendering engine to create the resulting graphics. Below are a couple of examples of the source text file and the rendered version for both types of diagrams:
+
+![xml.jpg](img/xml.jpg)
+
+![uml.jpg](img/uml.jpg)
+
+
+...
+
+SVG files are text-based specifications of two-dimensional graphics, written following an XML-based structure. Rendering of most SVG graphics is supported by the majority of mainstream modern browsers (**W3C**). Other advanced features present in complex SVG elements, like for example "foreign-object" elements are not supported in the HTML5 <svg> element. Test HTML support for your diagrams passing them to the graphyte tool.
+
+The creation of SVG graphics is usually achieved by using a graphic editor. One can simply draw lines and shapes and once ready export the work to an SVG file. We will explain how to do this using several editors widely known and used:
+
+- [Visio](https://en.wikipedia.org/wiki/Microsoft_Visio), a widely used software from Microsoft.
+- [Draw.io](https://www.draw.io/), an online flowchart editor.
+- [Inkscape](https://inkscape.org/), a free vector graphics editor.
+
+In these sections we will first create a simple shape, then add the link for a hypothetical template file, and lastly export to SVG format, compatible with graphyte. Creating a model will come down to repeat the procedure for each shape/template of each diagram.
+
+
 ### Variable List
 
 As seen in the [Templates chapter](templates.md), graphyte templates may include variables, which are marked using a specific available syntax.
