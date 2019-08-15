@@ -2,7 +2,7 @@
 
 If everything goes as planned, graphyte will produce a series of web documents embedding both diagrams and templates. When the user selects active shapes of the diagram, the corresponding templates will be triggered and loaded into the viewer.
 
-For this to be possible, there must be some association linking a particular element in a diagram to one of the multiple input templates. Graphyte uses the **Hyperlink** field on diagram shapes to establish that association between shape and template. The user is required to add a hyperlink to each shape with the name of the target template to be loaded on a mouse-click event.
+For this to be possible, there must be some association between a particular element in a diagram and one of the multiple input templates. Graphyte uses the **Hyperlink** field on diagram shapes to establish that association between shape and template. The model owner is required to add a hyperlink to each shape with the name of the target template to be loaded on a mouse-click event.
 
 ## Supported Link Types
 

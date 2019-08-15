@@ -2,8 +2,8 @@
 
 Graphyte requires a configuration file where the user can find some mandatory settings and others that are optional:
 
-| Section | Setting | mandatory/optional | Example | Description |
-|:-------:|:-------:|:-------:|:-------:|:-------:|
+| Section | Setting | Mandatory/Optional | Example | Description |
+|:------- |:------- |:------- |:------- |:------- |
 | **[main]** | model | mandatory | model = HLD Customer ACME | Global name of the model. It will appear in all modules. |
 | **[main]** | version | mandatory | version = 1.0 | Version of the model. |
 | **[parameters]** | auth_params | optional | auth_params = ACME_params.xls | Worksheet with the list of authorised parameters for template validation. |

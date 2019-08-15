@@ -1,6 +1,13 @@
 # Templates
 
-Let´s take a closer look at how the different types of input templates look like.
+The ultimate objective of a model is to represent relevant information in the viewer area responding to user events (mouse clicks) on the different parts of the diagram.
+
+This relevant information is provided to graphyte in the form of text files called **templates**.
+
+Templates may optionally include parameters. Graphyte provides syntax capabilities to support up to 4 types of parameters that will be recognized, processed and highlighted as such.
+
+Take a look at the [Templates section](templates.md) for details on how to create graphyte templates.
+
 
 ## TXT Templates
 
@@ -14,23 +21,23 @@ Graphyte supports variable markup syntax based on text bracketing, that allows i
 
 The following variable syntax markers are available for **.txt** files:
  
-- **Type 1** variables: **<variable_name>**
-- **Type 2** variables: **<{variable_name}>**
-- **Type 3** variables: **<(variable_name)>**
-- **Type 4** variables: **<[variable_name]>**
+- **Type 1** variables: `<variable_name>`
+- **Type 2** variables: `<{variable_name}>`
+- **Type 3** variables: `<(variable_name)>`
+- **Type 4** variables: `<[variable_name]>`
 
 It is up to the graphyte user to decide the specific role that each of the variable types above will play in the model. Some models will require several categories for different types of variables, others might only require a single type, and some models might not even require parametrized templates at all. There is full flexibility on this regard.
 
-When the template is loaded in the viewer, the variables are rendered for better readability. Different markers are highlighted in different colors.
+When the template is loaded in the viewer, the variables are rendered for better readability. Different markers (variable types) are highlighted in different colors.
 
-Say, for instance, the user would like to add to the model a template for the configuration of a sub-interface, leaving some of the configuration data as input variables. The user will mark those variables picking one of the available markers in a way that makes sense for his model. For example '**< >**' (**Type 1**) for input variables, and '**<[ ]>**' (**Type 4**) for variables that need to be looked up on some database. Graphyte will spot and process those variables and the viewer will highlight them according to their markup.
+Say, for instance, the user would like to add to the model a template for a subinterface configuration, leaving some of the configuration data as input variables. The model owner will assign a different type to each variable choosing among the available markers in a way that makes sense for the model. For example '**< >**' (**Type 1**) for input variables, and '**<[ ]>**' (**Type 4**) for variables that need to be looked up on some database. Graphyte will spot and process those variables and the viewer will highlight them according to their markup.
 
 ![template_txt.jpg](img/template_txt.jpg)
 
 Parameter names must follow some rules:
 
 - May not contain spaces or newlines.
-- May only contain markup characters in external marker '< > { } ( ) [ ]'. (E.g.: <na{m}e> is not a valid variable name, while <{name}> is).
+- May only contain markup characters in external marker '< > { } ( ) [ ]'. (E.g.: `<na{m}e>` is not a valid variable name, while `<{name}>` is).
 - The standard recommendation is to use **letters [a-zA-Z]**, **numbers [0-9]** and **underscores '_'**.
 
 ## CSV Templates
@@ -57,4 +64,4 @@ The syntax used to specify parameters on XML files differs from the one used for
 
 ![template_xml.jpg](img/template_xml.jpg)
 
-In the example some of the character data fields include parameters that are highlighted in the viewer, while others have fixed values. A character data field may have fixed parts and parameters at the same time.
+In the example above some of the character data fields include parameters that are highlighted in the viewer, while others have fixed values. A character data field may combine fixed parts and parameters at the same time.

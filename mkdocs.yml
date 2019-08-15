@@ -1,20 +1,16 @@
 site_name: Graphyte Webdoc Automation
 nav:
-    - Home: index.md
-    - Input Files:
-        - Input Files: input_files.md
-        - Templates:
-            - Templates: templates.md
-            -
-    - Output Files: output_files.md
-    - Templates: templates.md
-    - Diagrams: diagrams.md
-    - Variable List: variables.md
-    - Configuration File: configfile.md
-    - Linking input diagrams and templates: linking.md
+    - The Basics: index.md
+    - Graphyte Step-by-Step Guide: usage.md
+    - Creating Templates: templates.md
     - Creating SVG diagrams with Microsoft Visio: diagrams_visio.md
     - Creating SVG diagrams with Draw.io: diagrams_drawio.md
     - Creating SVG diagrams with Inkscape: diagrams_inkscape.md
     - Creating UML diagrams for Graphyte: diagrams_uml.md
-    - Creating Templates: templates.md
+    - Linking Input Diagrams and Templates: linking.md
+    - Performing Variable Validation: variables.md
+    - Graphyte Configuration File: configfile.md
+    - Running Graphyte: running.md
+    - 'Graphyte Output Files: The Model': output_files.md
+    - About: about.md
 theme: readthedocs

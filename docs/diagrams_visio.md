@@ -2,7 +2,7 @@
 
 This might be the most familiar solution in many cases, since it comes with simple to use stencil collections for any kind of diagram, which can also be extended downloading new stencils from online sources.
 
-Open Visio and draw any shape or stencil you want. For example in the top Ribbon - Tools select the rectangle and draw a rectangle in your canvas.
+Open Visio and draw any shape or stencil you like. For example in the top Ribbon - Tools select the rectangle and draw a rectangle in your canvas.
 
 Right-click on your shape and select "Hyperlink...".
 
@@ -16,6 +16,6 @@ Repeat the steps above until your diagram is ready.
 
 (see also: [Supported Link Types](#Supported-Link-Types) section)
 
-In order to export the diagram to SVG from Visio click on **File -> Export -> Change File Type-> SVG** and choose the name of your SVG file. This will become the name of the module, and that the file must keep its **.svg** extension.
+In order to export the diagram to SVG from Visio click on **File -> Export -> Change File Type -> SVG** and choose the name of your SVG file. This will become the name of the module. The file must keep its **.svg** extension.
 
 > **Important**: Filenames must be **unique** per model. Graphyte will crawl through all the input files looking for every linked filename until it finds the first match.

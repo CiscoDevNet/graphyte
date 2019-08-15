@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Graphyte Configuration File - Graphyte Webdoc Automation</title>
+  <title>Graphyte Step-by-Step Guide - Graphyte Webdoc Automation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Graphyte Configuration File";
-    var mkdocs_page_input_path = "configfile.md";
+    var mkdocs_page_name = "Graphyte Step-by-Step Guide";
+    var mkdocs_page_input_path = "usage.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -53,9 +53,15 @@
     <a class="" href="..">The Basics</a>
 	    </li>
           
-            <li class="toctree-l1">
+            <li class="toctree-l1 current">
 		
-    <a class="" href="../usage/">Graphyte Step-by-Step Guide</a>
+    <a class="current" href="./">Graphyte Step-by-Step Guide</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#graphyte-step-by-step-guide">Graphyte Step-by-Step Guide</a></li>
+    
+
+    </ul>
 	    </li>
           
             <li class="toctree-l1">
@@ -93,15 +99,9 @@
     <a class="" href="../variables/">Performing Variable Validation</a>
 	    </li>
           
-            <li class="toctree-l1 current">
+            <li class="toctree-l1">
 		
-    <a class="current" href="./">Graphyte Configuration File</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l2"><a href="#configuration-file">Configuration File</a></li>
-    
-
-    </ul>
+    <a class="" href="../configfile/">Graphyte Configuration File</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -141,7 +141,7 @@
     
       
     
-    <li>Graphyte Configuration File</li>
+    <li>Graphyte Step-by-Step Guide</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -151,50 +151,78 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="configuration-file">Configuration File</h1>
-<p>Graphyte requires a configuration file where the user can find some mandatory settings and others that are optional:</p>
+                <h1 id="graphyte-step-by-step-guide">Graphyte Step-by-Step Guide</h1>
+<p>In order to generate a new model from scratch follow steps 1 to 6.</p>
+<p>For subsequent model revisions, update your source files and re-run graphyte (step 6). </p>
 <table>
 <thead>
 <tr>
-<th align="left">Section</th>
-<th align="left">Setting</th>
-<th align="left">Mandatory/Optional</th>
-<th align="left">Example</th>
-<th align="left">Description</th>
+<th align="left">Step</th>
+<th align="left">Documentation</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left"><strong>[main]</strong></td>
-<td align="left">model</td>
-<td align="left">mandatory</td>
-<td align="left">model = HLD Customer ACME</td>
-<td align="left">Global name of the model. It will appear in all modules.</td>
+<td align="left">1. Create your <strong>template files</strong> (.txt, .csv, .xml).</td>
+<td align="left"><a href="../templates/">Creating Templates</a></td>
 </tr>
 <tr>
-<td align="left"><strong>[main]</strong></td>
-<td align="left">version</td>
-<td align="left">mandatory</td>
-<td align="left">version = 1.0</td>
-<td align="left">Version of the model.</td>
+<td align="left">2. Create your <strong>diagrams</strong> (.svg, .uml).</td>
+<td align="left"><a href="../diagrams_visio/">Creating SVG diagrams with Microsoft Visio</a></td>
 </tr>
 <tr>
-<td align="left"><strong>[parameters]</strong></td>
-<td align="left">auth_params</td>
-<td align="left">optional</td>
-<td align="left">auth_params = ACME_params.xls</td>
-<td align="left">Worksheet with the list of authorised parameters for template validation.</td>
+<td align="left"></td>
+<td align="left"><a href="../diagrams_drawio/">Creating SVG diagrams with Draw.io</a></td>
 </tr>
 <tr>
-<td align="left"><strong>[layout]</strong></td>
-<td align="left">diagram_order</td>
-<td align="left">optional</td>
-<td align="left">diagram_order = Overview.svg,Sequence.uml,Architecture Components.uml,Service.svg</td>
-<td align="left">Desired order for the modules in the navigation menu. Use exact diagram filenames (spaces allowed). Comma separated.</td>
+<td align="left"></td>
+<td align="left"><a href="../diagrams_inkscape/">Creating SVG diagrams with Inkscape</a></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><a href="../diagrams_uml/">Creating UML diagrams for Graphyte</a></td>
+</tr>
+<tr>
+<td align="left">3. <strong>Link</strong> diagram elements to their corresponding template.</td>
+<td align="left"><a href="../linking/">Linking Input Diagrams and Templates</a></td>
+</tr>
+<tr>
+<td align="left">4. (Optional) If parameter validation is desired, create your list of <strong>authorized parameters</strong> (.xls/.xlsx).</td>
+<td align="left"><a href="../variables/">Creating a Variable List</a></td>
+</tr>
+<tr>
+<td align="left">5. Create your <strong>graphyte.conf</strong> file.</td>
+<td align="left"><a href="../configfile/">Graphyte Configuration File</a></td>
+</tr>
+<tr>
+<td align="left">6. Run graphyte.</td>
+<td align="left"><a href="../running/">Running Graphyte</a></td>
 </tr>
 </tbody>
 </table>
-<p><img alt="configfile.jpg" src="../img/configfile.jpg" /></p>
+<p>Your model is now generated. For model revision/troubleshooting:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Step</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">7. Verify execution log on graphyte.log file.</td>
+</tr>
+<tr>
+<td align="left">8. Review your generated model. Update desired templates using the text editor integrated in the viewer.</td>
+</tr>
+<tr>
+<td align="left">9. Update the version number in the graphyte.conf file.</td>
+</tr>
+<tr>
+<td align="left">10. Run graphyte. A new revision of the model is generated.</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="graphyte_io.png" src="../img/graphyte_io.png" /></p>
               
             </div>
           </div>
@@ -202,10 +230,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../running/" class="btn btn-neutral float-right" title="Running Graphyte">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../templates/" class="btn btn-neutral float-right" title="Creating Templates">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../variables/" class="btn btn-neutral" title="Performing Variable Validation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href=".." class="btn btn-neutral" title="The Basics"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -231,10 +259,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../variables/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../running/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../templates/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

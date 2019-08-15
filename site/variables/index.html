@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Variable List - Graphyte Webdoc Automation</title>
+  <title>Performing Variable Validation - Graphyte Webdoc Automation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,7 +17,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Variable List";
+    var mkdocs_page_name = "Performing Variable Validation";
     var mkdocs_page_input_path = "variables.md";
     var mkdocs_page_url = null;
   </script>
@@ -50,48 +50,47 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="..">Home</a>
+    <a class="" href="..">The Basics</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">Input Files</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../input_files/">Input Files</a>
-                </li>
-                <li class="">
-                    
-    <span class="caption-text">Templates</span>
-    <ul class="subnav">
-                <li class="toctree-l3">
-                    
-    <a class="" href="../templates/">Templates</a>
-                </li>
-    </ul>
-                </li>
-    </ul>
+    <a class="" href="../usage/">Graphyte Step-by-Step Guide</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="../output_files.md">Output Files</a>
+    <a class="" href="../templates/">Creating Templates</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="../templates/">Templates</a>
+    <a class="" href="../diagrams_visio/">Creating SVG diagrams with Microsoft Visio</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="../diagrams/">Diagrams</a>
+    <a class="" href="../diagrams_drawio/">Creating SVG diagrams with Draw.io</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../diagrams_inkscape/">Creating SVG diagrams with Inkscape</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../diagrams_uml/">Creating UML diagrams for Graphyte</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../linking/">Linking Input Diagrams and Templates</a>
 	    </li>
           
             <li class="toctree-l1 current">
 		
-    <a class="current" href="./">Variable List</a>
+    <a class="current" href="./">Performing Variable Validation</a>
     <ul class="subnav">
             
     <li class="toctree-l2"><a href="#variable-list">Variable List</a></li>
@@ -102,7 +101,22 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../configfile/">Configuration File</a>
+    <a class="" href="../configfile/">Graphyte Configuration File</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../running/">Running Graphyte</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../output_files/">Graphyte Output Files: The Model</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../about/">About</a>
 	    </li>
           
         </ul>
@@ -127,7 +141,7 @@
     
       
     
-    <li>Variable List</li>
+    <li>Performing Variable Validation</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -145,12 +159,12 @@
 <li>The user provides an input sheet (XLS/XLSX) along with the rest of input documents (templates, diagrams, etc).</li>
 <li>The first row is reserved for headers. On the first column, the user includes a list of <strong>authorized parameters</strong> in the model. The rest of the columns may contain information or not.</li>
 <li>While generating the model, graphyte will analyze all the parameters on each of the input templates, and check them against the authorized parameters.</li>
-<li>On each module, graphyte will include a section <strong>"Module parameters"</strong>, where the results of the analysis are displayed as a table. If any non-authorised parameters were found in any template used by the module, they will be marked as such in the table, and an alert sign will show up: "Module Parameters ( ! )".</li>
+<li>On each module, graphyte will include a section <strong>"Module parameters"</strong>, where the results of the analysis are displayed as a table. If any non-authorised parameters were found in any template used by the module, they will be marked as such in the table, and an alert sign will show up: "<strong>Module Parameters ( ! )</strong>".</li>
 </ul>
 <p><img alt="variable_list.jpg" src="../img/variable_list.jpg" /></p>
-<p>Every parameter found in TXT and CSV templates will be checked against the parameters in this sheet (marked in red in the example).</p>
+<p>Every variable found in TXT and CSV templates will be checked against the variables in this sheet (marked in red in the example).</p>
 <blockquote>
-<p><strong>Important</strong>: Parameters must be added to the worksheet with their correct markers ('<strong>&lt; &gt;</strong>', '<strong>&lt;{ }&gt;</strong>', '<strong>&lt;( )&gt;</strong>', '<strong>&lt;[ ]&gt;</strong>') in order for graphyte to match them correctly.</p>
+<p><strong>Important</strong>: Variables must be added to the worksheet with their correct markers ('<strong>&lt; &gt;</strong>', '<strong>&lt;{ }&gt;</strong>', '<strong>&lt;( )&gt;</strong>', '<strong>&lt;[ ]&gt;</strong>') in order for graphyte to match them correctly.</p>
 </blockquote>
               
             </div>
@@ -159,10 +173,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../configfile/" class="btn btn-neutral float-right" title="Configuration File">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../configfile/" class="btn btn-neutral float-right" title="Graphyte Configuration File">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../diagrams/" class="btn btn-neutral" title="Diagrams"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../linking/" class="btn btn-neutral" title="Linking Input Diagrams and Templates"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -188,7 +202,7 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../diagrams/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../linking/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../configfile/" style="color: #fcfcfc">Next &raquo;</a></span>

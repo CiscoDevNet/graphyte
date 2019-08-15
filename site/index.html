@@ -8,7 +8,7 @@
   <meta name="description" content="None">
   
   <link rel="shortcut icon" href="img/favicon.ico">
-  <title>Home - Graphyte Webdoc Automation</title>
+  <title>The Basics - Graphyte Webdoc Automation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="css/theme.css" type="text/css" />
@@ -17,7 +17,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Home";
+    var mkdocs_page_name = "The Basics";
     var mkdocs_page_input_path = "index.md";
     var mkdocs_page_url = null;
   </script>
@@ -50,20 +50,17 @@
           
             <li class="toctree-l1 current">
 		
-    <a class="current" href=".">Home</a>
+    <a class="current" href=".">The Basics</a>
     <ul class="subnav">
             
     <li class="toctree-l2"><a href="#introduction">Introduction</a></li>
     
+
+    <li class="toctree-l2"><a href="#models-and-modules">Models and Modules</a></li>
+    
         <ul>
         
-            <li><a class="toctree-l3" href="#main-concepts">Main Concepts</a></li>
-        
-            <li><a class="toctree-l3" href="#using-graphyte-step-by-step">Using graphyte step-by-step</a></li>
-        
             <li><a class="toctree-l3" href="#input-files">Input Files</a></li>
-        
-            <li><a class="toctree-l3" href="#running-graphyte">Running Graphyte</a></li>
         
             <li><a class="toctree-l3" href="#output-files">Output Files</a></li>
         
@@ -75,48 +72,62 @@
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">Input Files</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="input_files/">Input Files</a>
-                </li>
-                <li class="">
-                    
-    <span class="caption-text">Templates</span>
-    <ul class="subnav">
-                <li class="toctree-l3">
-                    
-    <a class="" href="templates/">Templates</a>
-                </li>
-    </ul>
-                </li>
-    </ul>
+    <a class="" href="usage/">Graphyte Step-by-Step Guide</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="output_files.md">Output Files</a>
+    <a class="" href="templates/">Creating Templates</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="templates/">Templates</a>
+    <a class="" href="diagrams_visio/">Creating SVG diagrams with Microsoft Visio</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="diagrams/">Diagrams</a>
+    <a class="" href="diagrams_drawio/">Creating SVG diagrams with Draw.io</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="variables/">Variable List</a>
+    <a class="" href="diagrams_inkscape/">Creating SVG diagrams with Inkscape</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="configfile/">Configuration File</a>
+    <a class="" href="diagrams_uml/">Creating UML diagrams for Graphyte</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="linking/">Linking Input Diagrams and Templates</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="variables/">Performing Variable Validation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="configfile/">Graphyte Configuration File</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="running/">Running Graphyte</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="output_files/">Graphyte Output Files: The Model</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="about/">About</a>
 	    </li>
           
         </ul>
@@ -141,7 +152,7 @@
     
       
     
-    <li>Home</li>
+    <li>The Basics</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -173,76 +184,63 @@
 <li>Review of design specifications maintaining version control.</li>
 <li>etc</li>
 </ul>
-<h2 id="main-concepts">Main Concepts</h2>
+<h1 id="models-and-modules">Models and Modules</h1>
 <p>Graphyte requires a set of input files from the user. In turn, it generates and validates a standalone web based set of documents known as the graphyte <strong>model</strong>.</p>
 <p><img alt="graphyte_components.png" src="img/graphyte_components.png" /></p>
 <p>A model is a set of web documents that are related to each other, and combined create the full representation of the target design the user is trying to build. It could be a series of network schematics with device configurations, a sequence diagram with extended information, a logic workflow and parametrized templates for an automation project, or your new flat's blueprints and notes.</p>
 <p>Each one of the HTML web documents that assemble the model is referred to as a graphyte <strong>module</strong>. A model may consist of one or more modules. The web page layout of a module has the following structure:</p>
 <p><img alt="model_areas.png" src="img/model_areas.png" /></p>
-<h2 id="using-graphyte-step-by-step">Using graphyte step-by-step</h2>
-<ol>
-<li>Create your <strong>template files</strong> (.txt, .csv, .xml).</li>
-<li>Create your <strong>diagrams</strong> (.svg, .uml).</li>
-<li><strong>Link</strong> diagram elements to their corresponding template.</li>
-<li>(Optional) If parameter validation is desired, create your list of <strong>authorized parameters</strong> (.xls/.xlsx).</li>
-<li>Create your <strong>graphyte.conf</strong> file.</li>
-<li>Run graphyte. Your model is generated.</li>
-</ol>
-<p>Verification and revision:</p>
-<ol>
-<li>Verify execution log on graphyte.log file.</li>
-<li>Review your generated model. Modify any templates using the text editor integrated in the viewer.</li>
-<li>Generate new revisions of the model by updating the version number in the graphyte.conf file.</li>
-</ol>
-<p><img alt="graphyte_io.png" src="img/graphyte_io.png" /></p>
 <h2 id="input-files">Input Files</h2>
-<p>To generate a model, the user is required to provide a series of input files:</p>
+<p>In order to generate a model using Graphyte, the user needs to prepare a series of source files to be passed as inputs:</p>
 <ul>
-<li><strong>Templates</strong>: These are basically text files with content that will show up in the viewer when triggered by mouse clicks on the diagram. The currently supported formats are Plain Text files (<strong>.txt</strong>), eXtensible Markup Language XML files (<strong>.xml</strong>) and Comma Separated Values files (<strong>.csv</strong>).</li>
+<li><strong>Templates</strong>: These are text files with content that will show up in the viewer when triggered by mouse clicks on the diagram. The currently supported formats are Plain Text files (<strong>.txt</strong>), eXtensible Markup Language XML files (<strong>.xml</strong>) and Comma Separated Values files (<strong>.csv</strong>).</li>
 <li><strong>Diagrams</strong>: The diagram files used with graphyte are also text-based. Currently supported formats are Unified Modeling Language UML (<strong>.uml</strong>) and Scalable Vector Graphics files (<strong>.svg</strong>). UML file support is achieved by graphyte via integration with the <strong>PlantUML</strong> tool. SVG is an XML-based image format for two-dimensional graphics. A variety of applications allow creating or exporting to SVG files, including Inkscape or Microsoft Visio.</li>
-<li><strong>Variable list</strong>: Optionally, depending on which graphyte features the user is aiming for, additional input files may be needed. This is the case for example for input files with parameters, that graphyte can automatically validate against a user defined list of allowed model parameters.</li>
+<li><strong>Variable List</strong>: Optionally, depending on which graphyte features the user is aiming for, additional input files may be needed. This is the case for example for input files with parameters, that graphyte can automatically validate against a user defined list of allowed model parameters.</li>
 <li><strong>graphyte.conf file</strong>: The user is required to include a small configuration file where a series of options can be set, including the name and version of the model.</li>
 </ul>
-<h3 id="templates">Templates</h3>
+<h4 id="templates">Templates</h4>
 <p><img alt="template_txt.jpg" src="img/template_txt.jpg" /></p>
 <p>The ultimate objective of a model is to represent relevant information in the viewer area responding to user events (mouse clicks) on the different parts of the diagram.</p>
 <p>This relevant information is provided to graphyte in the form of text files called <strong>templates</strong>.</p>
-<p>Templates may optionally include parameters. Graphyte provides syntax capabilities to support up to 4 types of parameters that will be recognized, processed and highlighted as such.</p>
-<p>Take a look at the <a href="templates/">Templates section</a> for details on how to create graphyte templates.</p>
-<h3 id="diagrams">Diagrams</h3>
-<p>Graphyte diagrams allow the model designer to represent large amounts of information in a user-friendly and condensed way.</p>
-<p>Graphyte diagrams are embedded into the HTML modules as SVG objects. Graphyte accepts as inputs either SVG diagrams, or UML diagrams that it will convert to SVG during execution.</p>
-<p>Within the diagram, the model designer will <strong>link</strong> shapes or elements to target templates. By doing this, the shape becomes responsive to mouse clicks that will load the target template into the <strong>viewer</strong>.</p>
-<p>The <a href="diagrams/">Diagrams section</a> provides more details on how to create graphyte-ready diagrams using several widely available tools.</p>
-<h3 id="variable-list">Variable List</h3>
-<p>As seen in the <a href="templates/">Templates chapter</a>, graphyte templates may include variables, which are marked using a specific available syntax.</p>
-<p>Optionally, the model designer may choose to perform automatic validation of template variables against a pre-defined input list, provided in .xls/.xlsx sheet format. This will help ensure that all variables used in templates are known and valid.</p>
-<p>Check out the <a href="variables/">Variable List section</a> for details on how to create the variables worksheet.</p>
-<p><img alt="variable_list.jpg" src="img/variable_list.jpg" /></p>
-<h3 id="configuration-file">Configuration File</h3>
-<p>Finally, graphyte requires a configuration file that will contain the details of the model such as name and version, as well as other optional fields. The <strong>graphyte.conf</strong> file is mandatory and must be unique.</p>
-<p>Find the details for graphyte.conf creation on <a href="configfile/">Configuration File section</a>.</p>
-<h2 id="running-graphyte">Running Graphyte</h2>
-<p>Once the model owner has created templates and diagrams, linked them together, created the graphyte.conf file and optionally the variable worksheet, everything is ready to generate the graphyte model.</p>
-<p>Place all the input files under the same directory. The directory path containing all input files will be passed as argument to graphyte with -d option.</p>
-<pre><code>python3 graphyte.py -d /path/to/inputs/directory/
-</code></pre>
-
-<p>Note that there are no restrictions as to how input files should be organized below the directory specified with -d option. Graphyte will scan all subdirectories and fetch the relevant files required by the model.</p>
-<h2 id="output-files">Output Files</h2>
-<p>As a result of running graphyte successfully, graphyte will generate one <strong>.html module</strong> for each diagram input file, as well as the <strong>graphyte.log</strong> file containing execution information.</p>
-<p>The output files will be placed in a <strong>/www</strong> folder below the directory passed with -d option.</p>
-<h3 id="html-modules">HTML Modules</h3>
-<p>Graphyte will generate an HTML file for each of the modules that form the model. Apart from the diagram and the viewer area, the following fields are found:</p>
+<p>Templates may optionally include parameters. Graphyte provides syntax capabilities to support up to 4 types of parameters that will be detected, processed and highlighted as such.</p>
+<p>The section <a href="templates/">Creating Templates</a> has all the details on how to create graphyte templates.</p>
+<h4 id="diagrams">Diagrams</h4>
+<p>Graphyte diagrams allow the model designer to represent large amounts of information in a usable and condensed way.</p>
+<p>Graphyte supports two types of input diagrams:</p>
 <ul>
-<li><strong>Title</strong>: Formed by the name and version of the model (specified in graphyte.conf file), and the module name (extracted from the diagram file).</li>
-<li><strong>Zoom tool</strong>: Allows zooming the diagram in and out for better visualization.</li>
-<li><strong>Module Parameters</strong>: if the parameter analysis was performed as part of graphyte's execution, the results will show up here.</li>
-<li><strong>Navigation menu</strong>, displaying all the available modules (HTML pages) and providing a way to jump from one to the other from within the browser. Navigation links are relative, so the HTML files must be in the same folder for them to work.</li>
-<li><strong>Text editor</strong>: Templates can be edited from within the viewer using the integrated editor. After making the changes on the plain text document, the reviewer can download the modified file to his system. The template embedded in the current model will not be updated, the model is frozen on a fixed version. In order to incorporate the revised template, a new model version will need to be generated.</li>
+<li><strong>SVG</strong>: Scalable Vector Graphics files (with extension <strong>.svg</strong>).</li>
+<li><strong>UML</strong>: Unified Modeling Language UML files (with extension <strong>.uml</strong>)</li>
 </ul>
-<h3 id="log-file">Log file</h3>
-<p>The log file contains execution details useful for information and troubleshooting.</p>
+<p>Both are processed and embedded into the HTML modules as SVG objects (UML diagrams are internally converted to SVG). SVG files are text-based specifications of two-dimensional graphics, written following an XML-based structure. Rendering of most SVG graphics is supported by the majority of mainstream modern browsers (<strong>W3C</strong>). Other advanced features present in complex SVG elements, like for example <strong>foreign-object</strong> elements are not currently supported in the HTML5 <code>&lt;svg&gt;</code> element. Test HTML support for your diagrams passing them to the graphyte tool.</p>
+<p>Both types of diagram specifications are text-based and require a rendering engine to create the resulting graphics. Below are a couple of examples of the source text file and the rendered version for both types of diagrams:</p>
+<p><img alt="xml.jpg" src="img/xml.jpg" /></p>
+<p><img alt="uml.jpg" src="img/uml.jpg" /></p>
+<p>Within the diagram, the model designer will <strong>link</strong> shapes or elements to target templates. By doing this, the shape becomes responsive to mouse clicks that will load the target template into the <strong>viewer</strong>.</p>
+<p>The creation of SVG graphics is usually achieved by using a graphic editor. One can simply draw lines and shapes and once ready export the work to an SVG file. We will explain how to do this using several well-known editors:</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Microsoft_Visio">Visio</a>, a widely used software from Microsoft.</li>
+<li><a href="https://www.draw.io/">Draw.io</a>, an online flowchart editor.</li>
+<li><a href="https://inkscape.org/">Inkscape</a>, a free vector graphics editor.</li>
+</ul>
+<p>The following sections provide the necessary details for creating graphyte-ready SVG/UML diagrams.</p>
+<ul>
+<li><a href="diagrams_visio/">Creating SVG diagrams with Microsoft Visio</a></li>
+<li><a href="diagrams_drawio/">Creating SVG diagrams with Draw.io</a></li>
+<li><a href="diagrams_inkscape/">Creating SVG diagrams with Inkscape</a></li>
+<li><a href="diagrams_uml/">Creating UML diagrams for Graphyte</a></li>
+</ul>
+<h4 id="variable-list">Variable List</h4>
+<p>As previously mentioned, graphyte templates may include variables, which are marked using a specific available syntax.</p>
+<p>Optionally, the model designer may choose to perform automatic validation of template variables against a pre-defined input list, provided in <strong>.xls</strong>/<strong>.xlsx</strong> sheet format. This will help ensure that all variables used in templates are known and valid.</p>
+<p>Visit the <a href="variables/">Variable List section</a> section for details on how to create the variables worksheet.</p>
+<p><img alt="variable_list.jpg" src="img/variable_list.jpg" /></p>
+<h4 id="configuration-file">Configuration File</h4>
+<p>Finally, graphyte requires a configuration file that will contain the details of the model such as name and version, as well as other optional fields. The <strong>graphyte.conf</strong> file is mandatory and must be unique.</p>
+<p>Find the details for the creation of graphyte.conf file on <a href="configfile/">Configuration File section</a>.</p>
+<h2 id="output-files">Output Files</h2>
+<p>Once the input files are ready, the model owner is ready to run graphyte (see <a href="running/">Running Graphyte</a> section for details).</p>
+<p>As a result, the model, consisting on one or more HTML modules, will be generated. Details on the resulting files can be found on the section <a href="output_files/">Graphyte Output Files: The Model</a>.</p>
+<p><img alt="graphyte_io.png" src="img/graphyte_io.png" /></p>
               
             </div>
           </div>
@@ -250,7 +248,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="input_files/" class="btn btn-neutral float-right" title="Input Files">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="usage/" class="btn btn-neutral float-right" title="Graphyte Step-by-Step Guide">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
     </div>
@@ -278,7 +276,7 @@
       
       
       
-        <span style="margin-left: 15px"><a href="input_files/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="usage/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
@@ -291,5 +289,5 @@
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2019-08-15 00:13:29
+Build Date UTC : 2019-08-15 16:28:30
 -->

@@ -1,6 +1,6 @@
 ### Creating SVG diagrams with Draw.io
 
-Draw.io is a great online graph editor from JGraph Ltd. It has an intuitive and rich interface to create all kinds of diagrams and flow charts.
+[Draw.io](www.draw.io) is a great online graph editor from JGraph Ltd. It has an intuitive and rich interface to create all kinds of diagrams and flow charts.
 
 Visit [Draw.io](www.draw.io) and select "Create New Diagram" from the splash screen. If you had previously created a draw.io diagram and exported it to a file, you can select "Open Existing Diagram" and upload it again for edition:
 
@@ -28,11 +28,11 @@ Add the name of the TXT, CSV or XML template you would like to link to this shap
 
 (see also: [Supported Link Types](#Supported-Link-Types) section)
 
-At any point in time you can rename your diagram, in order to do so click on File -> Rename and edit the filename. Leave the .xml extension, for now.
+At any point in time you can rename your diagram, in order to do so click on **File -> Rename** and edit the filename. Leave the .xml extension, for now.
 
 ![drawio_rename.png](img/drawio_rename.png)
 
-Once your diagram is ready you need to export it to SVG. In order to do so click on File -> Export -> SVG.
+Once your diagram is ready you need to export it to SVG. In order to do so click on **File -> Export -> SVG**.
 
 ![drawio_export.png](img/drawio_export.png)
 
