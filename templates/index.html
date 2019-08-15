@@ -130,6 +130,11 @@
     <a class="" href="../output_files/">Graphyte Output Files: The Model</a>
 	    </li>
           
+            <li class="toctree-l1">
+		
+    <a class="" href="../about/">About</a>
+	    </li>
+          
         </ul>
       </div>
       &nbsp;
@@ -174,19 +179,19 @@
 <p>Graphyte supports variable markup syntax based on text bracketing, that allows it to recognize up to 4 different types of variables in the plain text files, process and validate them, and color highlight them in the viewer in real time.</p>
 <p>The following variable syntax markers are available for <strong>.txt</strong> files:</p>
 <ul>
-<li><strong>Type 1</strong> variables: <strong><variable_name></strong></li>
-<li><strong>Type 2</strong> variables: <strong>&lt;{variable_name}&gt;</strong></li>
-<li><strong>Type 3</strong> variables: <strong>&lt;(variable_name)&gt;</strong></li>
-<li><strong>Type 4</strong> variables: <strong>&lt;[variable_name]&gt;</strong></li>
+<li><strong>Type 1</strong> variables: <code>&lt;variable_name&gt;</code></li>
+<li><strong>Type 2</strong> variables: <code>&lt;{variable_name}&gt;</code></li>
+<li><strong>Type 3</strong> variables: <code>&lt;(variable_name)&gt;</code></li>
+<li><strong>Type 4</strong> variables: <code>&lt;[variable_name]&gt;</code></li>
 </ul>
 <p>It is up to the graphyte user to decide the specific role that each of the variable types above will play in the model. Some models will require several categories for different types of variables, others might only require a single type, and some models might not even require parametrized templates at all. There is full flexibility on this regard.</p>
-<p>When the template is loaded in the viewer, the variables are rendered for better readability. Different markers are highlighted in different colors.</p>
-<p>Say, for instance, the user would like to add to the model a template for the configuration of a sub-interface, leaving some of the configuration data as input variables. The user will mark those variables picking one of the available markers in a way that makes sense for his model. For example '<strong>&lt; &gt;</strong>' (<strong>Type 1</strong>) for input variables, and '<strong>&lt;[ ]&gt;</strong>' (<strong>Type 4</strong>) for variables that need to be looked up on some database. Graphyte will spot and process those variables and the viewer will highlight them according to their markup.</p>
+<p>When the template is loaded in the viewer, the variables are rendered for better readability. Different markers (variable types) are highlighted in different colors.</p>
+<p>Say, for instance, the user would like to add to the model a template for a subinterface configuration, leaving some of the configuration data as input variables. The model owner will assign a different type to each variable choosing among the available markers in a way that makes sense for the model. For example '<strong>&lt; &gt;</strong>' (<strong>Type 1</strong>) for input variables, and '<strong>&lt;[ ]&gt;</strong>' (<strong>Type 4</strong>) for variables that need to be looked up on some database. Graphyte will spot and process those variables and the viewer will highlight them according to their markup.</p>
 <p><img alt="template_txt.jpg" src="../img/template_txt.jpg" /></p>
 <p>Parameter names must follow some rules:</p>
 <ul>
 <li>May not contain spaces or newlines.</li>
-<li>May only contain markup characters in external marker '&lt; &gt; { } ( ) [ ]'. (E.g.: <na{m}e> is not a valid variable name, while &lt;{name}&gt; is).</li>
+<li>May only contain markup characters in external marker '&lt; &gt; { } ( ) [ ]'. (E.g.: <code>&lt;na{m}e&gt;</code> is not a valid variable name, while <code>&lt;{name}&gt;</code> is).</li>
 <li>The standard recommendation is to use <strong>letters [a-zA-Z]</strong>, <strong>numbers [0-9]</strong> and <strong>underscores '_'</strong>.</li>
 </ul>
 <h2 id="csv-templates">CSV Templates</h2>
@@ -201,7 +206,7 @@
 <h2 id="variables-in-xml-templates">Variables in XML Templates</h2>
 <p>The syntax used to specify parameters on XML files differs from the one used for TXT or CSV on the fact that it uses a simple brace bracketing '<strong>{ }</strong>' markup. Parameters on XML files are not validated and are highlighted in yellow as follows.</p>
 <p><img alt="template_xml.jpg" src="../img/template_xml.jpg" /></p>
-<p>In the example some of the character data fields include parameters that are highlighted in the viewer, while others have fixed values. A character data field may have fixed parts and parameters at the same time.</p>
+<p>In the example above some of the character data fields include parameters that are highlighted in the viewer, while others have fixed values. A character data field may combine fixed parts and parameters at the same time.</p>
               
             </div>
           </div>

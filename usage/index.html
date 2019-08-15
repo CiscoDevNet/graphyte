@@ -114,6 +114,11 @@
     <a class="" href="../output_files/">Graphyte Output Files: The Model</a>
 	    </li>
           
+            <li class="toctree-l1">
+		
+    <a class="" href="../about/">About</a>
+	    </li>
+          
         </ul>
       </div>
       &nbsp;
@@ -147,20 +152,76 @@
             <div class="section">
               
                 <h1 id="graphyte-step-by-step-guide">Graphyte Step-by-Step Guide</h1>
-<ol>
-<li>Create your <strong>template files</strong> (.txt, .csv, .xml).</li>
-<li>Create your <strong>diagrams</strong> (.svg, .uml).</li>
-<li><strong>Link</strong> diagram elements to their corresponding template.</li>
-<li>(Optional) If parameter validation is desired, create your list of <strong>authorized parameters</strong> (.xls/.xlsx).</li>
-<li>Create your <strong>graphyte.conf</strong> file.</li>
-<li>Run graphyte. Your model is generated.</li>
-</ol>
-<p>Verification and revision:</p>
-<ol>
-<li>Verify execution log on graphyte.log file.</li>
-<li>Review your generated model. Modify any templates using the text editor integrated in the viewer.</li>
-<li>Generate new revisions of the model by updating the version number in the graphyte.conf file.</li>
-</ol>
+<p>In order to generate a new model from scratch follow steps 1 to 6.</p>
+<p>For subsequent model revisions, update your source files and re-run graphyte (step 6). </p>
+<table>
+<thead>
+<tr>
+<th align="left">Step</th>
+<th align="left">Documentation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">1. Create your <strong>template files</strong> (.txt, .csv, .xml).</td>
+<td align="left"><a href="../templates/">Creating Templates</a></td>
+</tr>
+<tr>
+<td align="left">2. Create your <strong>diagrams</strong> (.svg, .uml).</td>
+<td align="left"><a href="../diagrams_visio/">Creating SVG diagrams with Microsoft Visio</a></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><a href="../diagrams_drawio/">Creating SVG diagrams with Draw.io</a></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><a href="../diagrams_inkscape/">Creating SVG diagrams with Inkscape</a></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><a href="../diagrams_uml/">Creating UML diagrams for Graphyte</a></td>
+</tr>
+<tr>
+<td align="left">3. <strong>Link</strong> diagram elements to their corresponding template.</td>
+<td align="left"><a href="../linking/">Linking Input Diagrams and Templates</a></td>
+</tr>
+<tr>
+<td align="left">4. (Optional) If parameter validation is desired, create your list of <strong>authorized parameters</strong> (.xls/.xlsx).</td>
+<td align="left"><a href="../variables/">Creating a Variable List</a></td>
+</tr>
+<tr>
+<td align="left">5. Create your <strong>graphyte.conf</strong> file.</td>
+<td align="left"><a href="../configfile/">Graphyte Configuration File</a></td>
+</tr>
+<tr>
+<td align="left">6. Run graphyte.</td>
+<td align="left"><a href="../running/">Running Graphyte</a></td>
+</tr>
+</tbody>
+</table>
+<p>Your model is now generated. For model revision/troubleshooting:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Step</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">7. Verify execution log on graphyte.log file.</td>
+</tr>
+<tr>
+<td align="left">8. Review your generated model. Update desired templates using the text editor integrated in the viewer.</td>
+</tr>
+<tr>
+<td align="left">9. Update the version number in the graphyte.conf file.</td>
+</tr>
+<tr>
+<td align="left">10. Run graphyte. A new revision of the model is generated.</td>
+</tr>
+</tbody>
+</table>
 <p><img alt="graphyte_io.png" src="../img/graphyte_io.png" /></p>
               
             </div>

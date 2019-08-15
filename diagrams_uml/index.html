@@ -120,6 +120,11 @@
     <a class="" href="../output_files/">Graphyte Output Files: The Model</a>
 	    </li>
           
+            <li class="toctree-l1">
+		
+    <a class="" href="../about/">About</a>
+	    </li>
+          
         </ul>
       </div>
       &nbsp;
@@ -153,10 +158,10 @@
             <div class="section">
               
                 <h2 id="uml-diagrams">UML Diagrams</h2>
-<p>Graphyte achieves support for UML specification files through integration with the great <a href="http://plantuml.com/">PlantUML tool</a>. PlantUML is widely used in IT for a variety of applications, from creating live diagrams while extracting requirements from a customer, to creating specifications for a design, representations of software components or creating charts of any kind.</p>
+<p>Graphyte implements support for UML specification files by leveraging the great <a href="http://plantuml.com/">PlantUML tool</a>. PlantUML is widely used in IT for a variety of applications, from creating live diagrams while extracting requirements from a customer, to creating specifications for a design, representations of software components or creating charts of any kind.</p>
 <p>At the time of this writing, the following UML diagrams are supported by PlantUML:</p>
 <ul>
-<li>[Sequence diagram(http://plantuml.com/sequence-diagram)</li>
+<li><a href="http://plantuml.com/sequence-diagram">Sequence diagram</a></li>
 <li><a href="http://plantuml.com/use-case-diagram">Usecase diagram</a></li>
 <li><a href="http://plantuml.com/class-diagram">Class diagram</a></li>
 <li><a href="http://plantuml.com/activity-diagram-beta">Activity diagram</a></li>
@@ -167,14 +172,14 @@
 <li><a href="http://plantuml.com/timing-diagram">Timing diagram</a></li>
 </ul>
 <p>On each of the links above, the PlantUML folks guide you through the creation of each type of diagram. It´s worth taking a look at the possibilities.</p>
-<p>Once you have your first UML specification ready, you can test it online on <a href="http://www.plantuml.com/plantuml">PlantUML Web Server</a>. Or, if you prefer, <a href="http://plantuml.com/download">download PlantUML</a> and work offline.</p>
+<p>Once you have your first UML specification ready, you can test it online on <a href="http://www.plantuml.com/plantuml">PlantUML Web Server</a>. Or, if you prefer, you can <a href="http://plantuml.com/download">download PlantUML</a> and work offline.</p>
 <h3 id="creating-uml-diagrams-for-graphyte">Creating UML diagrams for Graphyte</h3>
 <p>Use the plain text editor of your choice to create the UML file with your diagram's specification, following the guides on <a href="http://plantuml.com/">PlantUML website</a>.</p>
 <p>In order to link an element of your diagram to a specific input template, follow the format described in <a href="http://plantuml.com/link">Using Hyperlinks with PlantUML</a>. </p>
 <p>In the following example, graphyte will load the user created template <strong>request.txt</strong> in the viewer area when clicking on the "Request" text, and will load the template <strong>response.txt</strong> when it detects a click on the "Response" text in the diagram.</p>
 <p><img alt="uml_diagram.jpg" src="../img/uml_diagram.jpg" /></p>
 <p>(see also: <a href="#Supported-Link-Types">Supported Link Types</a> section)</p>
-<p>Choose the name of your UML file carefully. Remember that this will later become the name of the module, and that the file must keep its .uml extension.</p>
+<p>Choose the name of your UML file carefully, it will later become the name of the module. The file must keep its .uml extension.</p>
               
             </div>
           </div>
