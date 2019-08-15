@@ -1,8 +1,10 @@
 site_name: Graphyte Webdoc Automation
 nav:
     - Home: index.md
-    - Fake Level:
+    - Input Files:
         - Input Files: input_files.md
+        - Templates:
+            - Templates: templates.md
     - Output Files: output_files.md
     - Templates: templates.md
     - Diagrams: diagrams.md
