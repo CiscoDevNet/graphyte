@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Graphyte Output Files - Graphyte Webdoc Automation</title>
+  <title>Running Graphyte - Graphyte Webdoc Automation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Graphyte Output Files";
-    var mkdocs_page_input_path = "output_files.md";
+    var mkdocs_page_name = "Running Graphyte";
+    var mkdocs_page_input_path = "running.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -98,28 +98,20 @@
     <a class="" href="../configfile/">Graphyte Configuration File</a>
 	    </li>
           
-            <li class="toctree-l1">
-		
-    <a class="" href="../running/">Running Graphyte</a>
-	    </li>
-          
             <li class="toctree-l1 current">
 		
-    <a class="current" href="./">Graphyte Output Files</a>
+    <a class="current" href="./">Running Graphyte</a>
     <ul class="subnav">
             
-    <li class="toctree-l2"><a href="#output-files">Output Files</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l3" href="#html-modules">HTML Modules</a></li>
-        
-            <li><a class="toctree-l3" href="#log-file">Log file</a></li>
-        
-        </ul>
+    <li class="toctree-l2"><a href="#running-graphyte">Running Graphyte</a></li>
     
 
     </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../output_files/">Graphyte Output Files</a>
 	    </li>
           
         </ul>
@@ -144,7 +136,7 @@
     
       
     
-    <li>Graphyte Output Files</li>
+    <li>Running Graphyte</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -154,20 +146,13 @@
           <div role="main">
             <div class="section">
               
-                <h2 id="output-files">Output Files</h2>
-<p>As a result of running graphyte successfully, graphyte will generate one <strong>.html module</strong> for each diagram input file, as well as the <strong>graphyte.log</strong> file containing execution information.</p>
-<p>The output files will be placed in a <strong>/www</strong> folder below the directory passed with -d option.</p>
-<h3 id="html-modules">HTML Modules</h3>
-<p>Graphyte will generate an HTML file for each of the modules that form the model. Apart from the diagram and the viewer area, the following fields are found:</p>
-<ul>
-<li><strong>Title</strong>: Formed by the name and version of the model (specified in graphyte.conf file), and the module name (extracted from the diagram file).</li>
-<li><strong>Zoom tool</strong>: Allows zooming the diagram in and out for better visualization.</li>
-<li><strong>Module Parameters</strong>: if the parameter analysis was performed as part of graphyte's execution, the results will show up here.</li>
-<li><strong>Navigation menu</strong>, displaying all the available modules (HTML pages) and providing a way to jump from one to the other from within the browser. Navigation links are relative, so the HTML files must be in the same folder for them to work.</li>
-<li><strong>Text editor</strong>: Templates can be edited from within the viewer using the integrated editor. After making the changes on the plain text document, the reviewer can download the modified file to his system. The template embedded in the current model will not be updated, the model is frozen on a fixed version. In order to incorporate the revised template, a new model version will need to be generated.</li>
-</ul>
-<h3 id="log-file">Log file</h3>
-<p>The log file contains execution details useful for troubleshooting.</p>
+                <h2 id="running-graphyte">Running Graphyte</h2>
+<p>Once the model owner has created templates and diagrams, linked them together, created the graphyte.conf file and optionally the variable worksheet, everything is ready to generate the graphyte model.</p>
+<p>Place all the input files under the same directory. The directory path containing all input files will be passed as argument to graphyte with -d option.</p>
+<pre><code>python3 graphyte.py -d /path/to/inputs/directory/
+</code></pre>
+
+<p>Note that there are no restrictions as to how input files should be organized below the directory specified with -d option. Graphyte will scan all subdirectories and fetch the relevant files required by the model.</p>
               
             </div>
           </div>
@@ -175,8 +160,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="../output_files/" class="btn btn-neutral float-right" title="Graphyte Output Files">Next <span class="icon icon-circle-arrow-right"></span></a>
       
-        <a href="../running/" class="btn btn-neutral" title="Running Graphyte"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+        <a href="../configfile/" class="btn btn-neutral" title="Graphyte Configuration File"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -202,8 +189,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../running/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../configfile/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
+      
+        <span style="margin-left: 15px"><a href="../output_files/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
