@@ -119,6 +119,36 @@
     <a class="" href="configfile/">Configuration File</a>
 	    </li>
           
+            <li class="toctree-l1">
+		
+    <a class="" href="linking/">Linking input diagrams and templates</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="diagrams_visio/">Creating SVG diagrams with Microsoft Visio</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="diagrams_drawio/">Creating SVG diagrams with Draw.io</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="diagrams_inkscape/">Creating SVG diagrams with Inkscape</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="diagrams_uml/">Creating UML diagrams for Graphyte</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="templates/">Creating Templates</a>
+	    </li>
+          
         </ul>
       </div>
       &nbsp;
@@ -214,6 +244,24 @@
 <p>Graphyte diagrams are embedded into the HTML modules as SVG objects. Graphyte accepts as inputs either SVG diagrams, or UML diagrams that it will convert to SVG during execution.</p>
 <p>Within the diagram, the model designer will <strong>link</strong> shapes or elements to target templates. By doing this, the shape becomes responsive to mouse clicks that will load the target template into the <strong>viewer</strong>.</p>
 <p>The <a href="diagrams/">Diagrams section</a> provides more details on how to create graphyte-ready diagrams using several widely available tools.</p>
+<p>---...</p>
+<p>Graphyte supports two types of input diagrams:</p>
+<ul>
+<li><strong>SVG</strong>: Scalable Vector Graphics files (with extension <strong>.svg</strong>).</li>
+<li><strong>UML</strong>: Unified Modeling Language UML files (with extension <strong>.uml</strong>)</li>
+</ul>
+<p>Both types of diagram specifications are text-based and require a rendering engine to create the resulting graphics. Below are a couple of examples of the source text file and the rendered version for both types of diagrams:</p>
+<p><img alt="xml.jpg" src="img/xml.jpg" /></p>
+<p><img alt="uml.jpg" src="img/uml.jpg" /></p>
+<p>...</p>
+<p>SVG files are text-based specifications of two-dimensional graphics, written following an XML-based structure. Rendering of most SVG graphics is supported by the majority of mainstream modern browsers (<strong>W3C</strong>). Other advanced features present in complex SVG elements, like for example "foreign-object" elements are not supported in the HTML5 <svg> element. Test HTML support for your diagrams passing them to the graphyte tool.</p>
+<p>The creation of SVG graphics is usually achieved by using a graphic editor. One can simply draw lines and shapes and once ready export the work to an SVG file. We will explain how to do this using several editors widely known and used:</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Microsoft_Visio">Visio</a>, a widely used software from Microsoft.</li>
+<li><a href="https://www.draw.io/">Draw.io</a>, an online flowchart editor.</li>
+<li><a href="https://inkscape.org/">Inkscape</a>, a free vector graphics editor.</li>
+</ul>
+<p>In these sections we will first create a simple shape, then add the link for a hypothetical template file, and lastly export to SVG format, compatible with graphyte. Creating a model will come down to repeat the procedure for each shape/template of each diagram.</p>
 <h3 id="variable-list">Variable List</h3>
 <p>As seen in the <a href="templates/">Templates chapter</a>, graphyte templates may include variables, which are marked using a specific available syntax.</p>
 <p>Optionally, the model designer may choose to perform automatic validation of template variables against a pre-defined input list, provided in .xls/.xlsx sheet format. This will help ensure that all variables used in templates are known and valid.</p>
@@ -291,5 +339,5 @@
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2019-08-15 00:13:29
+Build Date UTC : 2019-08-15 11:52:48
 -->

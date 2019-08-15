@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Configuration File - Graphyte Webdoc Automation</title>
+  <title>Linking input diagrams and templates - Graphyte Webdoc Automation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Configuration File";
-    var mkdocs_page_input_path = "configfile.md";
+    var mkdocs_page_name = "Linking input diagrams and templates";
+    var mkdocs_page_input_path = "linking.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -94,20 +94,23 @@
     <a class="" href="../variables/">Variable List</a>
 	    </li>
           
+            <li class="toctree-l1">
+		
+    <a class="" href="../configfile/">Configuration File</a>
+	    </li>
+          
             <li class="toctree-l1 current">
 		
-    <a class="current" href="./">Configuration File</a>
+    <a class="current" href="./">Linking input diagrams and templates</a>
     <ul class="subnav">
             
-    <li class="toctree-l2"><a href="#configuration-file">Configuration File</a></li>
+    <li class="toctree-l2"><a href="#linking-input-diagrams-and-templates">Linking input diagrams and templates</a></li>
+    
+
+    <li class="toctree-l2"><a href="#supported-link-types">Supported Link Types</a></li>
     
 
     </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../linking/">Linking input diagrams and templates</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -157,7 +160,7 @@
     
       
     
-    <li>Configuration File</li>
+    <li>Linking input diagrams and templates</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -167,50 +170,43 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="configuration-file">Configuration File</h1>
-<p>Graphyte requires a configuration file where the user can find some mandatory settings and others that are optional:</p>
-<table>
-<thead>
-<tr>
-<th align="center">Section</th>
-<th align="center">Setting</th>
-<th align="center">mandatory/optional</th>
-<th align="center">Example</th>
-<th align="center">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center"><strong>[main]</strong></td>
-<td align="center">model</td>
-<td align="center">mandatory</td>
-<td align="center">model = HLD Customer ACME</td>
-<td align="center">Global name of the model. It will appear in all modules.</td>
-</tr>
-<tr>
-<td align="center"><strong>[main]</strong></td>
-<td align="center">version</td>
-<td align="center">mandatory</td>
-<td align="center">version = 1.0</td>
-<td align="center">Version of the model.</td>
-</tr>
-<tr>
-<td align="center"><strong>[parameters]</strong></td>
-<td align="center">auth_params</td>
-<td align="center">optional</td>
-<td align="center">auth_params = ACME_params.xls</td>
-<td align="center">Worksheet with the list of authorised parameters for template validation.</td>
-</tr>
-<tr>
-<td align="center"><strong>[layout]</strong></td>
-<td align="center">diagram_order</td>
-<td align="center">optional</td>
-<td align="center">diagram_order = Overview.svg,Sequence.uml,Architecture Components.uml,Service.svg</td>
-<td align="center">Desired order for the modules in the navigation menu. Use exact diagram filenames (spaces allowed). Comma separated.</td>
-</tr>
-</tbody>
-</table>
-<p><img alt="configfile.jpg" src="../img/configfile.jpg" /></p>
+                <h2 id="linking-input-diagrams-and-templates">Linking input diagrams and templates</h2>
+<p>If everything goes as planned, graphyte will produce a series of web documents embedding both diagrams and templates. When the user selects active shapes of the diagram, the corresponding templates will be triggered and loaded into the viewer.</p>
+<p>For this to be possible, there must be some association linking a particular element in a diagram to one of the multiple input templates. Graphyte uses the <strong>Hyperlink</strong> field on diagram shapes to establish that association between shape and template. The user is required to add a hyperlink to each shape with the name of the target template to be loaded on a mouse-click event.</p>
+<h2 id="supported-link-types">Supported Link Types</h2>
+<p>Graphyte supports 3 types of links in diagrams:</p>
+<ul>
+<li>Links to templates</li>
+</ul>
+<p>Used to show the contents of a template in the viewer when clicking on a particular shape. In order to achieve this, in your diagram, add a link to the shape. Add the name of the template in the href field (the path is not required). No additional tags are required.</p>
+<pre><code>E.g.: href="my_template.txt"
+</code></pre>
+<ul>
+<li>Links to other modules in the model</li>
+</ul>
+<p>This allows the user to, by clicking on a shape in one module, load another one of the modules in the same model. In order to define this type of link, we must use the tag "mod:".</p>
+<p>E.g.: Consider the following graphyte model called "Project ACME", which has 3 diagrams, that will generate 3 modules:</p>
+<pre><code>Model = "Project ACME"
+
+Module 1 = foo.svg
+
+Module 2 = bar.svg
+
+Module 3 = baz.uml
+</code></pre>
+<p>In order to go from Module 1 to Module 2, the user could rely on the embedded navigation menu that graphyte adds to the model. But it is also possible to add a link to a shape in foo.svg, that will take the user directly to Module 2. In order to achieve this, the model owner can add a link to a shape in foo.svg with the content:</p>
+<pre><code>href="mod:bar.svg"
+</code></pre>
+<p>(It is also possible to leave the extension out, as in <strong>href="mod:bar"</strong>).</p>
+<p>The same applies for uml diagrams. However there is one thing the model owner needs to take care of. Plantuml syntax for hyperlinks does not allow spaces, while graphyte does allow spaces in diagram filenames. So in graphyte we could have a diagram file called "foo bar.uml". In order to link to that module from a plantuml diagram, model owner must remember to replace spaces (" ") by their percent encoding ("%20") sign: "foo%20bar.uml". This is not required for SVG diagrams.</p>
+<ul>
+<li>Links to any external URL</li>
+</ul>
+<p>In order for graphyte not to interpret href field contents, the model owner must add it as a literal hyperlink with the tag "lit:".</p>
+<p>This will be useful to link to URLs that graphyte should not process further.</p>
+<pre><code>E.g.: href="lit:https://www.cisco.com/"
+</code></pre>
+<p>When clicking on the shape it will load the URL <a href="https://www.cisco.com">https://www.cisco.com</a> in the browser.</p>
               
             </div>
           </div>
@@ -218,10 +214,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../linking/" class="btn btn-neutral float-right" title="Linking input diagrams and templates">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../diagrams_visio/" class="btn btn-neutral float-right" title="Creating SVG diagrams with Microsoft Visio">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../variables/" class="btn btn-neutral" title="Variable List"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../configfile/" class="btn btn-neutral" title="Configuration File"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -247,10 +243,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../variables/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../configfile/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../linking/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../diagrams_visio/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

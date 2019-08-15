@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Configuration File - Graphyte Webdoc Automation</title>
+  <title>Creating SVG diagrams with Inkscape - Graphyte Webdoc Automation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Configuration File";
-    var mkdocs_page_input_path = "configfile.md";
+    var mkdocs_page_name = "Creating SVG diagrams with Inkscape";
+    var mkdocs_page_input_path = "diagrams_inkscape.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -94,15 +94,9 @@
     <a class="" href="../variables/">Variable List</a>
 	    </li>
           
-            <li class="toctree-l1 current">
+            <li class="toctree-l1">
 		
-    <a class="current" href="./">Configuration File</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l2"><a href="#configuration-file">Configuration File</a></li>
-    
-
-    </ul>
+    <a class="" href="../configfile/">Configuration File</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -120,9 +114,15 @@
     <a class="" href="../diagrams_drawio/">Creating SVG diagrams with Draw.io</a>
 	    </li>
           
-            <li class="toctree-l1">
+            <li class="toctree-l1 current">
 		
-    <a class="" href="../diagrams_inkscape/">Creating SVG diagrams with Inkscape</a>
+    <a class="current" href="./">Creating SVG diagrams with Inkscape</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#creating-svg-diagrams-with-inkscape">Creating SVG diagrams with Inkscape</a></li>
+    
+
+    </ul>
 	    </li>
           
             <li class="toctree-l1">
@@ -157,7 +157,7 @@
     
       
     
-    <li>Configuration File</li>
+    <li>Creating SVG diagrams with Inkscape</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -167,50 +167,19 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="configuration-file">Configuration File</h1>
-<p>Graphyte requires a configuration file where the user can find some mandatory settings and others that are optional:</p>
-<table>
-<thead>
-<tr>
-<th align="center">Section</th>
-<th align="center">Setting</th>
-<th align="center">mandatory/optional</th>
-<th align="center">Example</th>
-<th align="center">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center"><strong>[main]</strong></td>
-<td align="center">model</td>
-<td align="center">mandatory</td>
-<td align="center">model = HLD Customer ACME</td>
-<td align="center">Global name of the model. It will appear in all modules.</td>
-</tr>
-<tr>
-<td align="center"><strong>[main]</strong></td>
-<td align="center">version</td>
-<td align="center">mandatory</td>
-<td align="center">version = 1.0</td>
-<td align="center">Version of the model.</td>
-</tr>
-<tr>
-<td align="center"><strong>[parameters]</strong></td>
-<td align="center">auth_params</td>
-<td align="center">optional</td>
-<td align="center">auth_params = ACME_params.xls</td>
-<td align="center">Worksheet with the list of authorised parameters for template validation.</td>
-</tr>
-<tr>
-<td align="center"><strong>[layout]</strong></td>
-<td align="center">diagram_order</td>
-<td align="center">optional</td>
-<td align="center">diagram_order = Overview.svg,Sequence.uml,Architecture Components.uml,Service.svg</td>
-<td align="center">Desired order for the modules in the navigation menu. Use exact diagram filenames (spaces allowed). Comma separated.</td>
-</tr>
-</tbody>
-</table>
-<p><img alt="configfile.jpg" src="../img/configfile.jpg" /></p>
+                <h3 id="creating-svg-diagrams-with-inkscape">Creating SVG diagrams with Inkscape</h3>
+<p>Perhaps a bit more complex to learn than Visio, but quite powerful, fully equiped with vector graphic manipulation tools.</p>
+<p>Select a shape from the bar on the left, for example the rectangle, and draw a shape. Right click on the shape and select "Create link"</p>
+<p><img alt="inkscape1.png" src="../img/inkscape1.png" /></p>
+<p>A file attributes box will pop up on the right side. In the field "Href" write the name of the TXT, CSV or XML template file you want to link. Remember to write only the name of the template, no need for the full path.</p>
+<p><img alt="inkscape2.png" src="../img/inkscape2.png" /></p>
+<blockquote>
+<p><strong>Important</strong>: Filenames must be <strong>unique</strong> per model. Graphyte will crawl through all the input files looking for every linked filename until it finds the first match.</p>
+</blockquote>
+<p>In order to add another shape just repeat the steps again. You can add hyperlinks to virtually any element you add to the Inkscape canvas, the options are endless.</p>
+<p>When your diagram is ready, click on <strong>Archive -&gt; Save as</strong> and choose the name of your SVG file. Remember that this will later become the name of the module, and that the file must keep its <strong>.svg</strong> extension.</p>
+<p><img alt="inkscape3.png" src="../img/inkscape3.png" /></p>
+<p>(see also: <a href="#Supported-Link-Types">Supported Link Types</a> section)</p>
               
             </div>
           </div>
@@ -218,10 +187,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../linking/" class="btn btn-neutral float-right" title="Linking input diagrams and templates">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../diagrams_uml/" class="btn btn-neutral float-right" title="Creating UML diagrams for Graphyte">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../variables/" class="btn btn-neutral" title="Variable List"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../diagrams_drawio/" class="btn btn-neutral" title="Creating SVG diagrams with Draw.io"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -247,10 +216,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../variables/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../diagrams_drawio/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../linking/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../diagrams_uml/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

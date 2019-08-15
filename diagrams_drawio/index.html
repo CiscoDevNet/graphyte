@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Configuration File - Graphyte Webdoc Automation</title>
+  <title>Creating SVG diagrams with Draw.io - Graphyte Webdoc Automation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Configuration File";
-    var mkdocs_page_input_path = "configfile.md";
+    var mkdocs_page_name = "Creating SVG diagrams with Draw.io";
+    var mkdocs_page_input_path = "diagrams_drawio.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -94,15 +94,9 @@
     <a class="" href="../variables/">Variable List</a>
 	    </li>
           
-            <li class="toctree-l1 current">
+            <li class="toctree-l1">
 		
-    <a class="current" href="./">Configuration File</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l2"><a href="#configuration-file">Configuration File</a></li>
-    
-
-    </ul>
+    <a class="" href="../configfile/">Configuration File</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -115,9 +109,15 @@
     <a class="" href="../diagrams_visio/">Creating SVG diagrams with Microsoft Visio</a>
 	    </li>
           
-            <li class="toctree-l1">
+            <li class="toctree-l1 current">
 		
-    <a class="" href="../diagrams_drawio/">Creating SVG diagrams with Draw.io</a>
+    <a class="current" href="./">Creating SVG diagrams with Draw.io</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#creating-svg-diagrams-with-drawio">Creating SVG diagrams with Draw.io</a></li>
+    
+
+    </ul>
 	    </li>
           
             <li class="toctree-l1">
@@ -157,7 +157,7 @@
     
       
     
-    <li>Configuration File</li>
+    <li>Creating SVG diagrams with Draw.io</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -167,50 +167,29 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="configuration-file">Configuration File</h1>
-<p>Graphyte requires a configuration file where the user can find some mandatory settings and others that are optional:</p>
-<table>
-<thead>
-<tr>
-<th align="center">Section</th>
-<th align="center">Setting</th>
-<th align="center">mandatory/optional</th>
-<th align="center">Example</th>
-<th align="center">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center"><strong>[main]</strong></td>
-<td align="center">model</td>
-<td align="center">mandatory</td>
-<td align="center">model = HLD Customer ACME</td>
-<td align="center">Global name of the model. It will appear in all modules.</td>
-</tr>
-<tr>
-<td align="center"><strong>[main]</strong></td>
-<td align="center">version</td>
-<td align="center">mandatory</td>
-<td align="center">version = 1.0</td>
-<td align="center">Version of the model.</td>
-</tr>
-<tr>
-<td align="center"><strong>[parameters]</strong></td>
-<td align="center">auth_params</td>
-<td align="center">optional</td>
-<td align="center">auth_params = ACME_params.xls</td>
-<td align="center">Worksheet with the list of authorised parameters for template validation.</td>
-</tr>
-<tr>
-<td align="center"><strong>[layout]</strong></td>
-<td align="center">diagram_order</td>
-<td align="center">optional</td>
-<td align="center">diagram_order = Overview.svg,Sequence.uml,Architecture Components.uml,Service.svg</td>
-<td align="center">Desired order for the modules in the navigation menu. Use exact diagram filenames (spaces allowed). Comma separated.</td>
-</tr>
-</tbody>
-</table>
-<p><img alt="configfile.jpg" src="../img/configfile.jpg" /></p>
+                <h3 id="creating-svg-diagrams-with-drawio">Creating SVG diagrams with Draw.io</h3>
+<p>Draw.io is a great online graph editor from JGraph Ltd. It has an intuitive and rich interface to create all kinds of diagrams and flow charts.</p>
+<p>Visit <a href="www.draw.io">Draw.io</a> and select "Create New Diagram" from the splash screen. If you had previously created a draw.io diagram and exported it to a file, you can select "Open Existing Diagram" and upload it again for edition:</p>
+<p><img alt="drawio_splash.png" src="../img/drawio_splash.png" /></p>
+<p>Draw.io has a bunch of chart types to choose from. Start with the "Basic" chart.</p>
+<p><img alt="drawio_new.png" src="../img/drawio_new.png" /></p>
+<p>Drag and drop the shapes on the left panel into the canvas. You can move the shapes and change their size and proportions.</p>
+<p><img alt="drawio.png" src="../img/drawio.png" /></p>
+<p>Select a shape and use the tools on the right panel to change styles, arrangement and text.</p>
+<p><img alt="drawio_shape.png" src="../img/drawio_shape.png" /></p>
+<p>In order to add the link to the template, right click on a shape and select "Edit Link...".</p>
+<p><img alt="drawio_link1.png" src="../img/drawio_link1.png" /></p>
+<p>Add the name of the TXT, CSV or XML template you would like to link to this shape. <strong>Only the name</strong>, no need for the full path to the template. When done click on "Apply".</p>
+<p><img alt="drawio_link2.png" src="../img/drawio_link2.png" /></p>
+<p>(see also: <a href="#Supported-Link-Types">Supported Link Types</a> section)</p>
+<p>At any point in time you can rename your diagram, in order to do so click on File -&gt; Rename and edit the filename. Leave the .xml extension, for now.</p>
+<p><img alt="drawio_rename.png" src="../img/drawio_rename.png" /></p>
+<p>Once your diagram is ready you need to export it to SVG. In order to do so click on File -&gt; Export -&gt; SVG.</p>
+<p><img alt="drawio_export.png" src="../img/drawio_export.png" /></p>
+<p>Click on "Export."</p>
+<p><img alt="drawio_export2.png" src="../img/drawio_export2.png" /></p>
+<p>And then "Download" to get the SVG file into your local filesystem.</p>
+<p><img alt="drawio_export3.png" src="../img/drawio_export3.png" /></p>
               
             </div>
           </div>
@@ -218,10 +197,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../linking/" class="btn btn-neutral float-right" title="Linking input diagrams and templates">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../diagrams_inkscape/" class="btn btn-neutral float-right" title="Creating SVG diagrams with Inkscape">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../variables/" class="btn btn-neutral" title="Variable List"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../diagrams_visio/" class="btn btn-neutral" title="Creating SVG diagrams with Microsoft Visio"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -247,10 +226,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../variables/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../diagrams_visio/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../linking/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../diagrams_inkscape/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
