@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Diagrams - Graphyte Webdoc Automation</title>
+  <title>Input Files - Graphyte Webdoc Automation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Diagrams";
-    var mkdocs_page_input_path = "diagrams.md";
+    var mkdocs_page_name = "Input Files";
+    var mkdocs_page_input_path = "input_files.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -53,26 +53,33 @@
     <a class="" href="..">Home</a>
 	    </li>
           
-            <li class="toctree-l1">
-		
-    <a class="" href="../input_files/">Input Files</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../output_files.md">Output Files</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../templates/">Templates</a>
-	    </li>
-          
             <li class="toctree-l1 current">
 		
-    <a class="current" href="./">Diagrams</a>
+    <a class="current" href="./">Input Files</a>
     <ul class="subnav">
             
+    <li class="toctree-l2"><a href="#input-files">Input Files</a></li>
+    
+
+    <li class="toctree-l2"><a href="#templates">Templates</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#txt-templates">TXT Templates</a></li>
+        
+            <li><a class="toctree-l3" href="#variables-in-txt-templates">Variables in TXT Templates</a></li>
+        
+            <li><a class="toctree-l3" href="#csv-templates">CSV Templates</a></li>
+        
+            <li><a class="toctree-l3" href="#variables-in-csv-templates">Variables in CSV Templates</a></li>
+        
+            <li><a class="toctree-l3" href="#xml-templates">XML Templates</a></li>
+        
+            <li><a class="toctree-l3" href="#variables-in-xml-templates">Variables in XML Templates</a></li>
+        
+        </ul>
+    
+
     <li class="toctree-l2"><a href="#diagrams">Diagrams</a></li>
     
         <ul>
@@ -91,6 +98,21 @@
     
 
     </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../output_files.md">Output Files</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../templates/">Templates</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../diagrams/">Diagrams</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -125,7 +147,7 @@
     
       
     
-    <li>Diagrams</li>
+    <li>Input Files</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -135,7 +157,57 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="diagrams">Diagrams</h1>
+                <h1 id="input-files">Input Files</h1>
+<p>To generate a model, the user is required to provide a series of input files:</p>
+<ul>
+<li><strong>Templates</strong>: These are basically text files with content that will show up in the viewer when triggered by mouse clicks on the diagram. The currently supported formats are Plain Text files (<strong>.txt</strong>), eXtensible Markup Language XML files (<strong>.xml</strong>) and Comma Separated Values files (<strong>.csv</strong>).</li>
+<li><strong>Diagrams</strong>: The diagram files used with graphyte are also text-based. Currently supported formats are Unified Modeling Language UML (<strong>.uml</strong>) and Scalable Vector Graphics files (<strong>.svg</strong>). UML file support is achieved by graphyte via integration with the <strong>PlantUML</strong> tool. SVG is an XML-based image format for two-dimensional graphics. A variety of applications allow creating or exporting to SVG files, including Inkscape or Microsoft Visio.</li>
+<li><strong>Variable list</strong>: Optionally, depending on which graphyte features the user is aiming for, additional input files may be needed. This is the case for example for input files with parameters, that graphyte can automatically validate against a user defined list of allowed model parameters.</li>
+<li><strong>graphyte.conf file</strong>: The user is required to include a small configuration file where a series of options can be set, including the name and version of the model.</li>
+</ul>
+<h1 id="templates">Templates</h1>
+<p><img alt="template_txt.jpg" src="../img/template_txt.jpg" /></p>
+<p>The ultimate objective of a model is to represent relevant information in the viewer area responding to user events (mouse clicks) on the different parts of the diagram.</p>
+<p>This relevant information is provided to graphyte in the form of text files called <strong>templates</strong>.</p>
+<p>Templates may optionally include parameters. Graphyte provides syntax capabilities to support up to 4 types of parameters that will be recognized, processed and highlighted as such.</p>
+<p>Take a look at the <a href="../templates/">Templates section</a> for details on how to create graphyte templates.</p>
+<h2 id="txt-templates">TXT Templates</h2>
+<p>Any plain text content to be displayed in the viewer can be added as a file with <strong>.txt</strong> extension.</p>
+<p>TXT templates may use variables if desired. When displayed in the viewer (after the user clicks on the associated diagram section) the variables are highlighted for readability.</p>
+<h2 id="variables-in-txt-templates">Variables in TXT Templates</h2>
+<p>Graphyte supports variable markup syntax based on text bracketing, that allows it to recognize up to 4 different types of variables in the plain text files, process and validate them, and color highlight them in the viewer in real time.</p>
+<p>The following variable syntax markers are available for <strong>.txt</strong> files:</p>
+<ul>
+<li><strong>Type 1</strong> variables: <strong><variable_name></strong></li>
+<li><strong>Type 2</strong> variables: <strong>&lt;{variable_name}&gt;</strong></li>
+<li><strong>Type 3</strong> variables: <strong>&lt;(variable_name)&gt;</strong></li>
+<li><strong>Type 4</strong> variables: <strong>&lt;[variable_name]&gt;</strong></li>
+</ul>
+<p>It is up to the graphyte user to decide the specific role that each of the variable types above will play in the model. Some models will require several categories for different types of variables, others might only require a single type, and some models might not even require parametrized templates at all. There is full flexibility on this regard.</p>
+<p>When the template is loaded in the viewer, the variables are rendered for better readability. Different markers are highlighted in different colors.</p>
+<p>Say, for instance, the user would like to add to the model a template for the configuration of a sub-interface, leaving some of the configuration data as input variables. The user will mark those variables picking one of the available markers in a way that makes sense for his model. For example '<strong>&lt; &gt;</strong>' (<strong>Type 1</strong>) for input variables, and '<strong>&lt;[ ]&gt;</strong>' (<strong>Type 4</strong>) for variables that need to be looked up on some database. Graphyte will spot and process those variables and the viewer will highlight them according to their markup.</p>
+<p><img alt="template_txt.jpg" src="../img/template_txt.jpg" /></p>
+<p>Parameter names must follow some rules:</p>
+<ul>
+<li>May not contain spaces or newlines.</li>
+<li>May only contain markup characters in external marker '&lt; &gt; { } ( ) [ ]'. (E.g.: <na{m}e> is not a valid variable name, while &lt;{name}&gt; is).</li>
+<li>The standard recommendation is to use <strong>letters [a-zA-Z]</strong>, <strong>numbers [0-9]</strong> and <strong>underscores '_'</strong>.</li>
+</ul>
+<h2 id="csv-templates">CSV Templates</h2>
+<p>Comma Separated Values (<strong>.csv</strong>) files are used to represent tables.</p>
+<p>CSV files can be created on any plain text editor. New rows are depicted by the newline or carriage return character, and cells within a row are separated by the character '<strong>,</strong>'. The filename must have the extension .csv for graphyte to recognize it as a CSV input file, and represent it as a table when loaded in the viewer.</p>
+<h2 id="variables-in-csv-templates">Variables in CSV Templates</h2>
+<p>The same considerations as for variables in TXT files apply for CSV files. Syntax will be highlighted and the same kind of parameter processing will be performed.</p>
+<p><img alt="template_csv.jpg" src="../img/template_csv.jpg" /></p>
+<p>In this example, the user has included two types of parameters, marked with '<strong>&lt; &gt;</strong>' (<strong>Type 1</strong>) and '<strong>&lt;{ }&gt;</strong>' (<strong>Type 2</strong>). Perhaps the model owner has defined that type 1 parameters (yellow) will mean "input parameters" in his model, and type 2 parameters (blue) are those that can be calculated based on others (derived) and therefore are not needed as inputs.</p>
+<h2 id="xml-templates">XML Templates</h2>
+<p>XML template files are passed to graphyte as input files with the extension <strong>.xml</strong>. When displayed in the viewer, graphyte performs a basic highlighting differentiating the text that is part of the XML markup (inside '&lt; &gt;' tags) and the text that is part of the XML data content, also known as "character data".</p>
+<h2 id="variables-in-xml-templates">Variables in XML Templates</h2>
+<p>The syntax used to specify parameters on XML files differs from the one used for TXT or CSV on the fact that it uses a simple brace bracketing '<strong>{ }</strong>' markup. Parameters on XML files are not validated and are highlighted in yellow as follows.</p>
+<p><img alt="template_xml.jpg" src="../img/template_xml.jpg" /></p>
+<p>In the example some of the character data fields include parameters that are highlighted in the viewer, while others have fixed values. A character data field may have fixed parts and parameters at the same time.</p>
+<h1 id="diagrams">Diagrams</h1>
+<p>Diagrams allow the model designer to represent large amounts of information in a usable and condensed way.</p>
 <p>Graphyte supports two types of input diagrams:</p>
 <ul>
 <li><strong>SVG</strong>: Scalable Vector Graphics files (with extension <strong>.svg</strong>).</li>
@@ -266,6 +338,64 @@ Module 3 = baz.uml
 <p><img alt="uml_diagram.jpg" src="../img/uml_diagram.jpg" /></p>
 <p>(see also: <a href="#Supported-Link-Types">Supported Link Types</a> section)</p>
 <p>Choose the name of your UML file carefully. Remember that this will later become the name of the module, and that the file must keep its .uml extension.</p>
+<h3 id="variable-list">Variable List</h3>
+<p>As seen in the <a href="../templates/">Templates chapter</a>, graphyte templates may include variables, which are marked using a specific available syntax: '<strong>&lt; &gt;</strong>' (type 1), '<strong>&lt;{ }&gt;</strong>' (type 2), '<strong>&lt;( )&gt;</strong>' (type 3) and '<strong>&lt;[ ]&gt;</strong>' (type 4).</p>
+<p>Optionally, the model designer may choose to perform automatic validation of template variables against a pre-defined input list, provided in .xls/.xlsx sheet format. This will help ensure that all variables used in templates are known and valid. The process is the following:</p>
+<ul>
+<li>The user provides an input sheet (XLS/XLSX) along with the rest of input documents (templates, diagrams, etc).</li>
+<li>The first row is reserved for headers. On the first column, the user includes a list of <strong>authorized parameters</strong> in the model. The rest of the columns may contain information or not.</li>
+<li>While generating the model, graphyte will analyze all the parameters on each of the input templates, and check them against the authorized parameters.</li>
+<li>On each module, graphyte will include a section <strong>"Module parameters"</strong>, where the results of the analysis are displayed as a table. If any non-authorised parameters were found in any template used by the module, they will be marked as such in the table, and an alert sign will show up: "Module Parameters ( ! )".</li>
+</ul>
+<p><img alt="variable_list.jpg" src="../img/variable_list.jpg" /></p>
+<p>Every parameter found in TXT and CSV templates will be checked against the parameters in this sheet (marked in red in the example).</p>
+<blockquote>
+<p><strong>Important</strong>: Parameters must be added to the worksheet with their correct markers ('<strong>&lt; &gt;</strong>', '<strong>&lt;{ }&gt;</strong>', '<strong>&lt;( )&gt;</strong>', '<strong>&lt;[ ]&gt;</strong>') in order for graphyte to match them correctly.</p>
+</blockquote>
+<h3 id="configuration-file">Configuration File</h3>
+<p>Finally, graphyte requires a configuration file where the user can find some mandatory settings and others that are optional:</p>
+<table>
+<thead>
+<tr>
+<th align="center">Section</th>
+<th align="center">Setting</th>
+<th align="center">mandatory/optional</th>
+<th align="center">Example</th>
+<th align="center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><strong>[main]</strong></td>
+<td align="center">model</td>
+<td align="center">mandatory</td>
+<td align="center">model = HLD Customer ACME</td>
+<td align="center">Global name of the model. It will appear in all modules.</td>
+</tr>
+<tr>
+<td align="center"><strong>[main]</strong></td>
+<td align="center">version</td>
+<td align="center">mandatory</td>
+<td align="center">version = 1.0</td>
+<td align="center">Version of the model.</td>
+</tr>
+<tr>
+<td align="center"><strong>[parameters]</strong></td>
+<td align="center">auth_params</td>
+<td align="center">optional</td>
+<td align="center">auth_params = ACME_params.xls</td>
+<td align="center">Worksheet with the list of authorised parameters for template validation.</td>
+</tr>
+<tr>
+<td align="center"><strong>[layout]</strong></td>
+<td align="center">diagram_order</td>
+<td align="center">optional</td>
+<td align="center">diagram_order = Overview.svg,Sequence.uml,Architecture Components.uml,Service.svg</td>
+<td align="center">Desired order for the modules in the navigation menu. Use exact diagram filenames (spaces allowed). Comma separated.</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="configfile.jpg" src="../img/configfile.jpg" /></p>
               
             </div>
           </div>
@@ -273,10 +403,10 @@ Module 3 = baz.uml
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../variables/" class="btn btn-neutral float-right" title="Variable List">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../templates/" class="btn btn-neutral float-right" title="Templates">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../templates/" class="btn btn-neutral" title="Templates"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -302,10 +432,10 @@ Module 3 = baz.uml
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../templates/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../variables/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../templates/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
