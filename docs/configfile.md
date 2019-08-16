@@ -1,6 +1,6 @@
 # Configuration File
 
-Graphyte requires a configuration file where the user can find some mandatory settings and others that are optional:
+Graphyte requires a configuration file where the model owner will add some mandatory settings and others that are optional:
 
 | Section | Setting | Mandatory/Optional | Example | Description |
 |:------- |:------- |:------- |:------- |:------- |

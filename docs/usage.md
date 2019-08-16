@@ -4,7 +4,7 @@ In order to generate a new model from scratch follow steps 1 to 6.
 
 For subsequent model revisions, update your source files and re-run graphyte (step 6). 
 
-|Step | Documentation |
+|Step | Chapter(s) |
 |:--- |:--- |
 | 1. Create your **template files** (.txt, .csv, .xml). | [Creating Templates](templates.md) |
 | 2. Create your **diagrams** (.svg, .uml). | [Creating SVG diagrams with Microsoft Visio](diagrams_visio.md) |

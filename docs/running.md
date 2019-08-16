@@ -1,6 +1,6 @@
 ## Running Graphyte
 
-Once the model owner has created templates and diagrams, linked them together, created the graphyte.conf file and optionally the variable worksheet, everything is ready to generate the graphyte model.
+Once the model owner has created the templates and diagrams, linked them together, created the graphyte.conf file and optionally the variable worksheet, everything is ready to generate the graphyte model.
 
 Place all the input files under the same directory. The directory path containing all the input files will be passed as argument to graphyte with -d option.
 
