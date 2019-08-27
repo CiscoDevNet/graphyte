@@ -67,7 +67,10 @@ def atag_2_gtag(svg_lines, i):
     """
     while i < len(svg_lines):
         line = svg_lines[i]
-        link = re.search('xlink:href="(.*?)"', line).group(1)
+        try:
+            link = re.search('xlink:href="(.*?)"', line).group(1)
+        except AttributeError:
+            link = False
         if link:
             mod = re.search('mod:(.*)', link)
             lit = re.search('lit:(.*)', link)
