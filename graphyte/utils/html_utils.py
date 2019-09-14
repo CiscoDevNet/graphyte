@@ -12,7 +12,7 @@ import re
 from subprocess import Popen, PIPE
 from tempfile import mkstemp
 from os import fdopen
-from shutil import move
+from shutil import move, copy
 # import pprint
 # import webbrowser
 
@@ -21,6 +21,49 @@ __author__ = "Jorge Somavilla"
 
 # initialize logger
 logger = logging.getLogger('graphyte')
+
+
+def yang_2_uml(gm):
+    """Convert YANG module into UML format and store in
+    graphyte module object (in_diagram_path attribute).
+
+    :param gm: the graphyte module object
+    :return: boolean result
+    """
+    yang_fname = os.path.basename(gm.in_diagram_path)
+    work_yang_path = gm.work_dir + "/" + gm.in_diagram_name
+    yang_fname_no_ext = os.path.splitext(yang_fname)[0]
+    work_uml_path = gm.work_dir + "/" + yang_fname_no_ext + ".uml"
+    copy(gm.in_diagram_path,work_yang_path)
+    uml_no_option = "--uml-no=" + gm.pyang_uml_no
+    #print ("\npyang --ignore-errors " + uml_no_option + " -f uml " + work_yang_path + " -o " + work_uml_path)
+    p1 = Popen(["pyang", "--ignore-errors", uml_no_option, "-f", "uml", work_yang_path,
+                "-o", work_uml_path], cwd=gm.run_dir, stdout=PIPE, stderr=PIPE)
+    p1.communicate()  # wait for pyang execution
+    result = False
+    if p1.returncode == 0 and os.path.exists(work_uml_path):
+        logger.info('         Successfully transformed YANG into UML.' + '\r\n')
+        result = True
+    else:
+        logger.error('              Couldn´t convert YANG to UML. Check ' + yang_fname + ' syntax?\r\n')
+        result = False
+        return result
+    # remove pyang-generated title and footer
+    remove_patterns = ['center footer', ' <size:20> UML Generated :', ' endfooter', 'Title ' + yang_fname_no_ext]
+    tmp_fh, tmp_uml_path = mkstemp()  # temp file
+    with fdopen(tmp_fh, 'w') as new_uml:
+        with open(work_uml_path) as old_uml:
+            for line in old_uml:
+                if not any(p in line for p in remove_patterns):
+                    new_uml.write(line)
+    if os.path.exists(work_uml_path):
+        os.remove(work_uml_path)
+    copy(tmp_uml_path, work_uml_path)
+    # store as reference diagram
+    gm.in_diagram_path = work_uml_path
+    return result
+
+
 
 
 def uml_2_svg(gm):
@@ -42,14 +85,17 @@ def uml_2_svg(gm):
             for line in old_uml:
                 new_uml.write(re.sub(r'@startuml.*', r'@startuml', line))
     work_uml_path = gm.work_dir + "/" + gm.in_diagram_name
-    move(tmp_uml_path, work_uml_path)
+    if os.path.exists(work_uml_path):
+        os.remove(work_uml_path)
+    copy(tmp_uml_path, work_uml_path)
     plantuml_out_file = gm.work_dir + "/" + os.path.splitext(gm.in_diagram_name)[0] + ".svg"
     # TODO: cath exception if plantuml not in place
-    p1 = Popen(["java", "-jar", "utils/plantuml.jar", "-v", "-tsvg", work_uml_path,
+    #print ("java -Xmx1024m -jar utils/plantuml.jar -v -tsvg " + work_uml_path + " -o " + gm.work_dir)
+    p1 = Popen(["java","-Xmx1024m", "-jar", "utils/plantuml.jar", "-v", "-tsvg", work_uml_path,
                 "-o", gm.work_dir], cwd=gm.run_dir, stdout=PIPE, stderr=PIPE)
     p1.communicate()  # wait for plantuml execution
     gm.svg_path = plantuml_out_file
-    logger.info('         ...ok' + '\r\n')
+    logger.info('         ...done' + '\r\n')
     return
 
 

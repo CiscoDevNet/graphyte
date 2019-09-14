@@ -19,6 +19,7 @@ Error Codes:
     104: At least one .svg or .uml file is required.
     105: Bad diagram_order in graphyte.conf. Files were not found.
     106: File not found.
+    107: pyang_uml_no option not valid
 
 """
 
@@ -44,7 +45,10 @@ __author__ = "Jorge Somavilla"
 # mark start time
 start_time = datetime.datetime.now()
 
-
+uml_no_options = [
+    "uses", "leafref", "identity", "identityref", "typedef",
+    "annotation", "import", "circles", "stereotypes"
+]
 
 def make_zip(src_dir, dst_dir, id):
     """Compress model files into a ZIP file.
@@ -191,6 +195,8 @@ def main(args):
     #        1.1.2 Get version
     #        1.1.3 Get param list
     #        1.1.4 Get diagram order
+    #        1.1.5 Get diagram_ignore_list
+    #        1.1.6 Get pyang_no_uml
     #  2. Input files sanity checks
     #     2.1 Check number of modules
     #     2.2 Check param sheet file
@@ -220,7 +226,7 @@ def main(args):
                     "     Processing configuration file graphyte.conf.\r\n"
                 )
                 conf_file = os.path.join(base, file)
-            elif fext == '.svg' or fext == '.uml':
+            elif fext == '.svg' or fext == '.uml' or fext == '.yang':
                 mod_dict[file] = fpath
 
     # 1.1
@@ -277,6 +283,43 @@ def main(args):
     except:
         pass
 
+    # 1.1.5
+    diagram_ignore_list = list()
+    try:
+        s = conf_parser.get('layout', 'diagram_ignore_list')
+        logger.info("         diagram_ignore_list:  {}\r\n".format(s))
+        diagram_ignore_list = s.split(",")
+    except:
+        pass
+    for d in diagram_ignore_list:
+        logger.info("         removing {} from modules\r\n".format(d))
+        mod_dict.pop(d.strip(), None)
+
+    # 1.1.6
+    uml_no = ""
+    pyang_uml_no = ""
+
+    first = True
+    try:
+        uml_no = conf_parser.get('layout', 'pyang_uml_no')
+        logger.info("         pyang_uml_no:  {}\r\n".format(uml_no))
+    except:
+        pass
+    if uml_no:
+        for u in uml_no.split(","):
+            if not u in uml_no_options:
+                die("    Error 107: pyang_uml_no option \"{}\" not valid."
+                    " Valid options are: uses, leafref, identity, identityref,"
+                    " typedef, annotation, import, circles, stereotypes\r\n".format(param_ref))
+            else:
+                if first == False:
+                    pyang_uml_no = pyang_uml_no + ","
+                else:
+                    first = False
+                pyang_uml_no = pyang_uml_no + u
+    else:
+        pyang_uml_no = "annotation"
+
     # test mode
     test_mode = False
     try:
@@ -287,7 +330,7 @@ def main(args):
     # 2.
     if len(mod_dict) == 0:
         die(
-            "    Error 104: At least one .svg or .uml file is required, aborting execution.\r\n"
+            "    Error 104: At least one .svg, .uml or .yang file is required, aborting execution.\r\n"
         )
     if param_ref and not param_ref == sheet_name:
         logger.warning(
@@ -342,23 +385,34 @@ def main(args):
             sheet_option_cmd = sheet_option[0] + " \"" + sheet_option[1] + "\""
         else:
             sheet_option_cmd = ""
+        uml_no_option_cmd = ""
+        pyang_uml_no_option = []
+        if os.path.splitext(mod_path)[1] == ".yang":
+            uml_no_option_cmd = "--uml-no " + pyang_uml_no
+            pyang_uml_no_option.append('-u')
+            pyang_uml_no_option.append(pyang_uml_no)
         logger.info("     Processing module {}\r\n".format(module))
-        command = "python3 graphyte_gen.py -i \"{}\" -o \"{}\" -M \"{}\" -V \"{}\" -m \"{}\" -d \"{}\" -n \"{}\" -w \"{}\" {}"\
-            .format(mod_path, out_dir, model, version, os.path.splitext(module)[0], in_dir, nav_menu, work_dir, sheet_option_cmd)
+        command = "\n\n------------------------------------------------------------------------------\n\n" \
+                  "python3 graphyte_gen.py -i \"{}\" -o \"{}\" -M \"{}\" -V \"{}\" -m \"{}\" -d \"{}\" -n \"{}\" -w \"{}\" {} {}"\
+            .format(mod_path, out_dir, model, version, os.path.splitext(module)[0], in_dir, nav_menu, work_dir, sheet_option_cmd, uml_no_option_cmd)
+        result = ""
         if test_mode:
             logger.info("     {}\r\n".format(command))
         try:
             print(command)
             # os.system(command)
             module_2 = os.path.splitext(module)[0]
-            build_module(
+            result = build_module(
                 ['-i', mod_path, '-o', out_dir, '-M', model, '-V', version,
                  '-m', module_2, '-d', in_dir, '-n', nav_menu, '-w',
-                 work_dir]+sheet_option
+                 work_dir]+sheet_option+pyang_uml_no_option
             )
         except:
             pass
-        logger.info("     Completed module {}\r\n".format(module))
+        if result:
+            logger.info("     Completed module {}\r\n".format(module))
+        else:
+            logger.info("     Aborting module {}\r\n".format(module))
         num_modules += 1
 
     if identifier:

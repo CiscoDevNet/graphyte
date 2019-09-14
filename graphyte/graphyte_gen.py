@@ -24,7 +24,7 @@ if utils_path not in sys.path:
     sys.path.insert(0, utils_path)
 from template_utils import add_templates_to_script
 from param_utils import process_param_sheet, add_params_to_script
-from html_utils import uml_2_svg, build_menu, build_html, process_svg
+from html_utils import uml_2_svg, yang_2_uml, build_menu, build_html, process_svg
 
 # info
 __author__ = "Jorge Somavilla"
@@ -52,7 +52,7 @@ class GraphyteModule(object):
     """
     def __init__(
             self, model, module, version, title, out_dir, in_diagram_path,
-            work_dir, run_dir, file_dir, in_xls_path, menu_items
+            work_dir, run_dir, file_dir, in_xls_path, menu_items, uml_no
     ):
         """Initializes graphyte module instance. Builds attributes
         not specified by user.
@@ -99,6 +99,15 @@ class GraphyteModule(object):
         self.invalid_param_found_alert = ""
         self.allowed_parameters = []
         self.menu_tags = ""
+        self.pyang_uml_no = uml_no
+
+    def diagram_is_yang(self):
+        """Whether the diagram is of type YANG or not
+
+        :return: True if YANG, False otherwise.
+
+        """
+        return os.path.splitext(self.in_diagram_path)[1] == ".yang"
 
     def diagram_is_uml(self):
         """Whether the diagram is of type UML or not
@@ -210,6 +219,7 @@ output web page.
     in_xls_path = ""
     work_dir = ""
     log_file = ""
+    uml_no = ""
 
     class MyParser(argparse.ArgumentParser):
         def error(self, message):
@@ -244,7 +254,11 @@ output web page.
                              'in-flight, auxiliary files.')
     parser.add_argument('-l', '--logfile', required=False,
                         help='Path to log file.')
+    parser.add_argument('-u', '--uml-no', required=False, dest="umlno",
+                        help='pyang --uml-no option.')
     args = parser.parse_args(args)
+
+
 
     # input diagram
     if args.input == '':
@@ -288,11 +302,22 @@ output web page.
     # work directory
     if args.workdir:
         work_dir = args.workdir.strip()
-    # work directory
+    # log file
     if args.logfile:
         log_file = args.logfile.strip()
     else:
         log_file = out_dir + "/graphyte.log"
+    # log file
+    if args.umlno:
+        if not os.path.splitext(in_diagram_path)[1] == ".yang":
+            # --uml-no option only valid for .yang diagram
+            sys.exit(usage)
+        else:
+            uml_no = re.sub(r'\s+', '', args.umlno)
+    elif os.path.splitext(in_diagram_path)[1] == ".yang":
+        uml_no = "annotation"
+    else:
+        pass
 
     print ("\nRunning <{graphyte}> with arguments:\n\
               -i , Diagram file:      " + in_diagram_path + "\n\
@@ -305,12 +330,13 @@ output web page.
               -s , Parameter sheet:   " + in_xls_path + "\n\
               -w , Work Dir:          " + work_dir + "\n\
               -l , Log file:          " + log_file + "\n\
-              -n , Menu items:        " + menu_items)
+              -n , Menu items:        " + menu_items + "\n\
+              -u , pyang uml-no:      " + uml_no)
 
     # Initialize graphyte module object
     gm = GraphyteModule(
         model, module, version, title, out_dir, in_diagram_path, work_dir,
-        run_dir, file_dir, in_xls_path, menu_items
+        run_dir, file_dir, in_xls_path, menu_items, uml_no
     )
 
     # Sanity checks for dirs
@@ -326,6 +352,17 @@ output web page.
     # process authorized parameter list
     if in_xls_path:
         xls_to_script = process_param_sheet(gm)
+
+    # if diagram is yang, convert to uml
+    if gm.diagram_is_yang():
+        logger.info('         Processing YANG file...' + '\r\n')
+        success = yang_2_uml(gm)
+        if success:
+            logger.info('         ...ok' + '\r\n')
+        else:
+            logger.info('         ...failed' + '\r\n')
+            print ("\n...aborted.")
+            return False
 
     # if diagram is uml, convert to svg
     if gm.diagram_is_uml():
@@ -353,7 +390,8 @@ output web page.
     # create html file
     build_html(gm, processed_svg, file_script, xls_to_script)
 
-    print ("...done.\n\n")
+    print ("\n...done.")
+    return True
 
     # remove line comment to display module on browser after creation
     # webbrowser.open(out_html_path, new=0, autoraise=True)
