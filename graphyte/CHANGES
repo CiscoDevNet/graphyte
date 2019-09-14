@@ -1,5 +1,9 @@
--------------
-version 1.0.6
--------------
+------
+1.0.7
+------
+- Added support for rendering .yang input diagrams.
 
+------
+1.0.6
+------
 - Going public
