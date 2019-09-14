@@ -46,3 +46,7 @@ This will be useful to link to URLs that graphyte should not process further.
     E.g.: href="lit:https://www.cisco.com/"
 
 When clicking on the shape it will load the URL [https://www.cisco.com](https://www.cisco.com) in the browser.
+
+## Link in YANG modules
+
+It is not supported to link templates in YANG modules, only on UML and SVG modules.

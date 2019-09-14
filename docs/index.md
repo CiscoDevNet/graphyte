@@ -60,14 +60,15 @@ The section [Creating Templates](templates.md) has all the details on how to cre
 
 Graphyte diagrams allow the model designer to represent large amounts of information in a usable and condensed way.
 
-Graphyte supports two types of input diagrams:
+Graphyte supports three types of input diagrams:
 
 - **SVG**: Scalable Vector Graphics files (with extension **.svg**).
 - **UML**: Unified Modeling Language UML files (with extension **.uml**)
+- **YANG**: YANG modeling languaje files (with extension **.yang**)
 
 Both are processed and embedded into the HTML modules as SVG objects (UML diagrams are internally converted to SVG). SVG files are text-based specifications of two-dimensional graphics, written following an XML-based structure. Rendering of most SVG graphics is supported by the majority of mainstream modern browsers (**W3C**). Other advanced features present in complex SVG elements, like for example **foreign-object** elements are not currently supported in the HTML5 `<svg>` element. Test HTML support for your diagrams passing them to the graphyte tool.
 
-Both types of diagram specifications are text-based and require a rendering engine to create the resulting graphics. Below are a couple of examples of the source text file and the rendered version for both types of diagrams:
+Both types of diagram specifications are text-based and require a rendering engine to create the resulting graphics. Below are a couple of examples of the source text file and the rendered version:
 
 ![xml.jpg](img/xml.jpg)
 
@@ -87,6 +88,7 @@ The following sections provide the necessary details for creating graphyte-ready
 - [Creating SVG diagrams with Draw.io](diagrams_drawio.md)
 - [Creating SVG diagrams with Inkscape](diagrams_inkscape.md)
 - [Creating UML diagrams for Graphyte](diagrams_uml.md)
+- [Rendering YANG diagrams with Graphyte](diagrams_yang.md)
 
 
 #### Variable List

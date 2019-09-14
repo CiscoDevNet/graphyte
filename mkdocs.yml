@@ -7,6 +7,7 @@ nav:
     - Creating SVG diagrams with Draw.io: diagrams_drawio.md
     - Creating SVG diagrams with Inkscape: diagrams_inkscape.md
     - Creating UML diagrams for Graphyte: diagrams_uml.md
+    - Rendering YANG diagrams with Graphyte: diagrams_yang.md
     - Linking Input Diagrams and Templates: linking.md
     - Performing Variable Validation: variables.md
     - Graphyte Configuration File: configfile.md
