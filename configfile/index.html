@@ -85,6 +85,11 @@
           
             <li class="toctree-l1">
 		
+    <a class="" href="../diagrams_yang/">Rendering YANG diagrams with Graphyte</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
     <a class="" href="../linking/">Linking Input Diagrams and Templates</a>
 	    </li>
           
@@ -189,8 +194,22 @@
 <td align="left"><strong>[layout]</strong></td>
 <td align="left">diagram_order</td>
 <td align="left">optional</td>
-<td align="left">diagram_order = Overview.svg,Sequence.uml,Architecture Components.uml,Service.svg</td>
+<td align="left">diagram_order = Overview.svg,Sequence.uml,Architecture Components.uml,Service.yang</td>
 <td align="left">Desired order for the modules in the navigation menu. Use exact diagram filenames (spaces allowed). Comma separated.</td>
+</tr>
+<tr>
+<td align="left"><strong>[layout]</strong></td>
+<td align="left">diagram_ignore_list</td>
+<td align="left">optional</td>
+<td align="left">diagram_ignore_list = topology.svg,l3vpn.yang</td>
+<td align="left">List of diagram files to skip processing into modules. Use exact diagram filenames (spaces allowed). Comma separated.</td>
+</tr>
+<tr>
+<td align="left"><strong>[layout]</strong></td>
+<td align="left">pyang_uml_no</td>
+<td align="left">optional</td>
+<td align="left">pyang_uml_no = annotation,import,typedef</td>
+<td align="left">PYANG options to skip when converting YANG into UML. (Allowed values: uses,leafref,identity,identityref,typedef,annotation,import,circles,stereotypes. Default:annotation)</td>
 </tr>
 </tbody>
 </table>

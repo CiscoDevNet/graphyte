@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Creating UML diagrams for Graphyte - Graphyte Webdoc Automation</title>
+  <title>Rendering YANG diagrams with Graphyte - Graphyte Webdoc Automation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Creating UML diagrams for Graphyte";
-    var mkdocs_page_input_path = "diagrams_uml.md";
+    var mkdocs_page_name = "Rendering YANG diagrams with Graphyte";
+    var mkdocs_page_input_path = "diagrams_yang.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -78,26 +78,20 @@
     <a class="" href="../diagrams_inkscape/">Creating SVG diagrams with Inkscape</a>
 	    </li>
           
+            <li class="toctree-l1">
+		
+    <a class="" href="../diagrams_uml/">Creating UML diagrams for Graphyte</a>
+	    </li>
+          
             <li class="toctree-l1 current">
 		
-    <a class="current" href="./">Creating UML diagrams for Graphyte</a>
+    <a class="current" href="./">Rendering YANG diagrams with Graphyte</a>
     <ul class="subnav">
             
-    <li class="toctree-l2"><a href="#uml-diagrams">UML Diagrams</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l3" href="#creating-uml-diagrams-for-graphyte">Creating UML diagrams for Graphyte</a></li>
-        
-        </ul>
+    <li class="toctree-l2"><a href="#yang-diagrams">YANG Diagrams</a></li>
     
 
     </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../diagrams_yang/">Rendering YANG diagrams with Graphyte</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -152,7 +146,7 @@
     
       
     
-    <li>Creating UML diagrams for Graphyte</li>
+    <li>Rendering YANG diagrams with Graphyte</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -162,29 +156,33 @@
           <div role="main">
             <div class="section">
               
-                <h2 id="uml-diagrams">UML Diagrams</h2>
-<p>Graphyte implements support for UML specification files by leveraging the great <a href="http://plantuml.com/">PlantUML tool</a>. PlantUML is widely used in IT for a variety of applications, from creating live diagrams while extracting requirements from a customer, to creating specifications for a design, representations of software components or creating charts of any kind.</p>
-<p>At the time of this writing, the following UML diagrams are supported by PlantUML:</p>
+                <h2 id="yang-diagrams">YANG Diagrams</h2>
+<p>Graphyte can render diagrams and add as modules with the help of <a href="https://pypi.org/project/pyang/">Pyang tool</a>.</p>
+<p>Simply include your .yang modules as input files and Graphyte will process them into html modules with rendered UML style diagrams.</p>
+<p>There are some options available for the model owner in the file graphyte.conf regarding YANG files:</p>
 <ul>
-<li><a href="http://plantuml.com/sequence-diagram">Sequence diagram</a></li>
-<li><a href="http://plantuml.com/use-case-diagram">Usecase diagram</a></li>
-<li><a href="http://plantuml.com/class-diagram">Class diagram</a></li>
-<li><a href="http://plantuml.com/activity-diagram-beta">Activity diagram</a></li>
-<li><a href="http://plantuml.com/component-diagram">Component diagram</a></li>
-<li><a href="http://plantuml.com/state-diagram">State diagram</a></li>
-<li><a href="http://plantuml.com/object-diagram">Object diagram</a></li>
-<li><a href="http://plantuml.com/deployment-diagram">Deployment diagram</a></li>
-<li><a href="http://plantuml.com/timing-diagram">Timing diagram</a></li>
+<li><strong>diagram_ignore_list</strong>: Use to provide a comma separated list of files that Graphyte should skip and not consider as modules.</li>
+<li><strong>pyang_uml_no</strong>: Used to fine tune the conversion from YANG to UML. Multiple options are available in Pyang that allow the model owner to customize which YANG model constructs and elements to hide in the rendered diagram. Available options are:<ul>
+<li>uses</li>
+<li>leafref</li>
+<li>identity</li>
+<li>identityref</li>
+<li>typedef</li>
+<li>annotation</li>
+<li>import</li>
+<li>circles</li>
+<li>stereotypes</li>
 </ul>
-<p>On each of the links above, the PlantUML folks guide you through the creation of each type of diagram. It´s worth taking a look at the possibilities.</p>
-<p>Once you have your first UML specification ready, you can test it online on <a href="http://www.plantuml.com/plantuml">PlantUML Web Server</a>. Or, if you prefer, you can <a href="http://plantuml.com/download">download PlantUML</a> and work offline.</p>
-<h3 id="creating-uml-diagrams-for-graphyte">Creating UML diagrams for Graphyte</h3>
-<p>Use the plain text editor of your choice to create the UML file with your diagram's specification, following the guides on <a href="http://plantuml.com/">PlantUML website</a>.</p>
-<p>In order to link an element of your diagram to a specific input template, follow the format described in <a href="http://plantuml.com/link">Using Hyperlinks with PlantUML</a>. </p>
-<p>In the following example, graphyte will load the user created template <strong>request.txt</strong> in the viewer area when clicking on the "Request" text, and will load the template <strong>response.txt</strong> when it detects a click on the "Response" text in the diagram.</p>
-<p><img alt="uml_diagram.jpg" src="../img/uml_diagram.jpg" /></p>
-<p>(see also: <a href="#Supported-Link-Types">Supported Link Types</a> section)</p>
-<p>Choose the name of your UML file carefully, it will later become the name of the module. The file must keep its .uml extension.</p>
+</li>
+</ul>
+<p>For example, if we wish to remove from the diagram the YANG annotations and the imported modules, we will add the following to the graphyte.conf file:</p>
+<pre><code>  [layout]
+  ...
+  pyang_uml_no = annotation,import
+</code></pre>
+
+<p>Default value if no pyang_uml_no option is provided will be "--uml-no=annotation".</p>
+<p>Linking templates is not supported for YANG modules/diagrams.</p>
               
             </div>
           </div>
@@ -192,10 +190,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../diagrams_yang/" class="btn btn-neutral float-right" title="Rendering YANG diagrams with Graphyte">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../linking/" class="btn btn-neutral float-right" title="Linking Input Diagrams and Templates">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../diagrams_inkscape/" class="btn btn-neutral" title="Creating SVG diagrams with Inkscape"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../diagrams_uml/" class="btn btn-neutral" title="Creating UML diagrams for Graphyte"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -221,10 +219,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../diagrams_inkscape/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../diagrams_uml/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../diagrams_yang/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../linking/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

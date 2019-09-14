@@ -102,6 +102,11 @@
           
             <li class="toctree-l1">
 		
+    <a class="" href="diagrams_yang/">Rendering YANG diagrams with Graphyte</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
     <a class="" href="linking/">Linking Input Diagrams and Templates</a>
 	    </li>
           
@@ -206,13 +211,14 @@
 <p>The section <a href="templates/">Creating Templates</a> has all the details on how to create graphyte templates.</p>
 <h4 id="diagrams">Diagrams</h4>
 <p>Graphyte diagrams allow the model designer to represent large amounts of information in a usable and condensed way.</p>
-<p>Graphyte supports two types of input diagrams:</p>
+<p>Graphyte supports three types of input diagrams:</p>
 <ul>
 <li><strong>SVG</strong>: Scalable Vector Graphics files (with extension <strong>.svg</strong>).</li>
 <li><strong>UML</strong>: Unified Modeling Language UML files (with extension <strong>.uml</strong>)</li>
+<li><strong>YANG</strong>: YANG modeling languaje files (with extension <strong>.yang</strong>)</li>
 </ul>
 <p>Both are processed and embedded into the HTML modules as SVG objects (UML diagrams are internally converted to SVG). SVG files are text-based specifications of two-dimensional graphics, written following an XML-based structure. Rendering of most SVG graphics is supported by the majority of mainstream modern browsers (<strong>W3C</strong>). Other advanced features present in complex SVG elements, like for example <strong>foreign-object</strong> elements are not currently supported in the HTML5 <code>&lt;svg&gt;</code> element. Test HTML support for your diagrams passing them to the graphyte tool.</p>
-<p>Both types of diagram specifications are text-based and require a rendering engine to create the resulting graphics. Below are a couple of examples of the source text file and the rendered version for both types of diagrams:</p>
+<p>Both types of diagram specifications are text-based and require a rendering engine to create the resulting graphics. Below are a couple of examples of the source text file and the rendered version:</p>
 <p><img alt="xml.jpg" src="img/xml.jpg" /></p>
 <p><img alt="uml.jpg" src="img/uml.jpg" /></p>
 <p>Within the diagram, the model designer will <strong>link</strong> shapes or elements to target templates. By doing this, the shape becomes responsive to mouse clicks that will load the target template into the <strong>viewer</strong>.</p>
@@ -228,6 +234,7 @@
 <li><a href="diagrams_drawio/">Creating SVG diagrams with Draw.io</a></li>
 <li><a href="diagrams_inkscape/">Creating SVG diagrams with Inkscape</a></li>
 <li><a href="diagrams_uml/">Creating UML diagrams for Graphyte</a></li>
+<li><a href="diagrams_yang/">Rendering YANG diagrams with Graphyte</a></li>
 </ul>
 <h4 id="variable-list">Variable List</h4>
 <p>As previously mentioned, graphyte templates may include variables, which are marked using a specific available syntax.</p>
@@ -289,5 +296,5 @@
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2019-08-19 06:25:55
+Build Date UTC : 2019-09-14 22:58:27
 -->
