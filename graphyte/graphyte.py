@@ -433,7 +433,7 @@ def main(args):
             .format(identifier, model, version, num_modules, basedir)
         os.system(command2)
 
-    if global_result = True:
+    if global_result == True:
         pass
     else:
         die("    Model generation failed, please review the errors above.")
