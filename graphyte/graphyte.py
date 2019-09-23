@@ -417,8 +417,8 @@ def main(args):
             logger.info("     Aborting module {}\r\n".format(module))
             if mod_ext == ".yang":
                 die(
-                    "    Error 108: Bad YANG " + module + ". Maybe you would like to" \
-                    " add \"" + module + "\" to \"diagram_ignore_list\" list in graphyte.conf?\r\n"
+                    "    Error 108: Bad YANG " + module + ", please review. Maybe you would like to" \
+                    " add \"" + module + "\" to \"diagram_ignore_list\" list in graphyte.conf\r\n"
                 )
             else:
                 die(
