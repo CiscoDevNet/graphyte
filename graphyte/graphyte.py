@@ -378,6 +378,7 @@ def main(args):
 
     # 3.2
     num_modules = 0
+    global_result = True
     for module, mod_path in mod_dict.items():
         # 3.2.1
         sheet_option_cmd = ""
@@ -415,13 +416,14 @@ def main(args):
             logger.info("     Completed module {}\r\n".format(module))
         else:
             logger.info("     Aborting module {}\r\n".format(module))
+            global_result = False
             if mod_ext == ".yang":
-                die(
+                logger.error(
                     "    Error 108: Bad YANG " + module + ". Maybe you would like to" \
                     " add \"" + module + "\" to \"diagram_ignore_list\" list in graphyte.conf\r\n"
                 )
             else:
-                die(
+                logger.error(
                     "    Error 109: Module " + mod_name + " failed. Verify file " + module + ".\r\n"
                 )
         num_modules += 1
@@ -430,6 +432,11 @@ def main(args):
         command2 = "echo \"{}\n    {} {} - {} modules\" >> {}/jobs.log"\
             .format(identifier, model, version, num_modules, basedir)
         os.system(command2)
+
+    if global_result = True:
+        pass
+    else:
+        die("    Model generation failed, please review the errors above.")
 
     # zip files
     if identifier:
