@@ -1,7 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="86f348ae-b050-4c3f-bbcb-5eb9b3f446aa" name="Default" comment="docs" />
+    <list default="true" id="86f348ae-b050-4c3f-bbcb-5eb9b3f446aa" name="Default" comment="docs">
+      <change afterPath="$PROJECT_DIR$/site/diagrams_yang/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/configfile.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/configfile.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphyte/graphyte.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphyte/graphyte.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphyte/graphyte_gen.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphyte/graphyte_gen.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/404.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/404.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/about/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/about/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/configfile/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/configfile/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/diagrams/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/diagrams/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/diagrams_drawio/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/diagrams_drawio/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/diagrams_inkscape/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/diagrams_inkscape/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/diagrams_uml/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/diagrams_uml/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/diagrams_visio/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/diagrams_visio/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/input_files/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/input_files/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/linking/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/linking/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/output_files/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/output_files/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/running/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/running/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/search.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/search/search_index.json" beforeDir="false" afterPath="$PROJECT_DIR$/site/search/search_index.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/sitemap.xml" beforeDir="false" afterPath="$PROJECT_DIR$/site/sitemap.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/sitemap.xml.gz" beforeDir="false" afterPath="$PROJECT_DIR$/site/sitemap.xml.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/usage/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/usage/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/variables/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/variables/index.html" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -11,7 +37,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docs/index.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
@@ -21,10 +47,64 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="configfile.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/configfile.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="225">
+                <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="graphyte_gen.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/graphyte/graphyte_gen.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+              <caret line="315" column="51" selection-start-line="315" selection-start-column="51" selection-end-line="315" selection-end-column="51" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="graphyte.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/graphyte/graphyte.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="450">
+              <caret line="318" column="47" selection-start-line="318" selection-start-column="47" selection-end-line="318" selection-end-column="47" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="html_utils.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/graphyte/utils/html_utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="495">
+              <caret line="50" column="45" lean-forward="true" selection-start-line="50" selection-start-column="45" selection-end-line="50" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>anno</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/docs/configfile.md" />
+        <option value="$PROJECT_DIR$/graphyte/graphyte_gen.py" />
+        <option value="$PROJECT_DIR$/graphyte/utils/html_utils.py" />
+        <option value="$PROJECT_DIR$/graphyte/graphyte.py" />
+      </list>
+    </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="5" />
@@ -37,7 +117,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -50,10 +129,22 @@
               <item name="graphyte" type="462c0819:PsiDirectoryNode" />
               <item name="docs" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="graphyte" type="b2602c69:ProjectViewProjectNode" />
+              <item name="graphyte" type="462c0819:PsiDirectoryNode" />
+              <item name="graphyte" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="graphyte" type="b2602c69:ProjectViewProjectNode" />
+              <item name="graphyte" type="462c0819:PsiDirectoryNode" />
+              <item name="graphyte" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -86,7 +177,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="5" y="39" width="1666" height="955" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30012006" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -126,6 +216,45 @@
         <state split_layout="SPLIT">
           <first_editor />
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/index.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/configfile.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="225">
+            <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphyte/graphyte_gen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="315" column="51" selection-start-line="315" selection-start-column="51" selection-end-line="315" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphyte/utils/html_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="50" column="45" lean-forward="true" selection-start-line="50" selection-start-column="45" selection-end-line="50" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphyte/graphyte.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="318" column="47" selection-start-line="318" selection-start-column="47" selection-end-line="318" selection-end-column="47" />
         </state>
       </provider>
     </entry>

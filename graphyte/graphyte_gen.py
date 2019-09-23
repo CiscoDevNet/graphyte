@@ -314,8 +314,6 @@ output web page.
             sys.exit(usage)
         else:
             uml_no = re.sub(r'\s+', '', args.umlno)
-    elif os.path.splitext(in_diagram_path)[1] == ".yang":
-        uml_no = "annotation"
     else:
         pass
 

@@ -317,8 +317,6 @@ def main(args):
                 else:
                     first = False
                 pyang_uml_no = pyang_uml_no + u
-    else:
-        pyang_uml_no = "annotation"
 
     # test mode
     test_mode = False
