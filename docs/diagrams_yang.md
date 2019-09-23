@@ -26,6 +26,6 @@ There are some options available for the model owner in the file graphyte.conf r
   pyang_uml_no = annotation,import
 ```
 
-Default value if no pyang_uml_no option is provided will be "--uml-no=annotation".
+Default value if no pyang_uml_no option is provided will be empty (include all yang artifacts in the representation).
 
-Linking templates is not supported for YANG modules/diagrams.
+Linking templates to YANG modules/diagrams is not supported.
