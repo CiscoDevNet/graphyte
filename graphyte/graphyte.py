@@ -418,7 +418,7 @@ def main(args):
             if mod_ext == ".yang":
                 die(
                     "    Error 108: Bad YANG " + module + ". Maybe you would like to" \
-                    " add \"" + mod_name + "\" to \"diagram_ignore_list\" list in graphyte.conf\r\n"
+                    " add \"" + module + "\" to \"diagram_ignore_list\" list in graphyte.conf\r\n"
                 )
             else:
                 die(
