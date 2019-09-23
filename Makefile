@@ -7,4 +7,4 @@ plantuml:
 	curl -L https://sourceforge.net/projects/plantuml/files/1.2017.16/plantuml.1.2017.16.jar/download > graphyte/utils/plantuml.jar
 
 pyang:
-    pip install pyang
+	pip install pyang
