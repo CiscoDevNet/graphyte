@@ -20,6 +20,8 @@ Error Codes:
     105: Bad diagram_order in graphyte.conf. Files were not found.
     106: File not found.
     107: pyang_uml_no option not valid
+    108: failed to process module: bad yang file
+    109: failed to process module
 
 """
 
@@ -379,13 +381,14 @@ def main(args):
     for module, mod_path in mod_dict.items():
         # 3.2.1
         sheet_option_cmd = ""
+        mod_ext = os.path.splitext(mod_path)[1] # module extension
         if len(sheet_option) > 1:
             sheet_option_cmd = sheet_option[0] + " \"" + sheet_option[1] + "\""
         else:
             sheet_option_cmd = ""
         uml_no_option_cmd = ""
         pyang_uml_no_option = []
-        if os.path.splitext(mod_path)[1] == ".yang":
+        if mod_ext == ".yang":
             uml_no_option_cmd = "--uml-no " + pyang_uml_no
             pyang_uml_no_option.append('-u')
             pyang_uml_no_option.append(pyang_uml_no)
@@ -411,6 +414,15 @@ def main(args):
             logger.info("     Completed module {}\r\n".format(module))
         else:
             logger.info("     Aborting module {}\r\n".format(module))
+            if mod_ext == ".yang":
+                die(
+                    "    Error 108: Bad YANG " + module + mod_ext + ". Maybe you would like to" \
+                    "add \"" + module + "\" to \"diagram_ignore_list\" list in graphyte.conf\r\n"
+                )
+            else:
+                die(
+                    "    Error 109: Module " + module + " failed. Verify file " + module + mod_ext + ".\r\n"
+                )
         num_modules += 1
 
     if identifier:
