@@ -382,6 +382,7 @@ def main(args):
         # 3.2.1
         sheet_option_cmd = ""
         mod_ext = os.path.splitext(mod_path)[1] # module extension
+        mod_name = os.path.splitext(module)[0] # module name w/o extension
         if len(sheet_option) > 1:
             sheet_option_cmd = sheet_option[0] + " \"" + sheet_option[1] + "\""
         else:
@@ -395,7 +396,7 @@ def main(args):
         logger.info("     Processing module {}\r\n".format(module))
         command = "\n\n------------------------------------------------------------------------------\n\n" \
                   "python3 graphyte_gen.py -i \"{}\" -o \"{}\" -M \"{}\" -V \"{}\" -m \"{}\" -d \"{}\" -n \"{}\" -w \"{}\" {} {}"\
-            .format(mod_path, out_dir, model, version, os.path.splitext(module)[0], in_dir, nav_menu, work_dir, sheet_option_cmd, uml_no_option_cmd)
+            .format(mod_path, out_dir, model, version, mod_name, in_dir, nav_menu, work_dir, sheet_option_cmd, uml_no_option_cmd)
         result = ""
         if test_mode:
             logger.info("     {}\r\n".format(command))
@@ -416,12 +417,12 @@ def main(args):
             logger.info("     Aborting module {}\r\n".format(module))
             if mod_ext == ".yang":
                 die(
-                    "    Error 108: Bad YANG " + module + mod_ext + ". Maybe you would like to" \
-                    "add \"" + module + "\" to \"diagram_ignore_list\" list in graphyte.conf\r\n"
+                    "    Error 108: Bad YANG " + module + ". Maybe you would like to" \
+                    " add \"" + mod_name + "\" to \"diagram_ignore_list\" list in graphyte.conf\r\n"
                 )
             else:
                 die(
-                    "    Error 109: Module " + module + " failed. Verify file " + module + mod_ext + ".\r\n"
+                    "    Error 109: Module " + mod_name + " failed. Verify file " + module + ".\r\n"
                 )
         num_modules += 1
 
