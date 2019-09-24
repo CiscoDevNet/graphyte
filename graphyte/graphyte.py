@@ -356,7 +356,13 @@ def main(args):
             if d in mod_dict:
                 if not count == 0:
                     nav_menu += ','
-                nav_menu += str(os.path.splitext(d)[0])
+                d_name = os.path.splitext(d)[0]
+                d_ext = os.path.splitext(d)[1]
+                d_name_ext = d_name + d_ext
+                if d_ext == ".yang":
+                    nav_menu += d_name_ext
+                else:
+                    nav_menu += d_name
                 count += 1
             else:
                 error_items.append(d)
@@ -367,13 +373,29 @@ def main(args):
             )
         for g in mod_dict:
             if g not in diagram_order_list:
-                nav_menu += ','
-                nav_menu += str(os.path.splitext(g)[0])
+
+                g_name = os.path.splitext(g)[0]
+                g_ext = os.path.splitext(g)[1]
+                g_name_ext = g_name + g_ext
+                print ("2: g_name:" + g_name + " g_ext:" + g_ext + " g_name_ext:" + g_name_ext)
+                if g_ext == ".yang":
+                    nav_menu += ','
+                    nav_menu += g_name_ext
+                else:
+                    nav_menu += ','
+                    nav_menu += g_name
     else:
         for d in mod_dict:
             if not count == 0:
                 nav_menu += ','
-            nav_menu += str(os.path.splitext(d)[0])
+
+            d_name = os.path.splitext(d)[0]
+            d_ext = os.path.splitext(d)[1]
+            d_name_ext = d_name + d_ext
+            if d_ext == ".yang":
+                nav_menu += d_name_ext
+            else:
+                nav_menu += d_name
             count += 1
 
     # 3.2
@@ -393,6 +415,7 @@ def main(args):
             uml_no_option_cmd = "--uml-no " + pyang_uml_no
             pyang_uml_no_option.append('-u')
             pyang_uml_no_option.append(pyang_uml_no)
+            mod_name = mod_name + mod_ext # include extension if .yang
         logger.info("     Processing module {}\r\n".format(module))
         command = "\n\n------------------------------------------------------------------------------\n\n" \
                   "python3 graphyte_gen.py -i \"{}\" -o \"{}\" -M \"{}\" -V \"{}\" -m \"{}\" -d \"{}\" -n \"{}\" -w \"{}\" {} {}"\
@@ -403,10 +426,9 @@ def main(args):
         try:
             print(command)
             # os.system(command)
-            module_2 = os.path.splitext(module)[0]
             result = build_module(
                 ['-i', mod_path, '-o', out_dir, '-M', model, '-V', version,
-                 '-m', module_2, '-d', in_dir, '-n', nav_menu, '-w',
+                 '-m', mod_name, '-d', in_dir, '-n', nav_menu, '-w',
                  work_dir]+sheet_option+pyang_uml_no_option
             )
         except:
