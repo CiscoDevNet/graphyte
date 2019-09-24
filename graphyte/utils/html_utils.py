@@ -41,9 +41,13 @@ def yang_2_uml(gm):
                 "-o", work_uml_path], cwd=gm.run_dir, stdout=PIPE, stderr=PIPE)
     p1.communicate()  # wait for pyang execution
     result = False
-    if p1.returncode == 0 and os.path.exists(work_uml_path):
-        logger.info('         Successfully transformed YANG into UML.' + '\r\n')
-        result = True
+    if p1.returncode == 0:
+        if os.path.exists(work_uml_path):
+            logger.info('         Successfully converted YANG to UML.' + '\r\n')
+            result = True
+        else:
+            logger.info('         Failed to convert YANG to UML. Is pyang installed?' + '\r\n')
+            result = True
     else:
         logger.error('              Couldn´t convert YANG to UML. Check ' + yang_fname + ' syntax?\r\n')
         result = False
