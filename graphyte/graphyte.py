@@ -37,6 +37,7 @@ try:
     from graphyte_gen import build_module
 except ImportError:
     print ("Couldn't import graphyte_gen.py module.")
+    exit(1)
 except:
     pass
 import datetime
@@ -424,8 +425,7 @@ def main(args):
         if test_mode:
             logger.info("     {}\r\n".format(command))
         try:
-            print(command)
-            # os.system(command)
+            #print(command)
             result = build_module(
                 ['-i', mod_path, '-o', out_dir, '-M', model, '-V', version,
                  '-m', mod_name, '-d', in_dir, '-n', nav_menu, '-w',
