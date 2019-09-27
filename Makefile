@@ -8,3 +8,6 @@ plantuml:
 
 pyang:
 	pip install pyang
+
+xlrd:
+    pip install xlrd
