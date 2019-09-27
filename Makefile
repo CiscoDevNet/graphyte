@@ -1,4 +1,4 @@
-all: install plantuml pyang
+all: install plantuml pyang xlrd
 
 install:
 	chmod +x graphyte/graphyte.py graphyte/graphyte_gen.py
@@ -10,4 +10,4 @@ pyang:
 	pip install pyang
 
 xlrd:
-    pip install xlrd
+	pip install xlrd
