@@ -568,10 +568,17 @@
                 lines[i] = lines[i].replace(/&gt;/g, "/&gt;"); // protect &gt; string
                 lines[i] = lines[i].replace(/</g, "-&lt;"); // identify < string
                 lines[i] = lines[i].replace(/>/g, "-&gt;"); // identify > string
-                lines[i] = lines[i].replace(/\-&lt;([$,a-z,A-Z,0-9,\-,_]+)\-&gt;/g, "<b><span style=background-color:yellow>&lt;$1&gt;</span></b>"); // param <type1>
+
+<!--            lines[i] = lines[i].replace(/\-&lt;([$,a-z,A-Z,0-9,\-,_]+)\-&gt;/g, "<b><span style=background-color:yellow>&lt;$1&gt;</span></b>"); // param <type1>
                 lines[i] = lines[i].replace(/\-&lt;{([$,a-z,A-Z,0-9,\-,_]+)}\-&gt;/g, "<b><span style=background-color:LightSkyBlue>&lt;{$1}&gt;</span></b>"); // param <{type2}>
                 lines[i] = lines[i].replace(/\-&lt;\(([$,a-z,A-Z,0-9,\-,_]+)\)\-&gt;/g, "<b><span style=background-color:greenyellow>&lt;($1)&gt;</span></b>"); // param <(type3)>
-                lines[i] = lines[i].replace(/\-&lt;\[([$,a-z,A-Z,0-9,\-,_]+)\]\-&gt;/g, "<b><span style=background-color:gold>&lt;[$1]&gt;</span></b>"); // param <[type4]>
+                lines[i] = lines[i].replace(/\-&lt;\[([$,a-z,A-Z,0-9,\-,_]+)\]\-&gt;/g, "<b><span style=background-color:gold>&lt;[$1]&gt;</span></b>"); // param <[type4]>-->
+
+                lines[i] = lines[i].replace(/\-&lt;([$,a-z,A-Z,0-9,\.,\[,\],\/,=,&#039;,\-,_]+)\-&gt;/g, "<b><span style=background-color:yellow>&lt;$1&gt;</span></b>"); // param <type1>
+                lines[i] = lines[i].replace(/\-&lt;{([$,a-z,A-Z,0-9,\.,\[,\],\/,=,&#039;,\-,_]+)}\-&gt;/g, "<b><span style=background-color:LightSkyBlue>&lt;{$1}&gt;</span></b>"); // param <{type2}>
+                lines[i] = lines[i].replace(/\-&lt;\(([$,a-z,A-Z,0-9,\.,\[,\],\/,=,&#039;,\-,_]+)\)\-&gt;/g, "<b><span style=background-color:greenyellow>&lt;($1)&gt;</span></b>"); // param <(type3)>
+                lines[i] = lines[i].replace(/\-&lt;\[([$,a-z,A-Z,0-9,\.,\[,\],\/,=,&#039;,\-,_]+)\]\-&gt;/g, "<b><span style=background-color:gold>&lt;[$1]&gt;</span></b>"); // param <[type4]>
+
                 lines[i] = lines[i].replace(/\/&lt;/g, "&amp;lt;"); // restore &lt; string
                 lines[i] = lines[i].replace(/\/&gt;/g, "&amp;gt;");  // restore &gt; string
                 lines[i] = lines[i].replace(/\-&lt;/g, "&lt;"); // replace < by entity
