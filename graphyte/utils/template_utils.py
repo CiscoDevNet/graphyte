@@ -53,6 +53,7 @@ def add_templates_to_script(gm):
                         for line in f:
                             line = re.sub(r'(\\|\")', r'\\\1', line.rstrip())
                             line = re.sub(r'-', r'\-', line.rstrip())
+                            line = re.sub(r'</script>', r'<\/script>', line.rstrip())
                             # line = line.decode('utf-8')
                             file_script += "\",\n\"" + line.rstrip()
                         file_script += "\"];\n\n"
