@@ -1,9 +1,15 @@
-------
+1.0.9
+-----
+- added detection of scdp.cisco.com hosted svg diagrams.
+
+1.0.8
+-----
+- fixed detect draw.io file also in agent attribute.
+
 1.0.7
-------
+-----
 - Added support for rendering .yang input diagrams.
 
-------
 1.0.6
-------
-- Going public
+-----
+- Going public.
