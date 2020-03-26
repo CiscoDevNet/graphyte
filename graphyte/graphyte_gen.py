@@ -25,6 +25,7 @@ if utils_path not in sys.path:
 from template_utils import add_templates_to_script
 from param_utils import process_param_sheet, add_params_to_script
 from html_utils import uml_2_svg, yang_2_uml, build_menu, build_html, process_svg
+import pprint
 
 # info
 __author__ = "Jorge Somavilla"
@@ -32,6 +33,7 @@ __author__ = "Jorge Somavilla"
 # initialize logger
 logger = logging.getLogger('graphyte')
 
+pp = pprint.PrettyPrinter(indent=4)
 
 class GraphyteModule(object):
     """Stores the attributes of the graphyte module.
@@ -134,12 +136,12 @@ class GraphyteModule(object):
         if not (os.path.exists(self.in_diagram_path)
                 and os.path.isdir(self.file_dir)
                 and os.path.isdir(self.out_dir)):
-            print (self.in_diagram_path + " exists: "
-                   + str(os.path.exists(self.in_diagram_path)))
-            print (self.file_dir + " exists: "
-                   + str(os.path.isdir(self.file_dir)))
-            print (self.out_dir + " exists: "
-                   + str(os.path.isdir(self.out_dir)))
+            #print (self.in_diagram_path + " exists: "
+            #       + str(os.path.exists(self.in_diagram_path)))
+            #print (self.file_dir + " exists: "
+            #       + str(os.path.isdir(self.file_dir)))
+            #print (self.out_dir + " exists: "
+            #       + str(os.path.isdir(self.out_dir)))
             return False
         return True
 
@@ -331,6 +333,7 @@ output web page.
               -n , Menu items:        " + menu_items + "\n\
               -u , pyang uml-no:      " + uml_no)
 
+
     # Initialize graphyte module object
     gm = GraphyteModule(
         model, module, version, title, out_dir, in_diagram_path, work_dir,
@@ -363,8 +366,9 @@ output web page.
             return False
 
     # if diagram is uml, convert to svg
+    module_diagram = dict()
     if gm.diagram_is_uml():
-        uml_2_svg(gm)
+        module_diagram = uml_2_svg(gm)
     else:
         # diagram was already SVG
         gm.svg_path = gm.in_diagram_path
@@ -377,7 +381,7 @@ output web page.
         shutil.rmtree(os.path.join(out_dir, "work"))
 
     # process templates and detect parameters
-    file_script = add_templates_to_script(gm)
+    file_script,module_templates = add_templates_to_script(gm)
 
     # add detected parameters
     file_script = add_params_to_script(gm, file_script)
@@ -388,10 +392,13 @@ output web page.
     # create html file
     build_html(gm, processed_svg, file_script, xls_to_script)
 
-    print ("\n...done.")
-    return True
+    # merge return dictionary with all used files
+    module_files = {**module_diagram,**module_templates}
 
-    # remove line comment to display module on browser after creation
+    print ("\n...done.")
+    return True,module_files
+
+    # remove comment below to display module on browser after creation
     # webbrowser.open(out_html_path, new=0, autoraise=True)
 
     exit(0)
@@ -400,5 +407,4 @@ output web page.
 if __name__ == "__main__":
     # run when not called via 'import'
     import sys
-
     build_module(sys.argv[1:])

@@ -106,6 +106,13 @@ def process_param_sheet(gm):
                 allowed_parameters.append(
                     sheet.cell(row_index - 1, col_index).value.strip()
                 )
+                # remove invalid characters from var name
+                var_title = re.sub(r'=', r'_equal_', var_title.rstrip())
+                var_title = re.sub(r'\.', r'_dot_', var_title.rstrip())
+                var_title = re.sub(r'\[', r'_openbracket_', var_title.rstrip())
+                var_title = re.sub(r'\]', r'_closebracket_', var_title.rstrip())
+                var_title = re.sub(r'\/', r'_backslash_', var_title.rstrip())
+                var_title = re.sub(r'\'', r'_singlequote_', var_title.rstrip())
                 # add variable name
                 xls_to_script += "    var " + var_title + " = [\n\"" \
                                  + value_j.rstrip()
@@ -130,15 +137,21 @@ def param_name_is_valid(p, q):
     :param q: original parameter name in template
     :return:
     """
-    if not (re.match(r'<[$,a-z,A-z,0-9,\-,_]+>', p)
-            or re.match(r'<{[$,a-z,A-z,0-9,\-,_]+}>', p)
-            or re.match(r'<\([$,a-z,A-z,0-9,\-,_]+\)>', p)
-            or re.match(r'<\[[$,a-z,A-z,0-9,\-,_]+\]>', p)
+    #if not (re.match(r'<[$,a-z,A-z,0-9,\-,_]+>', p)
+    #        or re.match(r'<{[$,a-z,A-z,0-9,\-,_]+}>', p)
+    #        or re.match(r'<\([$,a-z,A-z,0-9,\-,_]+\)>', p)
+    #        or re.match(r'<\[[$,a-z,A-z,0-9,\-,_]+\]>', p)
+    if not (re.match(r'<[$,a-z,A-z,0-9,\.,\[,\],\/,=,\',\-,_]+>', p)
+            or re.match(r'<{[$,a-z,A-z,0-9,\.,\[,\],\/,=,\',\-,_]+}>', p)
+            or re.match(r'<\([$,a-z,A-z,0-9,\.,\[,\],\/,=,\',\-,_]+\)>', p)
+            or re.match(r'<\[[$,a-z,A-z,0-9,\.,\[,\],\/,=,\',\-,_]+\]>', p)
             ):
         logger.info('                 Skipping invalid name: ' + q + '\r\n')
         return False
     return True
 
+#  ([$,a-z,A-Z,0-9,\.,\[,\],\/,=,',\-,_]+
+#
 
 def param_is_legal(p, gm):
     """Returns whether a given parameter is allowed (present in the
@@ -192,6 +205,17 @@ def add_params_to_script(gm, file_script):
     params_csv = gm.out_html_name_no_ext + "_parameters"
     # spaces dots or hyphens -> underscores
     params_csv_ = re.sub(r'\s|-|\.', r'_', params_csv.rstrip())
+    # equal sign ->
+    params_csv_ = re.sub(r'=', r'_equal_', params_csv_.rstrip())
+    #aqui: \.,\[,\],\/,=,\',
+    params_csv_ = re.sub(r'\.', r'_dot_', params_csv_.rstrip())
+    params_csv_ = re.sub(r'\[', r'_openbracket_', params_csv_.rstrip())
+    params_csv_ = re.sub(r'\]', r'_closebracket_', params_csv_.rstrip())
+    params_csv_ = re.sub(r'\/', r'_backslash_', params_csv_.rstrip())
+    params_csv_ = re.sub(r'\'', r'_singlequote_', params_csv_.rstrip())
+
+
+
     file_script += "    var v_" + params_csv_ + "_csv" + " = [\n \"" + params_csv + "\.csv"
     if not gm.decision_param_list and not gm.template_param_list:
         file_script += "\",\n\"" + "No parameters found in module."

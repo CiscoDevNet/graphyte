@@ -13,7 +13,7 @@ from subprocess import Popen, PIPE
 from tempfile import mkstemp
 from os import fdopen
 from shutil import move, copy
-# import pprint
+import pprint
 # import webbrowser
 
 # info
@@ -22,6 +22,7 @@ __author__ = "Jorge Somavilla"
 # initialize logger
 logger = logging.getLogger('graphyte')
 
+pp = pprint.PrettyPrinter(indent=4)
 
 def yang_2_uml(gm):
     """Convert YANG module into UML format and store in
@@ -99,8 +100,11 @@ def uml_2_svg(gm):
                 "-o", gm.work_dir], cwd=gm.run_dir, stdout=PIPE, stderr=PIPE)
     p1.communicate()  # wait for plantuml execution
     gm.svg_path = plantuml_out_file
+    d = dict()
+    d['modsvgpath'] = { os.path.basename(plantuml_out_file) : plantuml_out_file }
+    #pp.pprint(d)
     logger.info('         ...done' + '\r\n')
-    return
+    return d
 
 
 def atag_2_gtag(svg_lines, i):

@@ -22,6 +22,8 @@ Error Codes:
     107: pyang_uml_no option not valid
     108: failed to process module: bad yang file
     109: failed to process module
+    110: confluence base url missing
+    111: confluence parent page url missing
 
 """
 
@@ -32,7 +34,14 @@ import shutil
 import logging
 import zipfile
 import configparser
-# import pprint
+import json
+import pprint
+import sys
+utils_path = os.path.abspath("utils")
+if utils_path not in sys.path:
+    sys.path.insert(0, utils_path)
+from confluence_utils import build_confluence_page
+
 try:
     from graphyte_gen import build_module
 except ImportError:
@@ -47,6 +56,7 @@ __author__ = "Jorge Somavilla"
 
 # mark start time
 start_time = datetime.datetime.now()
+star_time_str = start_time.strftime("(%Y-%m-%d@%H:%M:%S)")
 
 uml_no_options = [
     "uses", "leafref", "identity", "identityref", "typedef",
@@ -59,19 +69,18 @@ def make_zip(src_dir, dst_dir, id):
     :param src_dir: Directory containing graphyte model files
     :param dst_dir: Target directory for the compressed file
     :param id: Identifier of the graphyte transaction
-    :return: None
+    :return: zip file path
     """
     if not os.path.exists(dst_dir):
         os.makedirs(dst_dir)
-
-    zipobj = zipfile.ZipFile(os.path.join(dst_dir, "graphyte-"+id+'.zip'),
-                             'w', zipfile.ZIP_DEFLATED)
+    zf = os.path.join(dst_dir, "graphyte-" + id + '.zip')
+    zipobj = zipfile.ZipFile(zf, 'w', zipfile.ZIP_DEFLATED)
     rootlen = len(src_dir)
     for base, dirs, files in os.walk(src_dir):
         for file in files:
             fn = os.path.join(base, file)
             zipobj.write(fn, fn[rootlen:])
-
+    return zf
 
 def main(args):
     """Generate graphyte model, consisting on one or several modules.
@@ -138,6 +147,7 @@ def main(args):
         in_dir = basedir
         out_dir = basedir + '/www/'
         work_dir = '/tmp/graphyte/work/'
+        zip_dir = basedir + '/zip/'
 
     # TODO: Directories sanity checks
 
@@ -215,6 +225,7 @@ def main(args):
     sheet_name = ""
     file_dict = dict()
     repeated_fnames = []
+    model_dict = dict()
     for base, dirs, files in os.walk(in_dir):
         for file in files:
             fname = os.path.splitext(file)[0]
@@ -264,6 +275,9 @@ def main(args):
             "    Error 103: No \"version\" entry found on graphyte.conf file, aborting execution.\r\n"
         )
 
+    dict_p = model + ' v' + version + ' ' + star_time_str
+    model_dict[dict_p] = {}
+
     # 1.1.3
     param_ref = ""
     try:
@@ -275,6 +289,7 @@ def main(args):
         if param_ref in file_dict:
             sheet_name = param_ref
             sheet = file_dict[sheet_name]
+            model_dict[dict_p]['auth_params'] = sheet
         else:
             die("    Error 106: File \"{}\" not found.\r\n".format(param_ref))
 
@@ -328,6 +343,39 @@ def main(args):
     except:
         pass
 
+
+    # Confluence Options
+    confluence_enabled = 'False'
+    confluence_parent = ''
+    confluence_url = ''
+    confluence_script = ''
+    try:
+        confluence_enabled = conf_parser.get('confluence', 'enabled')
+        if confluence_enabled == "True":
+            confluence_enabled = True
+        else:
+            confluence_enabled = False
+    except:
+        pass
+    logger.info("         confluence enabled:          {}\r\n".format(str(confluence_enabled)))
+    if confluence_enabled:
+        try:
+            confluence_url = conf_parser.get('confluence', 'conf_base_url')
+        except ValueError:
+            die("    Error 110: Missing confluence base url conf_base_url is required.\r\n")
+        logger.info("         confluence conf_base_url:          {}\r\n".format(confluence_url))
+        try:
+            confluence_parent = conf_parser.get('confluence', 'parent_page_url')
+        except ValueError:
+            die("    Error 111: Missing confluence parent_page_url is required.\r\n")
+        logger.info("         confluence parent_page_url:          {}\r\n".format(confluence_parent))
+        try:
+            confluence_script = conf_parser.get('confluence', 'post_script')
+            logger.info("         confluence post_script:          {}\r\n".format(confluence_script))
+        except:
+            pass
+
+
     # 2.
     if len(mod_dict) == 0:
         die(
@@ -343,8 +391,9 @@ def main(args):
         sheet_option.append('-s')
         sheet_option.append(sheet)
 
-    # TODO: if any elements in repeated_fnames[] list,
+    # todo: if any elements in repeated_fnames[] list,
     # issue warning to logfile, continue
+
 
     # 3.
     # 3.1
@@ -355,6 +404,7 @@ def main(args):
         diagram_order_list = [x.strip() for x in diagram_order.split(',') if x != '']
         for d in diagram_order_list:
             if d in mod_dict:
+                model_dict[dict_p][d] = {'modpath':mod_dict[d]}
                 if not count == 0:
                     nav_menu += ','
                 d_name = os.path.splitext(d)[0]
@@ -374,11 +424,10 @@ def main(args):
             )
         for g in mod_dict:
             if g not in diagram_order_list:
-
+                model_dict[dict_p][g] = {'modpath': mod_dict[g]}
                 g_name = os.path.splitext(g)[0]
                 g_ext = os.path.splitext(g)[1]
                 g_name_ext = g_name + g_ext
-                print ("2: g_name:" + g_name + " g_ext:" + g_ext + " g_name_ext:" + g_name_ext)
                 if g_ext == ".yang":
                     nav_menu += ','
                     nav_menu += g_name_ext
@@ -398,6 +447,8 @@ def main(args):
             else:
                 nav_menu += d_name
             count += 1
+            model_dict[dict_p][d] = {'modpath': mod_dict[d]}
+
 
     # 3.2
     num_modules = 0
@@ -426,7 +477,7 @@ def main(args):
             logger.info("     {}\r\n".format(command))
         try:
             #print(command)
-            result = build_module(
+            result,mod_templates = build_module(
                 ['-i', mod_path, '-o', out_dir, '-M', model, '-V', version,
                  '-m', mod_name, '-d', in_dir, '-n', nav_menu, '-w',
                  work_dir]+sheet_option+pyang_uml_no_option
@@ -434,6 +485,7 @@ def main(args):
         except:
             pass
         if result:
+            model_dict[dict_p][module].update(mod_templates)
             logger.info("     Completed module {}\r\n".format(module))
         else:
             logger.info("     Aborting module {}\r\n".format(module))
@@ -448,20 +500,31 @@ def main(args):
                 )
         num_modules += 1
 
+
+    # Create jobs entry in server.
     if identifier:
         command2 = "echo \"{}\n    {} {} - {} modules\" >> {}/jobs.log"\
             .format(identifier, model, version, num_modules, basedir)
         os.system(command2)
 
-    # zip files
+    # zip files. If Confluence enabled, call confluence builder module.
     if identifier:
         logger.info("     Generating .zip\r\n")
         elapsed = datetime.datetime.now() - start_time
         logger.info("     Elapsed time {}s".format(elapsed))
         make_zip(out_dir, zip_dir, identifier)
     else:
-        elapsed = datetime.datetime.now() - start_time
-        logger.info("     Elapsed time {}s".format(elapsed))
+        if True: # pending if Confluence enable
+            logger.info("     Generating .zip\r\n")
+            elapsed = datetime.datetime.now() - start_time
+            zf = make_zip(out_dir, zip_dir, model + ' ' + version)
+            model_dict[dict_p]['zipfile'] = zf
+            logger.info("     Creating entry in Confluence\r\n")
+            build_confluence_page(model_dict, confluence_url, confluence_parent, confluence_script)
+            logger.info("     Elapsed time {}s".format(elapsed))
+        else:
+            elapsed = datetime.datetime.now() - start_time
+            logger.info("     Elapsed time {}s".format(elapsed))
 
     exit(0)
 

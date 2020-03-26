@@ -497,6 +497,12 @@
           aNode.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
           aNode.style.boxShadow = "0 7px 20px rgba(0,0,0,.3)";
           aNode.style.height = "auto";
+          filename = filename.replace(/=/g,'_equal_');
+          //filename = filename.replace(/\./g,'_dot_');
+          filename = filename.replace(/\[/g,'_openbracket_');
+          filename = filename.replace(/\]/g,'_closebracket_');
+          filename = filename.replace(/\//g,'_backslash_');
+          filename = filename.replace(/\'/g,'_singlequote_');
 
           var map = {
             '&': '&amp;',
@@ -543,8 +549,24 @@
               var re = /^(.*)$/m;
               var fname_retr = re.exec(data)[0];
               data = data.replace(/^.*\n/g,"");
-              data = data.replace(/(&)|(<\{)|(\}>)|(<\()|(\)>)|(<\[(?!\*>)|\]>)|(<)(?!\*>)|(>)|(")|(')|(,)|(\n)/g, function(m) { return map[m]; });
-              textDiv.innerHTML = "<table><tr align=\"left\" width=\"auto\"><td>" + data + "</table>";
+              var lines = data.split('\n');
+              dataout = ""
+              for(var i = 0;i < lines.length;i++){
+                lines[i] = lines[i].replace(/&/g,'&amp');
+                lines[i] = lines[i].replace(/<([$,a-z,A-Z,0-9,\.,\[,\],/,=,\-,_]+)>/g, "<b><span style=background-color:yellow>&lt;$1&gt;</span></b>"); // param <type1>
+                lines[i] = lines[i].replace(/<{([$,a-z,A-Z,0-9,\.,\[,\],\/,=,&#039;,\-,_]+)}>/g, "<b><span style=background-color:LightSkyBlue>&lt;{$1}&gt;</span></b>"); // param <{type2}>
+                lines[i] = lines[i].replace(/<\(([$,a-z,A-Z,0-9,\.,\[,\],\/,=,&#039;,\-,_]+)\)>/g, "<b><span style=background-color:greenyellow>&lt;($1)&gt;</span></b>"); // param <(type3)>
+                lines[i] = lines[i].replace(/<\[([$,a-z,A-Z,0-9,\.,\[,\],\/,=,&#039;,\-,_]+)\]>/g, "<b><span style=background-color:gold>&lt;[$1]&gt;</span></b>"); // param <[type4]>
+                lines[i] = lines[i].replace(/,/g,'</td><td style="padding:0 3px 0 3px;">');
+                //lines[i] = lines[i].replace(/\n/g,'</td></tr><tr align="left" width="auto"><td>');
+                lines[i] = lines[i] + '</td></tr><tr align="left" width="auto"><td>';
+                dataout  = dataout + lines[i] + "\n";
+
+              }
+              
+              //data = data.replace(/^.*\n/g,"");
+              //data = data.replace(/(&)|(<\{)|(\}>)|(<\()|(\)>)|(<\[(?!\*>)|\]>)|(<)(?!\*>)|(>)|(")|(')|(,)|(\n)/g, function(m) { return map[m]; });
+              textDiv.innerHTML = "<table><tr align=\"left\" width=\"auto\"><td>" + dataout + "</table>";
             }else if (ext == "xml"){
              data = eval(filename_var).join("\n");
              textDiv = document.getElementById('text');
