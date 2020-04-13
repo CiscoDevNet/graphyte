@@ -246,7 +246,7 @@ class Conflux(Confluence):
         """
         with open(file, "r") as f:
             body = f.read()
-        self.append_to_page(page_id, body)
+        self.append_p_to_page(page_id, body)
         return True
 
     def urlify_name(self,filepath):
@@ -334,18 +334,17 @@ class Conflux(Confluence):
         :param filepath: text file to be dumped into HTML body
         :return: HTML table body with file contents
         """
-
         with open(filepath, encoding="utf8", errors="ignore") as tf:
-            body = "<div class=\"table-wrap\"><table class=\"wrapped " \
-                   "confluenceTable\"><colgroup><col style=\"width: 374.0px;" \
-                   "\"/></colgroup><tbody><tr><th class=\"confluenceTh\">"
+            body = "<table class=\"wrapped relative-table\" style=\"width: 100.0%;\"><colgroup>" \
+                   "<col style=\"width: 100.0%;\" /></colgroup><tbody><tr><th><div class=\"content-wrapper\">"
             for l in tf:
+                l = re.sub(r'&', r'&amp;', l.rstrip())
                 l = re.sub(r'<', r'&lt;', l.rstrip())
                 l = re.sub(r'>', r'&gt;', l.rstrip())
                 if l == "":
                     l = "<br/>"
                 body = body + "<pre>" + l + "</pre>"
-        body = body + "</th></tr></tbody></table></div>"
+        body = body + "</div></th></tr></tbody></table>"
         return body
 
 

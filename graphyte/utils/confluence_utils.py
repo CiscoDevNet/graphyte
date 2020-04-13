@@ -28,7 +28,8 @@ def build_confluence_page(d, c, p, s):
     conflux = Conflux(
         url=c,
         username=usr,
-        password=pwd)
+        password=pwd,
+        timeout=1000)
 
     # retrieve confluence ID of parent page
     parent_id = conflux.get_page_id(p)
@@ -37,9 +38,11 @@ def build_confluence_page(d, c, p, s):
     title = next(iter(d))
 
     #create new page under parent
+    print("creating main page")
     page_id = conflux.create_empty_page_get_id(title, parent_id)
     # add model files to page
     zip_file = d[title]["zipfile"]
+    print("attaching zip")
     conflux.attach_file_get_id(zip_file, page_id, 'application/zip')
     href = conflux.build_attachchment_href(
         page_id,
@@ -54,11 +57,21 @@ def build_confluence_page(d, c, p, s):
 
     # todo: add model sources to page
 
+    # add changes file
+    conflux.append_header_to_page(page_id, "CHANGES", "1")
+    body = conflux.build_template_body("/Users/jsomavil/projects/TdE_R3/BF1/doc_repo/BF1DOC/Multicast IPTV/CHANGES")
+    conflux.append_body_to_page(page_id, body)
+
     # add variables table and upload as attachment
     if 'auth_params' in d[title]:
-        conflux.append_header_to_page(page_id, "Model Variables", "1")
+        print("creating variables page")
+        dtu = datetime.datetime.now()
+        sdt = dtu.strftime("(%Y-%m-%d@%H:%M:%S)")
+        child_id = conflux.create_empty_page_get_id("Variable List " + sdt, page_id)
+        conflux.append_header_to_page(child_id, "Allowed Model Variables", "1")
         params_workbook = d[title]['auth_params']
-        conflux.append_workbook_as_tables(page_id,params_workbook)
+        print("creating variables table")
+        conflux.append_workbook_as_tables(child_id,params_workbook)
         if os.path.splitext(params_workbook)[1] == '.xlsx':
             ct = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         else:
@@ -68,6 +81,7 @@ def build_confluence_page(d, c, p, s):
 
     # build child page for each module
     for m in d[title]:
+        print("creating module page (%s)" % (m))
         m_noext = os.path.splitext(m)[0]
         dtu = datetime.datetime.now()
         sdt = dtu.strftime("(%Y-%m-%d@%H:%M:%S)")
@@ -79,6 +93,7 @@ def build_confluence_page(d, c, p, s):
         conflux.append_body_to_page(child_id, toc)
         conflux.append_header_to_page(child_id, m, "1")
         conflux.append_header_to_page(child_id, "Diagram", "2")
+        print("  adding diagram")
         if 'modsvgpath' in d[title][m]:
             svg_name = next(iter(d[title][m]['modsvgpath']))
             conflux.attach_svg_append_as_img(
@@ -90,13 +105,16 @@ def build_confluence_page(d, c, p, s):
         if d[title][m]["templates"]:
             conflux.append_header_to_page(child_id, "Module Templates", "2")
             for t in d[title][m]["templates"]:
+                print("  adding template %s " %(t))
                 if os.path.splitext(t)[1] == ".csv":
-                    conflux.append_csv_as_table(child_id, t)
+                    fp = d[title][m]["templates"][t]
+                    conflux.append_csv_as_table(child_id, fp)
                 else:
                     fp = d[title][m]["templates"][t]
                     id, name = conflux.attach_file_get_id(fp, page_id)
-                    href = conflux.build_attachchment_href(child_id, name, name)
+                    href = conflux.build_attachchment_href(page_id, name, name)
                     conflux.append_header_to_page(child_id, href, "3")
                     body = conflux.build_template_body(fp)
                     conflux.append_body_to_page(child_id, body)
+    print ("done.")
     return True

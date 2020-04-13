@@ -486,7 +486,7 @@
           svgWidth = document.getElementById("svg").getAttribute("width");
           svgWidth = svgWidth.replace("%", "");
           newWidth = parseInt(svgWidth) + zoom;
-          if (newWidth > 0 && newWidth < 800) {
+          if (newWidth > 0) {
             document.getElementById("svg").setAttribute("width",newWidth + "%");
           }
         }
