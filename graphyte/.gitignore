@@ -18,4 +18,4 @@
 
 .DS_Store
 
-test.py
+utils/test.py
