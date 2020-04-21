@@ -191,6 +191,7 @@ def process_svg(gm):
         if "editor=&quot;www.draw.io&quot;" in content \
                 or "host=&quot;www.draw.io&quot;" in content \
                 or "host=&quot;scdp.cisco.com&quot" in content \
+                or "host=&quot;app.diagrams.net&quot" in content \
                 or re.search(r'<[^<>]+agent=[^>]+draw.io', content):
             is_drawio_file = True
             content = re.sub(r'width="(.*?)px" height="(.*?)px"'
