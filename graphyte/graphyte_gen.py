@@ -54,7 +54,8 @@ class GraphyteModule(object):
     """
     def __init__(
             self, model, module, version, title, out_dir, in_diagram_path,
-            work_dir, run_dir, file_dir, in_xls_path, menu_items, uml_no
+            work_dir, run_dir, file_dir, in_xls_path, menu_items, uml_no,
+            changes_file
     ):
         """Initializes graphyte module instance. Builds attributes
         not specified by user.
@@ -102,6 +103,14 @@ class GraphyteModule(object):
         self.allowed_parameters = []
         self.menu_tags = ""
         self.pyang_uml_no = uml_no
+        if changes_file:
+            self.changes_file = changes_file
+            self.changes_fname = self.in_diagram_name = os.path.basename(changes_file)
+            self.changes_tab = "<li id=\"changes\" style=\"float:right\">Changes</li><li id=\"separator\" style=\"float:right\">|</li>"
+        else:
+            self.changes_file = ""
+            self.changes_fname = ""
+            self.changes_tab = ""
 
     def diagram_is_yang(self):
         """Whether the diagram is of type YANG or not
@@ -183,7 +192,8 @@ SVG/UML and text files.
 [-l "log file"] \
 [-s "parameters worksheet"] \
 [-n "navigation items"] \
-[-t "web page title"]
+[-t "web page title"] \
+[-c "changes file"]
 
      Options:
      -------
@@ -206,6 +216,7 @@ the tool to store in-flight, auxiliary files.
 menu items.
        -t|--title     "web page title":         Optional. Will show in the \
 output web page.
+       -c|--changes   "changes file":           Optional. Changes file.
 
     """
 
@@ -222,6 +233,7 @@ output web page.
     work_dir = ""
     log_file = ""
     uml_no = ""
+    changes_file = ""
 
     class MyParser(argparse.ArgumentParser):
         def error(self, message):
@@ -258,6 +270,8 @@ output web page.
                         help='Path to log file.')
     parser.add_argument('-u', '--uml-no', required=False, dest="umlno",
                         help='pyang --uml-no option.')
+    parser.add_argument('-c', '--changes', required=False, dest="changes",
+                        help='changes file.')
     args = parser.parse_args(args)
 
 
@@ -309,13 +323,18 @@ output web page.
         log_file = args.logfile.strip()
     else:
         log_file = out_dir + "/graphyte.log"
-    # log file
+    # pyang uml-no options
     if args.umlno:
         if not os.path.splitext(in_diagram_path)[1] == ".yang":
             # --uml-no option only valid for .yang diagram
             sys.exit(usage)
         else:
             uml_no = re.sub(r'\s+', '', args.umlno)
+    else:
+        pass
+    # changes file
+    if args.changes:
+        changes_file = re.sub(r'\s+', '', args.changes)
     else:
         pass
 
@@ -337,7 +356,7 @@ output web page.
     # Initialize graphyte module object
     gm = GraphyteModule(
         model, module, version, title, out_dir, in_diagram_path, work_dir,
-        run_dir, file_dir, in_xls_path, menu_items, uml_no
+        run_dir, file_dir, in_xls_path, menu_items, uml_no, changes_file
     )
 
     # Sanity checks for dirs

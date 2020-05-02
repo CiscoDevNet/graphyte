@@ -352,7 +352,9 @@ def build_html(gm, processed_svg, file_script, xls_to_script):
         .replace("%alert%", gm.invalid_param_found_alert)\
         .replace("%viewer_init_content%", viewer_init_content)\
         .replace("%xls%", xls_to_script)\
-        .replace("%menuwidth%", gm.get_menu_width())
+        .replace("%menuwidth%", gm.get_menu_width())\
+        .replace("%changes_tab%", gm.changes_tab) \
+        .replace("%changes_file%", gm.changes_fname)
     text_file = open(gm.out_html_path, "w")
     text_file.write(filled_template)
     text_file.close()

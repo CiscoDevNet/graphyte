@@ -289,7 +289,8 @@
       font-size:9pt;
       color: grey;
       display:block;
-      padding:10px 10px;
+      /*padding:10px 10px;*/
+      padding:10px 20px 10px 0px;
       position:relative;
     }
 
@@ -351,7 +352,7 @@
       right: 0;
       background:white;
     }
-    #zoom,#zoomOut,#zoomIn,#params,#zoomid{
+    #zoom,#zoomOut,#zoomIn,#params,#zoomid,#changes,#separator{
       padding-top:10px;
       font-family: "Courier New", Courier, monospace;
       font-size:9pt;
@@ -365,11 +366,11 @@
                 user-select: none; /* Non-prefixed version */
     }
 
-    #zoomIn, #params{
+    #zoomIn, #params, #changes, #separator{
       padding-right: 15px
     }
 
-    #zoomIn:hover, #zoomOut:hover, #params:hover{
+    #zoomIn:hover, #zoomOut:hover, #params:hover, #changes:hover{
       color:black;
       cursor:pointer;
     }
@@ -405,6 +406,7 @@
           else if ($(evt.target).closest('#zoomOut').length) {zoomOutElmMouseDown(evt);}
           else if ($(evt.target).closest('#zoomIn').length) {zoomInElmMouseDown(evt);}
           else if ($(evt.target).closest('#params').length) {paramsElmMouseDown(evt);}
+          else if ($(evt.target).closest('#changes').length) {changesElmMouseDown(evt);}
           else {
             cleardisplay("3");
           }
@@ -618,6 +620,11 @@
           processClick("%params_csv%",evt.ctrlKey);
         }
 
+        function changesElmMouseDown(evt){
+          cleardisplay("1");
+          processClick("%changes_file%",evt.ctrlKey);
+        }
+
         function scrollTextDiv(){
           var scrollTop = $(window).scrollTop();
           element.stop(false, false).animate({
@@ -681,7 +688,9 @@
               %menu%
             </ul>
           </li>
-          <li id="params" style="float:right">Module Parameters %alert%</li>
+          <li id="separator" style="float:right">|</li>
+          %changes_tab%
+          <li id="params" style="float:right">Module Parameters %alert%</li><li id="separator" style="float:right">|</li>
           <li id="zoomid" style="float:right"><span id="zoomOut">[-]</span><span id="zoom">Zoom</span><span id="zoomIn">[+]</span></li>
         </ul>
       </div>

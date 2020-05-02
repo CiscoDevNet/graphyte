@@ -37,9 +37,9 @@ def add_templates_to_script(gm):
     mod_linked_templates = {}
     for dirpath, dirs, src_files in os.walk(gm.file_dir):
         for src_file_name in src_files:
-            # Check if file has been linked
-            if src_file_name in gm.svg_links:
-                # Link to file has been found in the SVG, process it.
+            # Check if file has been linked or is Changes file
+            if src_file_name in gm.svg_links or src_file_name == gm.changes_fname:
+                # Link to file has been found in the SVG or is Changes file, process it.
                 logger.info('             ' + src_file_name + '\r\n')
                 file_path = os.path.join(dirpath, src_file_name)
                 if os.path.isfile(file_path):

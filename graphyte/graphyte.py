@@ -278,6 +278,21 @@ def main(args):
     dict_p = model + ' v' + version + ' ' + star_time_str
     model_dict[dict_p] = {}
 
+    # 1.1.2
+    changes = ""
+    changesfile = ""
+    try:
+        changes = conf_parser.get('main', 'changes_file')
+        logger.info("         changes_file:        {}\r\n".format(changes))
+    except:
+        pass
+    if changes:
+        if changes in file_dict:
+            changesfile = file_dict[changes]
+            model_dict[dict_p]['changesfile'] = changesfile
+        else:
+            die("    Error 106: File \"{}\" not found.\r\n".format(param_ref))
+
     # 1.1.3
     param_ref = ""
     try:
@@ -390,6 +405,10 @@ def main(args):
     if sheet:
         sheet_option.append('-s')
         sheet_option.append(sheet)
+    changes_option = []
+    if changesfile:
+        changes_option.append('-c')
+        changes_option.append(changesfile)
 
     # todo: if any elements in repeated_fnames[] list,
     # issue warning to logfile, continue
@@ -461,6 +480,10 @@ def main(args):
             sheet_option_cmd = sheet_option[0] + " \"" + sheet_option[1] + "\""
         else:
             sheet_option_cmd = ""
+        if len(changes_option) > 1:
+            changes_option_cmd = changes_option[0] + " \"" + changes_option[1] + "\""
+        else:
+            changes_option_cmd = ""
         uml_no_option_cmd = ""
         pyang_uml_no_option = []
         if mod_ext == ".yang":
@@ -471,16 +494,16 @@ def main(args):
         logger.info("     Processing module {}\r\n".format(module))
         command = "\n\n------------------------------------------------------------------------------\n\n" \
                   "python3 graphyte_gen.py -i \"{}\" -o \"{}\" -M \"{}\" -V \"{}\" -m \"{}\" -d \"{}\" -n \"{}\" -w \"{}\" {} {}"\
-            .format(mod_path, out_dir, model, version, mod_name, in_dir, nav_menu, work_dir, sheet_option_cmd, uml_no_option_cmd)
+            .format(mod_path, out_dir, model, version, mod_name, in_dir, nav_menu, work_dir, sheet_option_cmd, uml_no_option_cmd, changes_option_cmd,)
         result = ""
         if test_mode:
             logger.info("     {}\r\n".format(command))
         try:
-            #print(command)
+            print(command)
             result,mod_templates = build_module(
                 ['-i', mod_path, '-o', out_dir, '-M', model, '-V', version,
                  '-m', mod_name, '-d', in_dir, '-n', nav_menu, '-w',
-                 work_dir]+sheet_option+pyang_uml_no_option
+                 work_dir]+sheet_option+pyang_uml_no_option+changes_option
             )
         except:
             pass
@@ -514,7 +537,7 @@ def main(args):
         logger.info("     Elapsed time {}s".format(elapsed))
         make_zip(out_dir, zip_dir, identifier)
     else:
-        if True: # pending if Confluence enable
+        if confluence_enabled: # pending if Confluence enable
             logger.info("     Generating .zip\r\n")
             elapsed = datetime.datetime.now() - start_time
             zf = make_zip(out_dir, zip_dir, model + ' ' + version)

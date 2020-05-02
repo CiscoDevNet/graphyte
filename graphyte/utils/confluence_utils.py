@@ -13,6 +13,8 @@ __author__ = "Jorge Somavilla"
 # initialize logger
 logger = logging.getLogger('graphyte')
 
+pp = pprint.PrettyPrinter(indent=4)
+
 def build_confluence_page(d, c, p, s):
     """Create content structure in Confluence
     as a page tree for all Graphyte modules, under
@@ -58,9 +60,11 @@ def build_confluence_page(d, c, p, s):
     # todo: add model sources to page
 
     # add changes file
-    conflux.append_header_to_page(page_id, "CHANGES", "1")
-    body = conflux.build_template_body("/Users/jsomavil/projects/TdE_R3/BF1/doc_repo/BF1DOC/Multicast IPTV/CHANGES")
-    conflux.append_body_to_page(page_id, body)
+    if 'changesfile' in d[title]:
+        conflux.append_header_to_page(page_id, "CHANGES", "1")
+        body = conflux.build_template_body(d[title]['changesfile'])
+        conflux.append_body_to_page(page_id, body)
+        del d[title]['changesfile']
 
     # add variables table and upload as attachment
     if 'auth_params' in d[title]:
@@ -70,7 +74,7 @@ def build_confluence_page(d, c, p, s):
         child_id = conflux.create_empty_page_get_id("Variable List " + sdt, page_id)
         conflux.append_header_to_page(child_id, "Allowed Model Variables", "1")
         params_workbook = d[title]['auth_params']
-        print("creating variables table")
+        print("  creating variables table")
         conflux.append_workbook_as_tables(child_id,params_workbook)
         if os.path.splitext(params_workbook)[1] == '.xlsx':
             ct = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
@@ -79,7 +83,7 @@ def build_confluence_page(d, c, p, s):
         conflux.attach_file_get_id(params_workbook, page_id, ct)
         del d[title]['auth_params']
 
-    # build child page for each module
+    # build child page for each remaining module
     for m in d[title]:
         print("creating module page (%s)" % (m))
         m_noext = os.path.splitext(m)[0]
@@ -105,7 +109,7 @@ def build_confluence_page(d, c, p, s):
         if d[title][m]["templates"]:
             conflux.append_header_to_page(child_id, "Module Templates", "2")
             for t in d[title][m]["templates"]:
-                print("  adding template %s " %(t))
+                print("  adding template %s " % (t))
                 if os.path.splitext(t)[1] == ".csv":
                     fp = d[title][m]["templates"][t]
                     conflux.append_csv_as_table(child_id, fp)
@@ -113,8 +117,8 @@ def build_confluence_page(d, c, p, s):
                     fp = d[title][m]["templates"][t]
                     id, name = conflux.attach_file_get_id(fp, page_id)
                     href = conflux.build_attachchment_href(page_id, name, name)
-                    conflux.append_header_to_page(child_id, href, "3")
+                    status = conflux.append_header_to_page(child_id, href, "3")
                     body = conflux.build_template_body(fp)
-                    conflux.append_body_to_page(child_id, body)
+                    status = conflux.append_body_to_page(child_id, body)
     print ("done.")
     return True
