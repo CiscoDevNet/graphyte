@@ -3,11 +3,11 @@ Webdoc automation tool.
 
 ## Prerequisites
 
-Graphyte requires Python 3.
+Graphyte requires Python >3.6.
 
-Graphyte UML support requires:
-- JAVA runtime environment.
-- PlantUML version 1.2017.16, automatically installed by makefile.
+System requirements for UML support:
+- JAVA runtime environment >1.8.
+- Graphviz.
 
 ## Files
 
@@ -31,7 +31,10 @@ graphyte/
 **Important: Both files must be in the same folder.**
 
 ## Installation
-Just do
+
+- Install [system requirements](##-Pre-requirements)
+
+- Install graphyte
 ``` bash
 git clone...
 cd graphyte

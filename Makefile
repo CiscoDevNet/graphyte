@@ -1,4 +1,4 @@
-all: install plantuml pyang xlrd
+all: plantuml setup install
 
 install:
 	chmod +x graphyte/graphyte.py graphyte/graphyte_gen.py
@@ -6,8 +6,5 @@ install:
 plantuml:
 	curl -L https://sourceforge.net/projects/plantuml/files/1.2017.16/plantuml.1.2017.16.jar/download > graphyte/utils/plantuml.jar
 
-pyang:
-	pip3 install pyang
-
-xlrd:
-	pip3 install xlrd
+setup:
+	pip install -U .
