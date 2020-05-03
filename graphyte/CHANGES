@@ -1,12 +1,13 @@
 1.0.10
 ------
-- added support for confluence integration
-- added pip installer
+- added support for confluence integration.
+- added pip installer.
+- added container execution mode.
 
 1.0.9
 -----
 - added detection of scdp.cisco.com hosted svg diagrams.
-- increased max zoom limit for diagrams 400%->800%
+- increased max zoom limit for diagrams 400%->800%.
 
 1.0.8
 -----

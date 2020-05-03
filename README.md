@@ -54,5 +54,11 @@ docker kill graphyte-container
 
 In both cases replace **/path/to/local/inputs/dir** with your inputs local file path (as per [graphyte documentation](https://ciscodevnet.github.io/graphyte/usage/)).
 
+Finally remove your docker image.
+
+``` bash
+docker image rm graphyte-image
+```
+
 ## Author
 Jorge Somavilla (@cisco.com) ([contact](https://www.linkedin.com/in/jsomav/))
