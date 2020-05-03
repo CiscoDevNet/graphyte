@@ -360,7 +360,7 @@ def main(args):
 
 
     # Confluence Options
-    confluence_enabled = 'False'
+    confluence_enabled = False
     confluence_parent = ''
     confluence_url = ''
     confluence_script = ''
@@ -537,7 +537,7 @@ def main(args):
         logger.info("     Elapsed time {}s".format(elapsed))
         make_zip(out_dir, zip_dir, identifier)
     else:
-        if confluence_enabled: # pending if Confluence enable
+        if confluence_enabled:
             logger.info("     Generating .zip\r\n")
             elapsed = datetime.datetime.now() - start_time
             zf = make_zip(out_dir, zip_dir, model + ' ' + version)
