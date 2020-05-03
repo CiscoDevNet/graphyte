@@ -25,6 +25,7 @@ if utils_path not in sys.path:
 from template_utils import add_templates_to_script
 from param_utils import process_param_sheet, add_params_to_script
 from html_utils import uml_2_svg, yang_2_uml, build_menu, build_html, process_svg
+import pprint
 
 # info
 __author__ = "Jorge Somavilla"
@@ -32,6 +33,7 @@ __author__ = "Jorge Somavilla"
 # initialize logger
 logger = logging.getLogger('graphyte')
 
+pp = pprint.PrettyPrinter(indent=4)
 
 class GraphyteModule(object):
     """Stores the attributes of the graphyte module.
@@ -52,7 +54,8 @@ class GraphyteModule(object):
     """
     def __init__(
             self, model, module, version, title, out_dir, in_diagram_path,
-            work_dir, run_dir, file_dir, in_xls_path, menu_items, uml_no
+            work_dir, run_dir, file_dir, in_xls_path, menu_items, uml_no,
+            changes_file
     ):
         """Initializes graphyte module instance. Builds attributes
         not specified by user.
@@ -100,6 +103,14 @@ class GraphyteModule(object):
         self.allowed_parameters = []
         self.menu_tags = ""
         self.pyang_uml_no = uml_no
+        if changes_file:
+            self.changes_file = changes_file
+            self.changes_fname = self.in_diagram_name = os.path.basename(changes_file)
+            self.changes_tab = "<li id=\"changes\" style=\"float:right\">Changes</li><li id=\"separator\" style=\"float:right\">|</li>"
+        else:
+            self.changes_file = ""
+            self.changes_fname = ""
+            self.changes_tab = ""
 
     def diagram_is_yang(self):
         """Whether the diagram is of type YANG or not
@@ -134,12 +145,12 @@ class GraphyteModule(object):
         if not (os.path.exists(self.in_diagram_path)
                 and os.path.isdir(self.file_dir)
                 and os.path.isdir(self.out_dir)):
-            print (self.in_diagram_path + " exists: "
-                   + str(os.path.exists(self.in_diagram_path)))
-            print (self.file_dir + " exists: "
-                   + str(os.path.isdir(self.file_dir)))
-            print (self.out_dir + " exists: "
-                   + str(os.path.isdir(self.out_dir)))
+            #print (self.in_diagram_path + " exists: "
+            #       + str(os.path.exists(self.in_diagram_path)))
+            #print (self.file_dir + " exists: "
+            #       + str(os.path.isdir(self.file_dir)))
+            #print (self.out_dir + " exists: "
+            #       + str(os.path.isdir(self.out_dir)))
             return False
         return True
 
@@ -181,7 +192,8 @@ SVG/UML and text files.
 [-l "log file"] \
 [-s "parameters worksheet"] \
 [-n "navigation items"] \
-[-t "web page title"]
+[-t "web page title"] \
+[-c "changes file"]
 
      Options:
      -------
@@ -204,6 +216,7 @@ the tool to store in-flight, auxiliary files.
 menu items.
        -t|--title     "web page title":         Optional. Will show in the \
 output web page.
+       -c|--changes   "changes file":           Optional. Changes file.
 
     """
 
@@ -220,6 +233,7 @@ output web page.
     work_dir = ""
     log_file = ""
     uml_no = ""
+    changes_file = ""
 
     class MyParser(argparse.ArgumentParser):
         def error(self, message):
@@ -256,6 +270,8 @@ output web page.
                         help='Path to log file.')
     parser.add_argument('-u', '--uml-no', required=False, dest="umlno",
                         help='pyang --uml-no option.')
+    parser.add_argument('-c', '--changes', required=False, dest="changes",
+                        help='changes file.')
     args = parser.parse_args(args)
 
 
@@ -307,13 +323,18 @@ output web page.
         log_file = args.logfile.strip()
     else:
         log_file = out_dir + "/graphyte.log"
-    # log file
+    # pyang uml-no options
     if args.umlno:
         if not os.path.splitext(in_diagram_path)[1] == ".yang":
             # --uml-no option only valid for .yang diagram
             sys.exit(usage)
         else:
             uml_no = re.sub(r'\s+', '', args.umlno)
+    else:
+        pass
+    # changes file
+    if args.changes:
+        changes_file = re.sub(r'\s+', '', args.changes)
     else:
         pass
 
@@ -331,10 +352,11 @@ output web page.
               -n , Menu items:        " + menu_items + "\n\
               -u , pyang uml-no:      " + uml_no)
 
+
     # Initialize graphyte module object
     gm = GraphyteModule(
         model, module, version, title, out_dir, in_diagram_path, work_dir,
-        run_dir, file_dir, in_xls_path, menu_items, uml_no
+        run_dir, file_dir, in_xls_path, menu_items, uml_no, changes_file
     )
 
     # Sanity checks for dirs
@@ -363,8 +385,9 @@ output web page.
             return False
 
     # if diagram is uml, convert to svg
+    module_diagram = dict()
     if gm.diagram_is_uml():
-        uml_2_svg(gm)
+        module_diagram = uml_2_svg(gm)
     else:
         # diagram was already SVG
         gm.svg_path = gm.in_diagram_path
@@ -377,7 +400,7 @@ output web page.
         shutil.rmtree(os.path.join(out_dir, "work"))
 
     # process templates and detect parameters
-    file_script = add_templates_to_script(gm)
+    file_script,module_templates = add_templates_to_script(gm)
 
     # add detected parameters
     file_script = add_params_to_script(gm, file_script)
@@ -388,10 +411,13 @@ output web page.
     # create html file
     build_html(gm, processed_svg, file_script, xls_to_script)
 
-    print ("\n...done.")
-    return True
+    # merge return dictionary with all used files
+    module_files = {**module_diagram,**module_templates}
 
-    # remove line comment to display module on browser after creation
+    print ("\n...done.")
+    return True,module_files
+
+    # remove comment below to display module on browser after creation
     # webbrowser.open(out_html_path, new=0, autoraise=True)
 
     exit(0)
@@ -400,5 +426,4 @@ output web page.
 if __name__ == "__main__":
     # run when not called via 'import'
     import sys
-
     build_module(sys.argv[1:])

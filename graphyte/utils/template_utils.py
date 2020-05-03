@@ -10,6 +10,9 @@ import logging
 import os
 import re
 from param_utils import param_is_false_positive, param_is_legal
+import pprint
+
+pp = pprint.PrettyPrinter(indent=4)
 
 # info
 __author__ = "Jorge Somavilla"
@@ -29,15 +32,20 @@ def add_templates_to_script(gm):
 
     logger.info('         Processing template files...' + '\r\n')
     file_script = ""
+    mod_linked_templates = dict()
+    #mod_linked_templates['templates'] = {}
+    mod_linked_templates = {}
     for dirpath, dirs, src_files in os.walk(gm.file_dir):
         for src_file_name in src_files:
-            # Check if file has been linked
-            if src_file_name in gm.svg_links:
-                # Link to file has been found in the SVG, process it.
+            # Check if file has been linked or is Changes file
+            if src_file_name in gm.svg_links or src_file_name == gm.changes_fname:
+                # Link to file has been found in the SVG or is Changes file, process it.
                 logger.info('             ' + src_file_name + '\r\n')
                 file_path = os.path.join(dirpath, src_file_name)
                 if os.path.isfile(file_path):
                     file_name = os.path.splitext(src_file_name)[0]
+                    #mod_linked_templates['templates'][src_file_name]=file_path
+                    mod_linked_templates[src_file_name] = file_path
                     # spaces dots or hyphens -> underscores
                     file_name = re.sub(r'\s|-|\.|\(|\)|\+', r'_',
                                        file_name.rstrip()
@@ -46,7 +54,6 @@ def add_templates_to_script(gm):
                     file_ext = re.sub(r'\.', r'_', file_ext.rstrip())
                     file_script += "    var v_" + file_name + file_ext \
                                    + " = [\n \"" + src_file_name
-
                     with open(file_path,
                               encoding="utf8",
                               errors='ignore') as f:
@@ -130,4 +137,7 @@ def add_templates_to_script(gm):
                                                                        r'',
                                                                        line.strip()))
     logger.info('         ...ok' + '\r\n')
-    return file_script
+    mod_linked_templates2 = dict()
+    mod_linked_templates2['templates'] = {}
+    mod_linked_templates2['templates'] = mod_linked_templates
+    return file_script,mod_linked_templates2

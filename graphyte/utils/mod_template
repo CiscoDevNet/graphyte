@@ -289,7 +289,8 @@
       font-size:9pt;
       color: grey;
       display:block;
-      padding:10px 10px;
+      /*padding:10px 10px;*/
+      padding:10px 20px 10px 0px;
       position:relative;
     }
 
@@ -351,7 +352,7 @@
       right: 0;
       background:white;
     }
-    #zoom,#zoomOut,#zoomIn,#params,#zoomid{
+    #zoom,#zoomOut,#zoomIn,#params,#zoomid,#changes,#separator{
       padding-top:10px;
       font-family: "Courier New", Courier, monospace;
       font-size:9pt;
@@ -365,11 +366,11 @@
                 user-select: none; /* Non-prefixed version */
     }
 
-    #zoomIn, #params{
+    #zoomIn, #params, #changes, #separator{
       padding-right: 15px
     }
 
-    #zoomIn:hover, #zoomOut:hover, #params:hover{
+    #zoomIn:hover, #zoomOut:hover, #params:hover, #changes:hover{
       color:black;
       cursor:pointer;
     }
@@ -405,6 +406,7 @@
           else if ($(evt.target).closest('#zoomOut').length) {zoomOutElmMouseDown(evt);}
           else if ($(evt.target).closest('#zoomIn').length) {zoomInElmMouseDown(evt);}
           else if ($(evt.target).closest('#params').length) {paramsElmMouseDown(evt);}
+          else if ($(evt.target).closest('#changes').length) {changesElmMouseDown(evt);}
           else {
             cleardisplay("3");
           }
@@ -486,7 +488,7 @@
           svgWidth = document.getElementById("svg").getAttribute("width");
           svgWidth = svgWidth.replace("%", "");
           newWidth = parseInt(svgWidth) + zoom;
-          if (newWidth > 0 && newWidth < 800) {
+          if (newWidth > 0) {
             document.getElementById("svg").setAttribute("width",newWidth + "%");
           }
         }
@@ -497,6 +499,12 @@
           aNode.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
           aNode.style.boxShadow = "0 7px 20px rgba(0,0,0,.3)";
           aNode.style.height = "auto";
+          filename = filename.replace(/=/g,'_equal_');
+          //filename = filename.replace(/\./g,'_dot_');
+          filename = filename.replace(/\[/g,'_openbracket_');
+          filename = filename.replace(/\]/g,'_closebracket_');
+          filename = filename.replace(/\//g,'_backslash_');
+          filename = filename.replace(/\'/g,'_singlequote_');
 
           var map = {
             '&': '&amp;',
@@ -543,8 +551,24 @@
               var re = /^(.*)$/m;
               var fname_retr = re.exec(data)[0];
               data = data.replace(/^.*\n/g,"");
-              data = data.replace(/(&)|(<\{)|(\}>)|(<\()|(\)>)|(<\[(?!\*>)|\]>)|(<)(?!\*>)|(>)|(")|(')|(,)|(\n)/g, function(m) { return map[m]; });
-              textDiv.innerHTML = "<table><tr align=\"left\" width=\"auto\"><td>" + data + "</table>";
+              var lines = data.split('\n');
+              dataout = ""
+              for(var i = 0;i < lines.length;i++){
+                lines[i] = lines[i].replace(/&/g,'&amp');
+                lines[i] = lines[i].replace(/<([$,a-z,A-Z,0-9,\.,\[,\],/,=,\-,_]+)>/g, "<b><span style=background-color:yellow>&lt;$1&gt;</span></b>"); // param <type1>
+                lines[i] = lines[i].replace(/<{([$,a-z,A-Z,0-9,\.,\[,\],\/,=,&#039;,\-,_]+)}>/g, "<b><span style=background-color:LightSkyBlue>&lt;{$1}&gt;</span></b>"); // param <{type2}>
+                lines[i] = lines[i].replace(/<\(([$,a-z,A-Z,0-9,\.,\[,\],\/,=,&#039;,\-,_]+)\)>/g, "<b><span style=background-color:greenyellow>&lt;($1)&gt;</span></b>"); // param <(type3)>
+                lines[i] = lines[i].replace(/<\[([$,a-z,A-Z,0-9,\.,\[,\],\/,=,&#039;,\-,_]+)\]>/g, "<b><span style=background-color:gold>&lt;[$1]&gt;</span></b>"); // param <[type4]>
+                lines[i] = lines[i].replace(/,/g,'</td><td style="padding:0 3px 0 3px;">');
+                //lines[i] = lines[i].replace(/\n/g,'</td></tr><tr align="left" width="auto"><td>');
+                lines[i] = lines[i] + '</td></tr><tr align="left" width="auto"><td>';
+                dataout  = dataout + lines[i] + "\n";
+
+              }
+              
+              //data = data.replace(/^.*\n/g,"");
+              //data = data.replace(/(&)|(<\{)|(\}>)|(<\()|(\)>)|(<\[(?!\*>)|\]>)|(<)(?!\*>)|(>)|(")|(')|(,)|(\n)/g, function(m) { return map[m]; });
+              textDiv.innerHTML = "<table><tr align=\"left\" width=\"auto\"><td>" + dataout + "</table>";
             }else if (ext == "xml"){
              data = eval(filename_var).join("\n");
              textDiv = document.getElementById('text');
@@ -594,6 +618,11 @@
         function paramsElmMouseDown(evt){
           cleardisplay("1");
           processClick("%params_csv%",evt.ctrlKey);
+        }
+
+        function changesElmMouseDown(evt){
+          cleardisplay("1");
+          processClick("%changes_file%",evt.ctrlKey);
         }
 
         function scrollTextDiv(){
@@ -659,7 +688,9 @@
               %menu%
             </ul>
           </li>
-          <li id="params" style="float:right">Module Parameters %alert%</li>
+          <li id="separator" style="float:right">|</li>
+          %changes_tab%
+          <li id="params" style="float:right">Module Parameters %alert%</li><li id="separator" style="float:right">|</li>
           <li id="zoomid" style="float:right"><span id="zoomOut">[-]</span><span id="zoom">Zoom</span><span id="zoomIn">[+]</span></li>
         </ul>
       </div>

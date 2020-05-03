@@ -1,37 +1,26 @@
 # <{graphyte}>
 Webdoc automation tool.
 
-## Prerequisites
+## System requirements
 
-Graphyte requires Python 3.
+Graphyte requires Python >3.6.
 
-Graphyte UML support requires:
-- JAVA runtime environment.
-- PlantUML version 1.2017.16, automatically installed by makefile.
+System requirements for UML support:
+- JAVA runtime environment >1.8.
+- Graphviz.
 
 ## Files
-
-```
-graphyte/
-├── CHANGES
-├── graphyte.py
-├── graphyte_gen.py
-└── utils
-    ├── html_utils.py
-    ├── mod_template
-    ├── param_utils.py
-    ├── plantuml.jar
-    └── template_utils.py
-```
 
 **graphyte_gen.py**: Graphyte core, generates one graphyte module per run.
 
 **graphyte.py**: Graphyte wrapper, handles the execution of graphyte_gen.py for a set of modules belonging to the same model, in a simplified way.
 
-**Important: Both files must be in the same folder.**
 
 ## Installation
-Just do
+
+- Install [system requirements](##-Pre-requirements)
+
+- Install graphyte
 ``` bash
 git clone...
 cd graphyte
@@ -41,8 +30,29 @@ make all
 ## Execution
 
 ``` bash
-python3 graphyte.py -d /path/to/input/dir/
+python graphyte.py -d /path/to/input/dir/
 ```
 
+## Running Graphyte as container
+
+Build docker image and execute command in ephemeral container.
+
+```bash
+docker build . -t graphyte-image
+docker run --rm -t --name graphyte-container -v /path/to/local/inputs/dir:/inputs graphyte-image /bin/bash -c "cd /usr/local/graphyte/graphyte; python graphyte.py -d /inputs"
+```
+
+Or build image, run the container in daemon mode, execute any number of commands on it and then manually destroy the container after you are done.
+
+```bash
+docker build . -t graphyte-image
+docker run --rm -dt --name graphyte-container -v /path/to/local/inputs/dir:/inputs graphyte-image
+docker exec -w "/usr/local/graphyte/graphyte" graphyte-container /bin/bash -c "python graphyte.py -d /inputs"
+(...)
+docker kill graphyte-container
+```
+
+In both cases replace **/path/to/local/inputs/dir** with your inputs local file path (as per [graphyte documentation](https://ciscodevnet.github.io/graphyte/usage/)).
+
 ## Author
-Jorge Somavilla ([on LinkedIn](https://www.linkedin.com/in/jsomav/))
+Jorge Somavilla (@cisco.com) ([contact](https://www.linkedin.com/in/jsomav/))
