@@ -52,7 +52,19 @@ docker exec -w "/usr/local/graphyte/graphyte" graphyte-container /bin/bash -c "p
 docker kill graphyte-container
 ```
 
-In both cases replace **/path/to/local/inputs/dir** with your inputs local file path (as per [graphyte documentation](https://ciscodevnet.github.io/graphyte/usage/)).
+Or if you want to use Confluence upload feature, then log into the container and execute the commands from there (you need an interactive shell).
+
+```bash
+docker build . -t graphyte-image
+docker run --rm -it --name graphyte-container -v /path/to/local/inputs/dir:/inputs graphyte-image /bin/bash
+cd /usr/local/graphyte/graphyte
+python graphyte.py -d /inputs
+(...)
+exit
+docker kill graphyte-container
+```
+
+In all cases replace **/path/to/local/inputs/dir** with your inputs local file path (as per [graphyte documentation](https://ciscodevnet.github.io/graphyte/usage/)).
 
 Finally remove your docker image.
 

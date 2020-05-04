@@ -4,6 +4,7 @@ import getpass
 from conflux import Conflux
 import pprint
 import os
+import sys
 import datetime
 
 
@@ -25,13 +26,18 @@ def build_confluence_page(d, c, p, s):
     :param s: post script to execute
     :return: boolean result
     """
-    usr = getpass.getuser()
+    user_input = input("Confluence User (" + getpass.getuser() + "): ")
+
+    usr = user_input or getpass.getuser()
     pwd = getpass.getpass(prompt='Password (' + usr + '): ', stream=None)
     conflux = Conflux(
         url=c,
         username=usr,
         password=pwd,
         timeout=1000)
+
+    if not conflux.test_connection():
+        sys.exit("Sorry, that login didn´t work (" + usr + "). Unable to reach Confluence base URL: " + c)
 
     # retrieve confluence ID of parent page
     parent_id = conflux.get_page_id(p)

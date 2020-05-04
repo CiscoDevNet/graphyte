@@ -30,6 +30,25 @@ log = logging.getLogger(__name__)
 
 class Conflux(Confluence):
 
+    def test_connection(self):
+        """
+        Return boolean True if connection worked,
+        False otherwise.
+        :param url: Page URL
+        :return: Boolean
+        """
+        urllib3.disable_warnings()
+        headers={'Content-Type':'application/json'}
+        user = self.username
+        pwd = self.password
+        auth=(user, pwd)
+        r = requests.get(self.url, verify=False, headers=headers, auth=auth)
+        print(r.text)
+        if "<title>HTTP Status 401 – Unauthorized</title>" in r.text:
+            return False
+        else:
+            return True
+
     def create_empty_page_get_id (self,title,parent_id):
         """
         Creates empty child page under parent page
