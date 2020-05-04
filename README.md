@@ -72,5 +72,12 @@ Finally remove your docker image.
 docker image rm graphyte-image
 ```
 
+Note: you can adjust the timezone in your container OS like so:
+
+```bash
+docker exec -it graphyte-container /bin/bash
+cp /usr/share/zoneinfo/Europe/Madrid /etc/localtime
+```
+
 ## Author
 Jorge Somavilla (@cisco.com) ([contact](https://www.linkedin.com/in/jsomav/))
