@@ -43,7 +43,6 @@ class Conflux(Confluence):
         pwd = self.password
         auth=(user, pwd)
         r = requests.get(self.url, verify=False, headers=headers, auth=auth)
-        print(r.text)
         if "<title>HTTP Status 401 – Unauthorized</title>" in r.text:
             return False
         else:
