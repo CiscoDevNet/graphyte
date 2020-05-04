@@ -13,7 +13,7 @@ Graphyte requires a configuration file where the model owner will add some manda
 | **[layout]** | pyang_uml_no | optional | pyang_uml_no = annotation,import,typedef | PYANG options to skip when converting YANG into UML. (Allowed values: uses,leafref,identity,identityref,typedef,annotation,import,circles,stereotypes.) |
 | **[confluence]** | enabled | optional | enabled = True | Upload model to confluence instance. |
 | **[confluence]** | conf_base_url | mandatory when confluence enabled = True | conf_base_url = https://scdp.cisco.com/conf | Confluence Server Base URL |
-| **[confluence]** | parent_page_url | mandatory when confluence enabled = True | parent_page_url = parent_page_url = https://scdp.cisco.com/conf/display/TTD/ | URL of confluence page below which the model should be uploaded. |
+| **[confluence]** | parent_page_url | mandatory when confluence enabled = True | parent_page_url = https://scdp.cisco.com/conf/display/TTD/ | URL of confluence page below which the model should be uploaded. |
 
 
 ![configfile.jpg](img/configfile.jpg)

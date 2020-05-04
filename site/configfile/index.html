@@ -184,6 +184,13 @@
 <td align="left">Version of the model.</td>
 </tr>
 <tr>
+<td align="left"><strong>[main]</strong></td>
+<td align="left">changes_file</td>
+<td align="left">optional</td>
+<td align="left">changes_file = CHANGES.txt</td>
+<td align="left">Text file with log of changes for the model. It will show in "Changes" tab in the navigation menu.</td>
+</tr>
+<tr>
 <td align="left"><strong>[parameters]</strong></td>
 <td align="left">auth_params</td>
 <td align="left">optional</td>
@@ -210,6 +217,27 @@
 <td align="left">optional</td>
 <td align="left">pyang_uml_no = annotation,import,typedef</td>
 <td align="left">PYANG options to skip when converting YANG into UML. (Allowed values: uses,leafref,identity,identityref,typedef,annotation,import,circles,stereotypes.)</td>
+</tr>
+<tr>
+<td align="left"><strong>[confluence]</strong></td>
+<td align="left">enabled</td>
+<td align="left">optional</td>
+<td align="left">enabled = True</td>
+<td align="left">Upload model to confluence instance.</td>
+</tr>
+<tr>
+<td align="left"><strong>[confluence]</strong></td>
+<td align="left">conf_base_url</td>
+<td align="left">mandatory when confluence enabled = True</td>
+<td align="left">conf_base_url = https://scdp.cisco.com/conf</td>
+<td align="left">Confluence Server Base URL</td>
+</tr>
+<tr>
+<td align="left"><strong>[confluence]</strong></td>
+<td align="left">parent_page_url</td>
+<td align="left">mandatory when confluence enabled = True</td>
+<td align="left">parent_page_url = parent_page_url = https://scdp.cisco.com/conf/display/TTD/</td>
+<td align="left">URL of confluence page below which the model should be uploaded.</td>
 </tr>
 </tbody>
 </table>
