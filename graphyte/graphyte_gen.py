@@ -77,13 +77,7 @@ class GraphyteModule(object):
             + "_v" + self.version + ".html"
         )
         self.in_diagram_path = in_diagram_path
-
-        print("\n\nGraphyteModule: in_diagram_path", in_diagram_path)
-
         self.in_diagram_name = os.path.basename(in_diagram_path)
-
-        print("\n\nGraphyteModule: self.in_diagram_name",self.in_diagram_name)
-
         self.out_html_name_no_ext = os.path.basename(
             os.path.splitext(self.out_html_path)[0]
         )
