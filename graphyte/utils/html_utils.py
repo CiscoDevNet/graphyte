@@ -85,15 +85,18 @@ def uml_2_svg(gm):
     uml_fname = os.path.basename(gm.in_diagram_path)
     logger.info('             ' + uml_fname + '\r\n')
     tmp_fh, tmp_uml_path = mkstemp()  # temp file
+
     with fdopen(tmp_fh, 'w') as new_uml:
         with open(gm.in_diagram_path) as old_uml:
             for line in old_uml:
                 new_uml.write(re.sub(r'@startuml.*', r'@startuml', line))
     work_uml_path = gm.work_dir + "/" + gm.in_diagram_name
+
     if os.path.exists(work_uml_path):
         os.remove(work_uml_path)
     copy(tmp_uml_path, work_uml_path)
     plantuml_out_file = gm.work_dir + "/" + os.path.splitext(gm.in_diagram_name)[0] + ".svg"
+
     # TODO: cath exception if plantuml not in place
     #print ("java -Xmx1024m -jar utils/plantuml.jar -v -tsvg " + work_uml_path + " -o " + gm.work_dir)
     p1 = Popen(["java","-Xmx1024m", "-jar", "utils/plantuml.jar", "-v", "-tsvg", work_uml_path,

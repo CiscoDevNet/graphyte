@@ -26,6 +26,7 @@ def build_confluence_page(d, c, p, s):
     :param s: post script to execute
     :return: boolean result
     """
+
     user_input = input("Confluence User (" + getpass.getuser() + "): ")
 
     usr = user_input or getpass.getuser()
