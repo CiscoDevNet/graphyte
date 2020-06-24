@@ -76,12 +76,23 @@ def build_confluence_page(d, c, p, s):
     # add variables table and upload as attachment
     if 'auth_params' in d[title]:
         print("creating variables page")
-        dtu = datetime.datetime.now()
-        sdt = dtu.strftime("(%Y-%m-%d@%H:%M:%S)")
-        child_id = conflux.create_empty_page_get_id("Variable List " + sdt, page_id)
-        conflux.append_header_to_page(child_id, "Allowed Model Variables", "1")
+        #dtu = datetime.datetime.now()
+        #sdt = dtu.strftime("(%Y-%m-%d@%H:%M:%S)")
+        child_id = conflux.create_empty_page_get_id("Variable List", page_id)
         params_workbook = d[title]['auth_params']
+        conflux.append_header_to_page(child_id, "Allowed Model Variables", "1")
+        print("  attaching xls/xlsx as file")
+        #conflux.append_header_to_page(child_id, "Allowed Model Variables File", "1")
+        conflux.attach_file_get_id(params_workbook, child_id, 'application/xls')
+        href = conflux.build_attachchment_href(
+            page_id,
+            os.path.basename(params_workbook),
+            "Download Variable List as file.\n"
+        )
+        conflux.append_body_to_page(child_id, href)
+
         print("  creating variables table")
+
         conflux.append_workbook_as_tables(child_id,params_workbook)
         if os.path.splitext(params_workbook)[1] == '.xlsx':
             ct = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
@@ -94,9 +105,10 @@ def build_confluence_page(d, c, p, s):
     for m in d[title]:
         print("creating module page (%s)" % (m))
         m_noext = os.path.splitext(m)[0]
-        dtu = datetime.datetime.now()
-        sdt = dtu.strftime("(%Y-%m-%d@%H:%M:%S)")
-        child_id = conflux.create_empty_page_get_id(m_noext + " " + sdt, page_id)
+        #dtu = datetime.datetime.now()
+        #sdt = dtu.strftime("(%Y-%m-%d@%H:%M:%S)")
+        #child_id = conflux.create_empty_page_get_id(m_noext + " " + sdt, page_id)
+        child_id = conflux.create_empty_page_get_id(m_noext, page_id)
         # add toc with title
         toc = conflux.build_scroll_ignore(
             conflux.build_toc_with_header("Table of Contents")

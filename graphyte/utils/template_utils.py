@@ -45,7 +45,9 @@ def add_templates_to_script(gm):
                 if os.path.isfile(file_path):
                     file_name = os.path.splitext(src_file_name)[0]
                     #mod_linked_templates['templates'][src_file_name]=file_path
-                    mod_linked_templates[src_file_name] = file_path
+                    if not src_file_name == gm.changes_fname:
+                        # do not add changesfile to module templates dict
+                        mod_linked_templates[src_file_name] = file_path
                     # spaces dots or hyphens -> underscores
                     file_name = re.sub(r'\s|-|\.|\(|\)|\+', r'_',
                                        file_name.rstrip()
