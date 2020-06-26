@@ -561,7 +561,10 @@
                 lines[i] = lines[i].replace(/<\[([$,a-z,A-Z,0-9,\.,\[,\],\/,=,&#039;,\-,_]+)\]>/g, "<b><span style=background-color:gold>&lt;[$1]&gt;</span></b>"); // param <[type4]>
                 lines[i] = lines[i].replace(/,/g,'</td><td style="padding:0 3px 0 3px;">');
                 //lines[i] = lines[i].replace(/\n/g,'</td></tr><tr align="left" width="auto"><td>');
-                lines[i] = lines[i] + '</td></tr><tr align="left" width="auto"><td>';
+                lines[i] = lines[i] + '</td></tr>';
+                if (i < lines.length-1) {
+                  lines[i] = lines[i] + '<tr align="left" width="auto"><td>';
+                }
                 dataout  = dataout + lines[i] + "\n";
 
               }

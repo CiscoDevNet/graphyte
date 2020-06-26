@@ -1,3 +1,7 @@
+1.0.12
+------
+- fixed trailing empty line on csv tables
+
 1.0.11
 ------
 - fix error gm.in_diagram_name overriden

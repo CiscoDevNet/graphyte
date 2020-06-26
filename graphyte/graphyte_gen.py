@@ -390,9 +390,11 @@ output web page.
         module_diagram = uml_2_svg(gm)
     else:
         # diagram was already SVG
+        print("\nit was svg\n")
         gm.svg_path = gm.in_diagram_path
 
     # process svg diagram
+    print("\ncalling processed_svg\n")
     processed_svg = process_svg(gm)
 
     # if work_dir was not user specified, clean up work_dir after svg creation
@@ -409,6 +411,7 @@ output web page.
     build_menu(gm)
 
     # create html file
+    print("\ncalling build_html\n",processed_svg)
     build_html(gm, processed_svg, file_script, xls_to_script)
 
     # merge return dictionary with all used files
