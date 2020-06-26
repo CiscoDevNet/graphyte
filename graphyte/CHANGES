@@ -1,6 +1,7 @@
 1.0.12
 ------
 - fixed trailing empty line on csv tables
+- process template variables by default for all except xml, yang, changefile
 
 1.0.11
 ------

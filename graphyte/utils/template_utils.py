@@ -68,39 +68,43 @@ def add_templates_to_script(gm):
                         file_script += "\"];\n\n"
 
                     # Find decision parameters
-                    if file_ext == "_csv":
-                        with open(file_path,
-                                  encoding="utf8",
-                                  errors='ignore') as f:
-                            for line in f:
-                                if not (line.strip() == ""):
-                                    items = line.strip().split(",")
-                                    # items.insert(1,src_file_name)
-                                    newline = items[0] + "," \
-                                        + src_file_name + ","
-                                    if gm.in_xls_path:
-                                        # define legality of parameter
-                                        param_validation_result = ""
-                                        # print "Legal?:" + items[0]
-                                        if param_is_legal(items[0], gm):
-                                            param_validation_result = "ok"
-                                            # print "yes csv\n\n"
-                                        else:
-                                            param_validation_result \
-                                                = "unauthorized"
-                                            # print "no csv\n\n"
-                                            gm.invalid_param_found_alert \
-                                                = "(!)"
-                                        newline += param_validation_result \
-                                                   + ","
-                                    for item in items[1:-1]:
-                                        newline += item + " | "
-                                    newline += items[-1]
-                                    gm.decision_param_list.append(newline
-                                                                  + "\n")
+                    if file_ext == "_yang" or file_ext == "_xml" or src_file_name == gm.changes_fname:
+                        # do nothing
+                        continue
                     else:
+                        if file_ext == "_csv":
+                            with open(file_path,
+                                      encoding="utf8",
+                                      errors='ignore') as f:
+                                for line in f:
+                                    if not (line.strip() == ""):
+                                        items = line.strip().split(",")
+                                        # items.insert(1,src_file_name)
+                                        newline = items[0] + "," \
+                                            + src_file_name + ","
+                                        if gm.in_xls_path:
+                                            # define legality of parameter
+                                            param_validation_result = ""
+                                            # print "Legal?:" + items[0]
+                                            if param_is_legal(items[0], gm):
+                                                param_validation_result = "ok"
+                                                # print "yes csv\n\n"
+                                            else:
+                                                param_validation_result \
+                                                    = "unauthorized"
+                                                # print "no csv\n\n"
+                                                gm.invalid_param_found_alert \
+                                                    = "(!)"
+                                            newline += param_validation_result \
+                                                       + ","
+                                        for item in items[1:-1]:
+                                            newline += item + " | "
+                                        newline += items[-1]
+                                        gm.decision_param_list.append(newline
+                                                                      + "\n")
+                        else: # txt + others
                         # Find template parameters
-                        if file_ext == "_txt":
+                        #if file_ext == "_txt":
                             with open(file_path,
                                       encoding="utf8",
                                       errors='ignore') as f:
