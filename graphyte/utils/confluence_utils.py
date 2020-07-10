@@ -76,9 +76,11 @@ def build_confluence_page(d, c, p, s):
     # add variables table and upload as attachment
     if 'auth_params' in d[title]:
         print("creating variables page")
-        #dtu = datetime.datetime.now()
-        #sdt = dtu.strftime("(%Y-%m-%d@%H:%M:%S)")
-        child_id = conflux.create_empty_page_get_id("Variable List", page_id)
+
+        dtu = datetime.datetime.now()
+        sdt = dtu.strftime("(%Y-%m-%d@%H:%M:%S)")
+        child_id = conflux.create_empty_page_get_id("Variable List" + sdt, page_id)
+
         params_workbook = d[title]['auth_params']
         conflux.append_header_to_page(child_id, "Allowed Model Variables", "1")
         print("  attaching xls/xlsx as file")
@@ -105,10 +107,9 @@ def build_confluence_page(d, c, p, s):
     for m in d[title]:
         print("creating module page (%s)" % (m))
         m_noext = os.path.splitext(m)[0]
-        #dtu = datetime.datetime.now()
-        #sdt = dtu.strftime("(%Y-%m-%d@%H:%M:%S)")
-        #child_id = conflux.create_empty_page_get_id(m_noext + " " + sdt, page_id)
-        child_id = conflux.create_empty_page_get_id(m_noext, page_id)
+        dtu = datetime.datetime.now()
+        sdt = dtu.strftime("(%Y-%m-%d@%H:%M:%S)")
+        child_id = conflux.create_empty_page_get_id(m_noext + " " + sdt, page_id)
         # add toc with title
         toc = conflux.build_scroll_ignore(
             conflux.build_toc_with_header("Table of Contents")
